@@ -253,6 +253,20 @@ body {
 .mv-kf-panel { flex:1 1 auto; min-width:0; overflow-y:auto; }
 .mv-kf-hint { display:flex; flex-direction:column; gap:5px; }
 
+/* live camera preview (gait capture) — a real viewfinder, so it gets a real
+   size, not the small SVG-figure max-height the other movements use. The
+   video (object-fit:contain) and the canvas overlay sit in the same box;
+   poseDraw.ts's containMap() reproduces the same letterbox math here so
+   the drawn skeleton lines up with the video pixels underneath it. */
+.gait-cam-wrap {
+  position:relative; width:100%; aspect-ratio:4 / 3; min-height:240px;
+  background:#0a0f11; border:1px solid var(--line); border-radius:var(--r);
+  overflow:hidden;
+}
+.gait-cam-video { position:absolute; inset:0; width:100%; height:100%;
+  object-fit:contain; background:#0a0f11; }
+.gait-cam-canvas { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+
 .kf-conn { display:flex; align-items:center; gap:7px; padding:3px 2px; }
 .kf-conn-label { flex:1 1 auto; min-width:0; font-size:var(--fs-sm); font-weight:600;
   white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
