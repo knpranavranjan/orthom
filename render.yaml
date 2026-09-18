@@ -11,6 +11,10 @@
 # so the free tier's CPU-only instance is enough — see
 # OAF/requirements-runtime.txt. Cold start after idling on the free plan is
 # a few seconds (loading the ~15MB ONNX model), not minutes.
+# gait-api needs no such heavy dependency at all -- confirmed by tracing its
+# actual import chain (numpy + pandas + scipy + fastapi only). Pose
+# extraction runs in-browser; this service only does signal processing and
+# risk scoring on an already-extracted knee-angle time series.
 services:
   - type: web
     name: aether-oa-xray-api
@@ -19,6 +23,17 @@ services:
     plan: free
     buildCommand: pip install -r requirements-runtime.txt
     startCommand: python scripts/serve_api.py
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+  - type: web
+    name: aether-oa-gait-api
+    runtime: python
+    rootDir: gait-api
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python serve_gait_api.py
     healthCheckPath: /health
     envVars:
       - key: PYTHON_VERSION

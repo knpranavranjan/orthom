@@ -1,0 +1,13 @@
+# AETHER-OA gait analysis API — deployment runtime only.
+# No MediaPipe, no OpenCV, no Streamlit: pose extraction runs in-browser
+# (oa copy/src/services/poseCapture.ts). This service only does signal
+# processing (Savitzky-Golay smoothing, gait-cycle peak detection) and the
+# 4-domain OA risk scoring model — confirmed by tracing core/api.py's real
+# import chain, not assumed.
+
+numpy>=1.26
+pandas>=2.0
+scipy>=1.11
+fastapi>=0.110
+uvicorn[standard]>=0.29
+pydantic>=2.0
