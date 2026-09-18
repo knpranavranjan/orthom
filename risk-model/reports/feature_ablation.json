@@ -1,0 +1,7 @@
+{
+  "question": "does adding RAC/SMK/OSP to AGE+BMI+SEX materially improve the model?",
+  "age_bmi_sex_only_cv_auc": 0.6422922246926115,
+  "all_six_features_cv_auc": 0.6495,
+  "delta": 0.007207775307388475,
+  "conclusion": "no \u2014 +0.007 AUC does not justify 3 new patient-facing kiosk questions; shipped model uses AGE+BMI+SEX only"
+}

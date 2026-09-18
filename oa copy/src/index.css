@@ -1,0 +1,496 @@
+/* ============================================================
+   OA Screening Kiosk — design tokens for a 480x320 panel
+   header 36 + content 236 + action bar 48 = 320
+   ============================================================ */
+:root {
+  --paper:#F1F4F3; --surface:#FFFFFF; --surface-2:#E7ECEA; --surface-3:#DCE3E1;
+  --ink:#0E1517; --ink-2:#3B4A4D; --slate:#66777A;
+  --line:#D2DAD8; --line-soft:#E2E8E6;
+  --accent:#0B6E7F; --accent-ink:#FFFFFF; --accent-soft:#E1EFF1;
+  --signal:#B4541F; --signal-soft:#FBEDE4;
+  --ok:#2F6B4F; --ok-soft:#E4F0EA;
+  --warn:#8A6A15;
+  --fig:#4A5C5F; --ghost:#B9C6C6;
+  --desk:#DCE2E0;
+
+  --h-head:52px; --h-actions:60px;
+  --r:6px;
+  /* Sized for a normal screen viewed at a normal distance, not a 3.5" panel
+     viewed up close -- these were tuned for the latter and read as tiny
+     everywhere else. */
+  --fs-xs:12px; --fs-sm:13.5px; --fs-md:15px; --fs-lg:18px; --fs-xl:26px; --fs-xxl:34px;
+  --tap:46px;
+}
+
+* { box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+html, body, #root { height:100%; margin:0; padding:0; }
+
+body {
+  background:var(--paper); color:var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Noto Sans Devanagari", sans-serif;
+  font-size:var(--fs-md); line-height:1.4;
+  -webkit-font-smoothing:antialiased;
+  user-select:none;
+  touch-action:manipulation;
+}
+
+/* Devanagari needs more vertical room: shirorekha + matras above and below */
+:lang(hi) { line-height:1.62; }
+:lang(hi) .instr, :lang(hi) .h1 { line-height:1.55; }
+
+/* ---------- shell ---------- */
+/* Originally a fixed 480x320 kiosk panel, magnified to fit the window.
+   Now a normal responsive layout: full-bleed on a phone/small kiosk panel,
+   a comfortably centered column on a desktop browser -- built and
+   maintained like an ordinary website, not a scaled photograph of a panel.
+   Flex-centered on both axes: a SHORT page (e.g. "no movement captured
+   yet") sits in the middle of the window instead of pinned to the top with
+   a dead gray gap below it.
+   `safe center`, NOT plain `center`, on purpose -- verified by measurement,
+   not theory: plain `center` on a TALL page (the 24-item WOMAC form) under
+   a zoomed child (see .app below) pushed part of the content above y:0,
+   and Chromium's own scrollHeight calculation for that zoomed-overflowing
+   flex item came out short, so scrolling could never reach it -- some
+   WOMAC rows were permanently unreachable, not just visually off at first
+   paint. `safe center` is the standards keyword for exactly this: center
+   when it fits, fall back to start-aligned (scrollable from the top) the
+   moment the item overflows its container, instead of centering into
+   inaccessible overflow on both sides. */
+#root {
+  display:flex; align-items:safe center; justify-content:center;
+  background:var(--desk); min-height:100vh;
+}
+
+/* The card sizes to its own content -- it does NOT stretch to fill the
+   viewport. Forcing min-height:100vh here was the bug: a short form (a few
+   fields) ended up inside a full-height flex column, its footer glued to
+   the bottom of the browser window with a large dead gap above it. A normal
+   website lets a short page be short. */
+.app {
+  width:100%; max-width:960px; margin:0 auto;
+  display:flex; flex-direction:column;
+  background:var(--paper);
+}
+
+/* Scales every px value in .app together -- fonts, padding, tap targets,
+   SVG figures, borders -- so the whole app reads at a normal size on a
+   real monitor instead of needing the visitor to zoom in manually. `zoom`
+   (not `transform:scale`) on purpose: it participates in layout, so
+   position:sticky headers/footers and touch target hit-areas scale
+   correctly with it, not just the paint. Chromium-only, which is fine here
+   -- this app only ever runs in Chromium (the kiosk's own chromium-browser,
+   and Chromium-based dev/testing browsers).
+   Gated to >=700px specifically so the ACTUAL 480x320 Pi kiosk panel is
+   untouched -- zoom scales .app's rendered box past its parent's available
+   width, which would overflow the physical 480px-wide screen this app is
+   built to fit exactly. Only a window with real headroom beyond the kiosk
+   panel gets the larger scale. */
+@media (min-width:700px) {
+  .app { zoom:1.2; }
+}
+
+@media (min-width:860px) {
+  .app { border-left:1px solid var(--line); border-right:1px solid var(--line);
+    box-shadow:0 0 48px -28px rgba(14,21,23,.35); }
+}
+
+.head {
+  flex:0 0 var(--h-head); height:var(--h-head);
+  position:sticky; top:0; z-index:3;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 18px; background:var(--surface-2); border-bottom:1px solid var(--line);
+}
+.head .title { font-size:var(--fs-lg); font-weight:700; color:var(--ink);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.head .step { font-size:var(--fs-sm); color:var(--slate); letter-spacing:.06em;
+  font-variant-numeric:tabular-nums; margin-left:8px; flex:0 0 auto; }
+
+/* The page (not this element) scrolls -- .content just flows naturally so
+   the card is exactly as tall as its content, and the sticky head/actions
+   bars stay reachable while a long page (e.g. the WOMAC list) scrolls. */
+.content { flex:1 1 auto; display:flex; }
+.pad { padding:16px 20px; width:100%; }
+
+.actions {
+  flex:0 0 var(--h-actions); height:var(--h-actions);
+  position:sticky; bottom:0; z-index:3;
+  display:flex; align-items:center; gap:10px; padding:0 18px;
+  background:var(--surface-2); border-top:1px solid var(--line);
+}
+
+/* ---------- buttons ---------- */
+.btn {
+  flex:1; min-width:0; height:var(--tap); border:1px solid var(--line); border-radius:var(--r);
+  background:var(--surface); color:var(--ink-2);
+  font-size:var(--fs-md); font-weight:600; font-family:inherit;
+  display:flex; align-items:center; justify-content:center; gap:4px;
+  cursor:pointer; padding:0 10px; white-space:nowrap; overflow:hidden;
+}
+.btn:active:not(:disabled) { background:var(--surface-3); }
+.btn:disabled { opacity:.32; cursor:default; }
+.btn.pri { background:var(--accent); border-color:var(--accent); color:var(--accent-ink); }
+.btn.pri:active:not(:disabled) { filter:brightness(.9); }
+.btn.danger { background:var(--signal); border-color:var(--signal); color:#fff; }
+.btn.ghost { background:transparent; }
+.btn.grow0 { flex:0 0 auto; padding:0 14px; }
+.btn:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+
+/* ---------- typography helpers ---------- */
+.h1 { font-size:var(--fs-lg); font-weight:700; margin:0 0 4px; }
+.h2 { font-size:var(--fs-md); font-weight:600; margin:0 0 3px; }
+.muted { color:var(--slate); }
+.small { font-size:var(--fs-sm); }
+.xs { font-size:var(--fs-xs); letter-spacing:.08em; text-transform:uppercase; color:var(--slate); font-weight:600; }
+.num { font-variant-numeric:tabular-nums; }
+.center { text-align:center; }
+.row { display:flex; align-items:center; gap:8px; }
+.col { display:flex; flex-direction:column; }
+.gap4 { gap:4px; } .gap6 { gap:6px; } .gap8 { gap:8px; } .gap10 { gap:10px; }
+.grow { flex:1 1 auto; min-width:0; min-height:0; }
+.spacer { flex:1 1 auto; }
+
+/* ---------- form rows (registration) ---------- */
+.field { display:flex; align-items:center; gap:12px; min-height:var(--tap); padding:4px 0; }
+.field > label { flex:0 0 92px; font-size:var(--fs-sm); font-weight:600; color:var(--ink-2); line-height:1.25; }
+.field > .ctl { flex:1 1 auto; min-width:0; }
+
+.input {
+  width:100%; height:var(--tap); border:1px solid var(--line); border-radius:var(--r);
+  background:var(--surface); color:var(--ink); font-size:var(--fs-md);
+  font-family:inherit; padding:0 12px; text-align:left;
+}
+.input.placeholder { color:var(--slate); }
+.input:focus-visible { outline:2px solid var(--accent); outline-offset:1px; }
+
+.seg { display:flex; gap:0; height:var(--tap); border:1px solid var(--line);
+  border-radius:var(--r); overflow:hidden; background:var(--surface); }
+.seg button {
+  flex:1; border:none; border-right:1px solid var(--line); background:transparent;
+  color:var(--ink-2); font-size:var(--fs-sm); font-weight:600; font-family:inherit; cursor:pointer;
+}
+.seg button:last-child { border-right:none; }
+.seg button[aria-pressed="true"] { background:var(--accent); color:var(--accent-ink); }
+
+.stepper { display:flex; align-items:center; gap:8px; }
+.stepper button {
+  flex:0 0 44px; height:var(--tap); border:1px solid var(--line); border-radius:var(--r);
+  background:var(--surface); color:var(--accent); font-size:20px; font-weight:700;
+  font-family:inherit; cursor:pointer; display:flex; align-items:center; justify-content:center;
+}
+.stepper button:active:not(:disabled) { background:var(--surface-3); }
+.stepper button:disabled { opacity:.3; }
+.stepper .val {
+  flex:1 1 auto; display:flex; align-items:baseline; justify-content:center; gap:2px; min-width:0;
+}
+.stepper .val-input {
+  width:2.6em; min-width:0; text-align:center; border:none; background:transparent;
+  font-size:var(--fs-xl); font-weight:700; font-family:inherit;
+  font-variant-numeric:tabular-nums; color:var(--ink); -moz-appearance:textfield;
+}
+.stepper .val-input::-webkit-outer-spin-button,
+.stepper .val-input::-webkit-inner-spin-button { -webkit-appearance:none; margin:0; }
+.stepper .val-input:focus-visible { outline:2px solid var(--accent); outline-offset:1px; border-radius:2px; }
+
+.check { display:flex; align-items:center; gap:11px; min-height:var(--tap); cursor:pointer; }
+.check .box {
+  flex:0 0 26px; width:26px; height:26px; border:2px solid var(--line); border-radius:4px;
+  background:var(--surface); display:flex; align-items:center; justify-content:center;
+  color:var(--accent-ink); font-size:16px; font-weight:800;
+}
+.check .box.on { background:var(--accent); border-color:var(--accent); }
+.check .lab { font-size:var(--fs-sm); color:var(--ink-2); line-height:1.3; }
+
+/* ---------- cards / lists ---------- */
+.card {
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--r);
+  padding:12px 14px;
+}
+.list { display:flex; flex-direction:column; gap:6px; }
+.listrow {
+  display:flex; align-items:center; gap:8px; background:var(--surface);
+  border:1px solid var(--line); border-radius:var(--r); padding:7px 9px;
+  cursor:pointer; text-align:left; font-family:inherit; width:100%;
+}
+.listrow:active { background:var(--surface-3); }
+
+.pill {
+  display:inline-flex; align-items:center; padding:2px 7px; border-radius:9px;
+  font-size:var(--fs-xs); font-weight:700; letter-spacing:.04em;
+}
+.pill.ok { background:var(--ok-soft); color:var(--ok); }
+.pill.warn { background:var(--signal-soft); color:var(--warn); }
+.pill.hi { background:var(--signal-soft); color:var(--signal); }
+.pill.mut { background:var(--surface-3); color:var(--slate); }
+
+/* ---------- movement capture ---------- */
+.mv-stage { flex:1 1 auto; display:flex; align-items:center; justify-content:center;
+  min-width:0; padding:4px; }
+.mv-side { flex:0 0 136px; border-left:1px solid var(--line-soft); padding:8px 10px;
+  display:flex; flex-direction:column; gap:6px; min-height:0; }
+.instr { font-size:var(--fs-md); font-weight:600; color:var(--ink); }
+.readout { font-size:var(--fs-xxl); font-weight:700; color:var(--accent);
+  font-variant-numeric:tabular-nums; line-height:1; }
+.readout .unit { font-size:var(--fs-md); font-weight:600; }
+.dots { display:flex; gap:5px; }
+.dot { width:9px; height:9px; border-radius:50%; border:1.5px solid var(--accent); }
+.dot.on { background:var(--accent); }
+.status { font-size:var(--fs-xs); color:var(--slate); letter-spacing:.06em;
+  text-transform:uppercase; font-weight:600; }
+.status.rec { color:var(--signal); }
+.status.rec::before {
+  content:''; display:inline-block; width:7px; height:7px; border-radius:50%;
+  background:var(--signal); margin-right:5px; vertical-align:middle;
+  animation:blink 1s steps(2,end) infinite;
+}
+@keyframes blink { 50% { opacity:0; } }
+
+/* ---------- KneeFit workflow (480px TFT) ---------- */
+.mv-kf { width:100%; display:flex; flex-direction:column; min-height:0; padding:6px 8px; gap:5px; }
+.mv-kf-body { flex:1 1 auto; min-height:0; display:flex; gap:8px; }
+.mv-kf-fig { flex:0 0 40%; min-width:0; display:flex; align-items:center; justify-content:center; }
+.mv-kf-fig .mvsvg { max-height:150px; }
+.mv-kf-panel { flex:1 1 auto; min-width:0; overflow-y:auto; }
+.mv-kf-hint { display:flex; flex-direction:column; gap:5px; }
+
+.kf-conn { display:flex; align-items:center; gap:7px; padding:3px 2px; }
+.kf-conn-label { flex:1 1 auto; min-width:0; font-size:var(--fs-sm); font-weight:600;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.kf-btn-sm { height:28px; font-size:var(--fs-xs); padding:0 10px; }
+
+.kf-metrics, .kf-result { display:flex; flex-direction:column; gap:5px; }
+.kf-head { display:flex; align-items:baseline; justify-content:space-between; }
+.kf-test { font-size:var(--fs-md); font-weight:700; }
+.kf-timer { font-size:var(--fs-sm); font-variant-numeric:tabular-nums; color:var(--slate); font-weight:700; }
+.kf-timer.live { color:var(--signal); }
+.kf-rec-dot { display:inline-block; width:7px; height:7px; border-radius:50%;
+  background:var(--signal); margin-right:5px; vertical-align:middle;
+  animation:blink 1s steps(2,end) infinite; }
+.kf-primary { display:flex; flex-direction:column; gap:0; line-height:1; margin:2px 0; }
+.kf-primary-num { font-size:var(--fs-xxl); font-weight:800; color:var(--accent);
+  font-variant-numeric:tabular-nums; }
+.kf-primary-unit { font-size:var(--fs-md); font-weight:700; margin-left:2px; }
+.kf-primary-label { font-size:var(--fs-xs); letter-spacing:.06em; text-transform:uppercase;
+  color:var(--slate); font-weight:700; margin-top:2px; }
+.kf-grid { display:flex; flex-direction:column; gap:2px; }
+.kf-row { display:flex; align-items:center; justify-content:space-between; gap:8px;
+  font-size:var(--fs-sm); }
+.kf-row-k { color:var(--slate); }
+.kf-row-v { font-variant-numeric:tabular-nums; font-weight:700; }
+.kf-crep { align-items:flex-start; }
+.kf-chips { display:flex; flex-wrap:wrap; gap:3px; justify-content:flex-end; }
+.kf-result-head { font-size:var(--fs-md); font-weight:700; color:var(--ok); }
+.kf-note { text-transform:none; letter-spacing:0; }
+
+.kf-console {
+  flex:0 0 auto; max-height:52px; overflow-y:auto; margin-top:2px;
+  padding:3px 6px; background:#0c1416; color:#b9d4d0; border-radius:3px;
+  font-family:ui-monospace, SFMono-Regular, Menlo, monospace; font-size:9px;
+  line-height:1.45; white-space:pre-wrap; word-break:break-word;
+}
+.kf-console-line { opacity:.8; }
+.kf-console-line:last-child { opacity:1; color:#dff0ec; }
+
+.kf-debug { font-size:10px; }
+.kf-debug-toggle { background:none; border:none; color:var(--slate); font-family:inherit;
+  font-size:10px; padding:0; cursor:pointer; }
+.kf-debug-body { margin:2px 0 0; padding:4px 6px; background:var(--surface-2);
+  border-radius:3px; white-space:pre-wrap; word-break:break-all; max-height:96px;
+  overflow:auto; font-size:9px; line-height:1.3; color:var(--ink-2); }
+
+.mvsvg { width:100%; height:100%; max-height:224px; display:block; }
+.mvmedia { object-fit:contain; border-radius:3px; background:transparent; }
+.lmb { fill:none; stroke:var(--fig); stroke-width:5.5; stroke-linecap:round; stroke-linejoin:round; }
+.lmb.thin { stroke-width:4; }
+.hd { fill:var(--fig); }
+.chair { fill:none; stroke:var(--ghost); stroke-width:4; stroke-linecap:round; }
+.arc { fill:none; stroke:var(--ghost); stroke-width:2; stroke-dasharray:4 4; }
+.arc.live { stroke:var(--accent); stroke-dasharray:none; stroke-width:3.5; }
+.arms { fill:none; stroke:var(--accent); stroke-width:5; stroke-linecap:round; }
+.trk { fill:none; stroke:var(--ghost); stroke-width:2; stroke-dasharray:6 6; }
+.mark { fill:none; stroke:var(--accent); stroke-width:3; stroke-linecap:round; }
+.fp { fill:var(--ghost); } .fp.b { fill:var(--fig); }
+.svglbl { font-size:9px; fill:var(--slate); letter-spacing:.06em; font-family:inherit; }
+
+/* ---------- xray page (big ORIGINAL · HEAT MAP + compact readout) ---------- */
+/* `height:100%` used to cascade this from a fixed-320px kiosk parent -- now
+   that .app sizes to its own content (see the shell comment above), a
+   height:100% ancestor with nothing to be 100% OF collapses to auto, and a
+   flex:1;min-height:0 tile inside it shrinks to near nothing: the thin
+   bars this was reported as. Fixed with a real intrinsic size instead of a
+   borrowed one: aspect-ratio (square, matching the model's own 224x224
+   input crop) plus a floor so the empty "no image yet" state still reads
+   as a proper photo box, not a sliver, before anything is uploaded. */
+.xr-report { display:flex; flex-direction:column; gap:4px; width:100%;
+  padding:6px 8px; }
+.xr-tiles { display:flex; gap:12px; flex-wrap:wrap; }
+.xr-tile { flex:1 1 260px; min-width:220px; display:flex; flex-direction:column; gap:4px; }
+.xr-tile figcaption { flex:0 0 auto; font-size:9px; text-align:center;
+  color:var(--slate); text-transform:uppercase; letter-spacing:.09em; font-weight:700; }
+.xr-img {
+  aspect-ratio:1 / 1; min-height:260px; background:#0a0f11; border:1px solid var(--line);
+  border-radius:var(--r); overflow:hidden; position:relative;
+  display:flex; align-items:center; justify-content:center;
+}
+.xr-img img, .xr-img canvas { width:100%; height:100%; object-fit:contain; display:block; }
+.xr-img .overlay { position:absolute; inset:0; }
+.xr-img-warn { border-color:var(--signal); }
+.xr-tile-msg { font-size:10px; padding:0 10px; text-align:center; color:var(--signal); font-weight:600; }
+.xr-tile-msg.muted { color:#7f8f92; font-weight:400; }
+
+/* upload step (7/9) — just the images + a one-line status */
+.xr-status { flex:0 0 auto; text-align:center; font-size:var(--fs-xs);
+  letter-spacing:.04em; font-weight:600; padding:1px 0;
+  display:flex; gap:6px; align-items:center; justify-content:center; }
+.xr-status.ok { color:var(--ok); }
+.xr-status.bad { color:var(--signal); }
+.xr-status.muted { color:var(--slate); }
+
+/* review step (8/9) — images + a compact result strip beneath */
+.xr-resultbar { flex:0 0 auto; display:flex; align-items:center; gap:8px;
+  flex-wrap:wrap; padding:4px 6px; background:var(--surface-2);
+  border:1px solid var(--line); border-radius:var(--r); }
+.xr-rb-meta { display:flex; flex-direction:column; line-height:1.25; flex:0 0 auto; }
+.xr-rb-meta b { font-size:var(--fs-sm); font-weight:800; }
+.xr-rb-meta span { font-size:8.5px; color:var(--slate); }
+.xr-rb-result { display:flex; align-items:center; gap:8px; flex:1 1 auto;
+  flex-wrap:wrap; min-width:0; }
+.xr-cond { padding:3px 10px; border-radius:12px; font-weight:800; font-size:12px;
+  white-space:nowrap; }
+.xr-cond.ok { background:var(--ok-soft); color:var(--ok); }
+.xr-cond.warn { background:var(--signal-soft); color:var(--warn); }
+.xr-cond.hi { background:var(--signal-soft); color:var(--signal); }
+.xr-conf { font-size:17px; font-weight:800; color:var(--warn); line-height:1;
+  font-variant-numeric:tabular-nums; display:flex; align-items:baseline; gap:4px; }
+.xr-conf em { font-size:8.5px; font-style:normal; font-weight:700; color:var(--slate);
+  text-transform:uppercase; letter-spacing:.06em; }
+.xr-oa { display:flex; align-items:center; gap:5px; flex:1 1 90px; min-width:80px; }
+.xr-oa > i { flex:1 1 auto; height:8px; background:var(--surface-3);
+  border-radius:4px; overflow:hidden; }
+.xr-oa > i > b { display:block; height:100%; border-radius:4px; background:var(--signal); }
+.xr-oa > em { font-style:normal; font-size:9px; font-weight:700; color:var(--ink-2);
+  white-space:nowrap; }
+.xr-rb-state { font-size:10px; display:flex; gap:5px; align-items:center; flex:1 1 auto; }
+.xr-rb-state.bad { color:var(--signal); font-weight:600; }
+.xr-rb-state.muted { color:var(--slate); }
+.xr-rb-abstain { font-size:9px; color:var(--signal); font-weight:600; flex-basis:100%; }
+
+.spin { width:11px; height:11px; border-radius:50%; display:inline-block;
+  border:2px solid var(--accent-soft); border-top-color:var(--accent);
+  animation:spin .7s linear infinite; }
+@keyframes spin { to { transform:rotate(360deg); } }
+
+/* ---------- keyboard sheet ---------- */
+.kbd {
+  position:absolute; left:0; right:0; bottom:0; z-index:20;
+  background:var(--surface-2); border-top:1px solid var(--line);
+  padding:4px; display:flex; flex-direction:column; gap:3px;
+}
+.kbd .krow { display:flex; gap:3px; justify-content:center; }
+.kbd button {
+  flex:1 1 0; min-width:0; height:30px; border:1px solid var(--line);
+  border-radius:3px; background:var(--surface); color:var(--ink);
+  font-size:var(--fs-md); font-family:inherit; cursor:pointer; padding:0;
+}
+.kbd button:active { background:var(--accent); color:var(--accent-ink); }
+.kbd button.wide { flex:2 1 0; }
+.kbd button.act { background:var(--accent); border-color:var(--accent); color:var(--accent-ink); font-weight:700; }
+
+.sheetwrap { position:relative; width:100%; height:100%; overflow:hidden; }
+
+/* ---------- misc ---------- */
+.banner {
+  background:var(--signal-soft); border:1px solid var(--signal); color:var(--signal);
+  border-radius:var(--r); padding:5px 8px; font-size:var(--fs-xs); font-weight:600;
+  line-height:1.35;
+}
+.banner.info { background:var(--accent-soft); border-color:var(--accent); color:var(--accent); }
+.hr { height:1px; background:var(--line); border:none; margin:6px 0; }
+.empty { display:flex; align-items:center; justify-content:center; height:100%;
+  color:var(--slate); font-size:var(--fs-sm); text-align:center; padding:0 20px; }
+.langbtn {
+  border:1px solid var(--line); background:var(--surface); border-radius:5px;
+  font-size:var(--fs-sm); font-weight:700; color:var(--ink-2); height:34px; padding:0 12px;
+  cursor:pointer; font-family:inherit; flex:0 0 auto;
+}
+
+/* ---------- movement figures ----------
+   Brief state loops; capture state freezes or mirrors live sensor data.
+   A looping animation during capture makes the patient synchronise to it,
+   which is no longer natural movement. Replace these keyframes freely. */
+.fig-shin { transform-box:view-box; transform-origin:126px 80px; }
+.fig-shin.anim { animation:flexext 3.4s ease-in-out infinite; }
+@keyframes flexext {
+  0%,8%    { transform:rotate(0deg); }
+  46%,56%  { transform:rotate(-86deg); }
+  94%,100% { transform:rotate(0deg); }
+}
+.fig-sweep { stroke-dasharray:78; stroke-dashoffset:78; }
+.fig-sweep.anim { animation:sweep 3.4s ease-in-out infinite; }
+@keyframes sweep {
+  0%,8%    { stroke-dashoffset:78; }
+  46%,56%  { stroke-dashoffset:0; }
+  94%,100% { stroke-dashoffset:78; }
+}
+.pose { opacity:0; }
+.pose.anim { animation:pose 3.6s ease-in-out infinite; }
+.pose.anim.p2 { animation-delay:1.2s; }
+.pose.anim.p3 { animation-delay:2.4s; }
+.pose.still.p1 { opacity:1; }
+.pose.still.p2 { opacity:.3; }
+.pose.still.p3 { opacity:.3; }
+@keyframes pose {
+  0%      { opacity:0; }
+  6%,28%  { opacity:1; }
+  34%,100%{ opacity:0; }
+}
+.fig-walker.anim { animation:walk 4.2s linear infinite; }
+@keyframes walk { 0% { transform:translateX(0); } 100% { transform:translateX(160px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .fig-shin.anim, .fig-sweep.anim, .pose.anim, .fig-walker.anim { animation:none !important; }
+  .pose.anim.p1 { opacity:1; }
+}
+
+/* ---------- score ring / clinical score summary ---------- */
+.score-ring { flex:0 0 auto; }
+.score-ring-num { font-size:22px; font-weight:800; fill:var(--ink); font-family:inherit;
+  font-variant-numeric:tabular-nums; }
+
+.score-card {
+  background:var(--surface); border:2px solid var(--accent); border-radius:10px;
+  padding:18px 20px; display:flex; align-items:center; gap:20px;
+  box-shadow:0 2px 14px -6px rgba(14,21,23,.18);
+}
+.score-card .pill { font-size:var(--fs-md); padding:7px 18px; border-radius:16px; }
+.score-card .score-num { font-size:var(--fs-xl); font-weight:800; }
+.score-card .stat-row { display:flex; flex-wrap:wrap; gap:16px; font-size:var(--fs-sm); color:var(--ink-2); }
+.score-card .stat-row b { color:var(--ink); font-variant-numeric:tabular-nums; }
+
+/* records row affordance */
+.listrow .chev { flex:0 0 auto; color:var(--slate); font-size:17px; line-height:1; padding-left:2px; }
+
+/* sensor link indicator */
+.ledot { flex:0 0 10px; width:10px; height:10px; border-radius:50%; background:var(--slate); }
+.ledot.ok  { background:var(--ok); box-shadow:0 0 0 3px var(--ok-soft); }
+.ledot.bad { background:var(--signal); box-shadow:0 0 0 3px var(--signal-soft); }
+.ledot.mut { background:var(--slate); opacity:.5; }
+.ledot.busy { background:var(--accent); animation:pulse 1s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity:.3; } }
+@media (prefers-reduced-motion: reduce) { .ledot.busy { animation:none; } }
+
+/* device metric readouts */
+.bignum { font-size:26px; font-weight:700; color:var(--accent);
+  font-variant-numeric:tabular-nums; line-height:1; }
+.mgrid { display:grid; grid-template-columns:1fr 1fr; gap:1px 14px; }
+.mrow { display:flex; justify-content:space-between; gap:8px;
+  font-size:var(--fs-sm); min-width:0; }
+.mrow > span:first-child { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.mrow .num { font-weight:700; white-space:nowrap; }
+.crep { display:flex; align-items:center; justify-content:space-between;
+  gap:8px; margin-top:4px; padding-top:4px; border-top:1px solid var(--line-soft); }
+.chip { display:inline-block; padding:1px 6px; border-radius:8px;
+  background:var(--signal-soft); color:var(--signal);
+  font-size:var(--fs-xs); font-weight:700; font-variant-numeric:tabular-nums; }
+.qaline { display:flex; gap:12px; flex-wrap:wrap; margin-top:4px; padding-top:4px;
+  border-top:1px solid var(--line-soft); font-size:var(--fs-xs); color:var(--slate); }

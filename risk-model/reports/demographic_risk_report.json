@@ -1,0 +1,26 @@
+{
+  "cv_results": {
+    "logistic_regression": {
+      "mean_auc": 0.6433591001708653,
+      "std_auc": 0.029900868213773548
+    },
+    "random_forest": {
+      "mean_auc": 0.6415520807635025,
+      "std_auc": 0.03586210226395067
+    },
+    "hist_gradient_boosting": {
+      "mean_auc": 0.6250016418363897,
+      "std_auc": 0.032746193579951864
+    }
+  },
+  "test_metrics": {
+    "roc_auc": 0.6377440725244072,
+    "accuracy": 0.6033402922755741,
+    "precision": 0.6183574879227053,
+    "recall": 0.5355648535564853,
+    "brier_score": 0.2357356401485687,
+    "n_test": 479,
+    "positive_rate_test": 0.4989561586638831
+  },
+  "chosen_model": "logistic_regression"
+}
