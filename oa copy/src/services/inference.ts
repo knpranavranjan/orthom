@@ -162,6 +162,18 @@ export class FixtureBackend implements InferenceBackend {
  * Placeholder overlay so screen 8 is demonstrable before the model lands.
  * Draws a soft warm focus over the medial joint space region.
  * Replace wholesale with the real Grad-CAM output.
+ *
+ * BUG FIXED 2026-09-18: this used to set
+ * `ctx.globalCompositeOperation = 'lighter'` (additive blending) before
+ * filling the gradient. Additive blending clips to white on top of
+ * already-bright pixels — and most of a real knee X-ray IS bright white —
+ * so the overlay was nearly invisible on real radiographs: verified by
+ * rendering it standalone and inspecting the output, which showed only a
+ * faint pastel smudge, easily mistaken for "the heatmap tile is just
+ * showing the original image again" (a real user report). Standard alpha
+ * compositing (the canvas default, no globalCompositeOperation override)
+ * blends the overlay color toward the base pixel rather than adding to it,
+ * so it stays visible regardless of how bright the underlying image is.
  */
 async function syntheticHeatmap(image: Blob): Promise<string | null> {
   try {
@@ -172,13 +184,13 @@ async function syntheticHeatmap(image: Blob): Promise<string | null> {
     const ctx = c.getContext('2d');
     if (!ctx) return null;
     ctx.drawImage(bmp, 0, 0, w, h);
-    const cx = w * 0.46, cy = h * 0.52, r = Math.min(w, h) * 0.3;
-    const g = ctx.createRadialGradient(cx, cy, r * 0.1, cx, cy, r);
-    g.addColorStop(0.0, 'rgba(220, 40, 20, 0.72)');
-    g.addColorStop(0.35, 'rgba(240, 150, 20, 0.55)');
-    g.addColorStop(0.7, 'rgba(60, 190, 170, 0.28)');
-    g.addColorStop(1.0, 'rgba(20, 60, 160, 0)');
-    ctx.globalCompositeOperation = 'lighter';
+    const cx = w * 0.46, cy = h * 0.52, r = Math.min(w, h) * 0.32;
+    const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+    g.addColorStop(0.0, 'rgba(200, 20, 20, 0.55)');
+    g.addColorStop(0.25, 'rgba(230, 120, 20, 0.50)');
+    g.addColorStop(0.5, 'rgba(230, 210, 20, 0.42)');
+    g.addColorStop(0.75, 'rgba(40, 180, 120, 0.30)');
+    g.addColorStop(1.0, 'rgba(30, 90, 200, 0)');
     ctx.fillStyle = g;
     ctx.fillRect(0, 0, w, h);
     bmp.close?.();
