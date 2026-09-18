@@ -124,6 +124,8 @@
   "xr.oa": "OA",
   "xr.exportPdf": "Export PDF",
   "xr.chooseHint": "Choose a knee X-ray to run the analysis.",
+  "xr.gradingError": "Couldn't reach the grading service — {{detail}}. Check the connection and try again.",
+  "xr.noResult": "No grading result for this image — go back to the X-ray step and try again.",
   "xr.yrs": "yrs",
   "kl.title": "Grade probability",
   "kl.grade": "KL grade",
