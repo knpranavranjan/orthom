@@ -1,0 +1,12 @@
+{
+  "eval": {
+    "mobilenet_v2": "mobilenet_v2__M_corn",
+    "efficientnet_b0": "efficientnet_b0__M0_baseline",
+    "convnext_tiny": "convnext_tiny__M_difflr"
+  },
+  "export": {
+    "mobilenet_v2": "mobilenet_v2__M_strongaug",
+    "efficientnet_b0": "efficientnet_b0__M0_baseline",
+    "convnext_tiny": "convnext_tiny__M_difflr"
+  }
+}

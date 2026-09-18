@@ -1,0 +1,113 @@
+{
+  "model": "xception",
+  "timm_name": "legacy_xception",
+  "accuracy": 0.6195476575121163,
+  "macro_precision": 0.6599020140704395,
+  "macro_recall": 0.653414795099714,
+  "macro_f1": 0.6522922718019676,
+  "weighted_f1": 0.6088770348297176,
+  "balanced_accuracy": 0.653414795099714,
+  "cohen_kappa": 0.4679524905766773,
+  "quadratic_weighted_kappa": 0.7595035927183359,
+  "roc_auc_ovr_macro": 0.8574447043382618,
+  "kl0_f1": 0.7238454288407163,
+  "kl1_f1": 0.2978723404255319,
+  "kl2_f1": 0.5230769230769231,
+  "kl3_f1": 0.8,
+  "kl4_f1": 0.9166666666666666,
+  "kl0_support": 484,
+  "kl1_support": 220,
+  "kl2_support": 338,
+  "kl3_support": 159,
+  "kl4_support": 37,
+  "parameters": 20817197,
+  "trainable_parameters": 20817197,
+  "non_trainable_parameters": 0,
+  "model_size_mb": 79.701,
+  "gmacs": 4.5742,
+  "flops_or_macs": 4.5742,
+  "flops_estimate_g": 9.1483,
+  "gmacs_method": "fvcore.FlopCountAnalysis (MAC=1)",
+  "mean_latency_ms": 3.0339,
+  "median_latency_ms": 2.9666,
+  "std_latency_ms": 0.2152,
+  "min_latency_ms": 2.755,
+  "max_latency_ms": 3.8964,
+  "throughput_images_per_sec": 329.61,
+  "latency_device": "cuda",
+  "cpu_mean_latency_ms": 23.8616,
+  "peak_memory_mb": 341.17,
+  "train_peak_cuda_mb": 5004.15,
+  "best_epoch": 7,
+  "epochs_run": 12,
+  "training_time_sec": 103.4,
+  "training_time": 103.4,
+  "stopped_early": true,
+  "adjacent_confusions": {
+    "KL1_as_KL2": 40,
+    "KL2_as_KL1": 72,
+    "KL2_as_KL3": 34,
+    "KL3_as_KL2": 16,
+    "KL3_as_KL4": 2,
+    "KL4_as_KL3": 4
+  },
+  "confusion_matrix": [
+    [
+      384,
+      62,
+      38,
+      0,
+      0
+    ],
+    [
+      113,
+      63,
+      40,
+      4,
+      0
+    ],
+    [
+      79,
+      72,
+      153,
+      34,
+      0
+    ],
+    [
+      1,
+      6,
+      16,
+      134,
+      2
+    ],
+    [
+      0,
+      0,
+      0,
+      4,
+      33
+    ]
+  ],
+  "gradcam_layer_candidates": [
+    "conv4.pointwise"
+  ],
+  "backend": "timm",
+  "preprocessing_variant": "basic",
+  "loss_name": "weighted_cross_entropy",
+  "seed": 42,
+  "stage_a_epochs": 3,
+  "max_epochs_budget": 50,
+  "patience": 5,
+  "differential_lr": null,
+  "artefacts": {
+    "best_ckpt": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\models\\phase4\\xception\\best.pt",
+    "confusion": {
+      "raw": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase4\\confusion_matrices\\xception_confusion_matrix.png",
+      "normalized": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase4\\confusion_matrices\\xception_confusion_matrix_normalized.png"
+    },
+    "training_curve": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase4\\training_curves\\xception_training_curve.png",
+    "config": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\models\\phase4\\xception\\config.json"
+  },
+  "phase": "phase4",
+  "max_epochs_config": 50
+}

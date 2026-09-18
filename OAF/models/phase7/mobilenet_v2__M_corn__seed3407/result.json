@@ -1,0 +1,200 @@
+{
+  "experiment_id": "mobilenet_v2__M_corn__seed3407",
+  "family": "multiseed",
+  "model": "mobilenet_v2",
+  "seed": 3407,
+  "ordinal": "corn",
+  "ema": false,
+  "preprocessing": "basic",
+  "loss": "corn",
+  "imbalance": "weighted_ce",
+  "augmentation": "augmentation.yaml",
+  "differential_lr": false,
+  "stage_a_epochs": 3,
+  "weight_decay": 0.0001,
+  "max_epochs": 50,
+  "patience": 5,
+  "best_epoch": 15,
+  "epochs_run": 20,
+  "stopped_early": true,
+  "val_accuracy": 0.5897,
+  "val_macro_f1": 0.6097,
+  "val_weighted_f1": 0.575,
+  "val_balanced_accuracy": 0.6062,
+  "val_qwk": 0.7437,
+  "val_KL0_F1": 0.7157,
+  "val_KL1_F1": 0.2423,
+  "val_KL2_F1": 0.4847,
+  "val_KL3_F1": 0.729,
+  "val_KL4_F1": 0.8767,
+  "val_binary_oa_acc": 0.8061,
+  "val_binary_oa_auc": 0.8903,
+  "val_3class_acc": 0.6866,
+  "val_mae": 0.5178,
+  "val_within1": 0.8958,
+  "parameters": 2228996,
+  "model_size_mb": 8.724,
+  "gmacs": 0.3129,
+  "gpu_latency_ms": 2.6411,
+  "cpu_latency_ms": 7.3955,
+  "training_time_sec": 95.8,
+  "checkpoint": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\models\\phase7\\mobilenet_v2__M_corn__seed3407\\best.pt",
+  "note": "mobilenet_v2__M_corn @ seed 3407",
+  "val_full": {
+    "n_samples": 1238,
+    "accuracy": 0.5896607431340872,
+    "balanced_accuracy": 0.6062326639790685,
+    "macro_precision": 0.6279465189393979,
+    "macro_recall": 0.6062326639790685,
+    "macro_f1": 0.6096919231944117,
+    "weighted_f1": 0.5750360026110878,
+    "cohen_kappa": 0.4196466225014004,
+    "quadratic_weighted_kappa": 0.7436913317497649,
+    "per_class": {
+      "KL0": {
+        "precision": 0.6323296354992076,
+        "recall": 0.8243801652892562,
+        "f1": 0.715695067264574,
+        "support": 484
+      },
+      "KL1": {
+        "precision": 0.2537313432835821,
+        "recall": 0.2318181818181818,
+        "f1": 0.24228028503562946,
+        "support": 220
+      },
+      "KL2": {
+        "precision": 0.6164383561643836,
+        "recall": 0.3994082840236686,
+        "f1": 0.48473967684021546,
+        "support": 338
+      },
+      "KL3": {
+        "precision": 0.7483443708609272,
+        "recall": 0.710691823899371,
+        "f1": 0.7290322580645161,
+        "support": 159
+      },
+      "KL4": {
+        "precision": 0.8888888888888888,
+        "recall": 0.8648648648648649,
+        "f1": 0.8767123287671232,
+        "support": 37
+      }
+    },
+    "kl0_f1": 0.715695067264574,
+    "kl0_precision": 0.6323296354992076,
+    "kl0_recall": 0.8243801652892562,
+    "kl0_support": 484,
+    "kl1_f1": 0.24228028503562946,
+    "kl1_precision": 0.2537313432835821,
+    "kl1_recall": 0.2318181818181818,
+    "kl1_support": 220,
+    "kl2_f1": 0.48473967684021546,
+    "kl2_precision": 0.6164383561643836,
+    "kl2_recall": 0.3994082840236686,
+    "kl2_support": 338,
+    "kl3_f1": 0.7290322580645161,
+    "kl3_precision": 0.7483443708609272,
+    "kl3_recall": 0.710691823899371,
+    "kl3_support": 159,
+    "kl4_f1": 0.8767123287671232,
+    "kl4_precision": 0.8888888888888888,
+    "kl4_recall": 0.8648648648648649,
+    "kl4_support": 37,
+    "confusion_matrix": [
+      [
+        399,
+        62,
+        20,
+        3,
+        0
+      ],
+      [
+        136,
+        51,
+        30,
+        3,
+        0
+      ],
+      [
+        95,
+        81,
+        135,
+        27,
+        0
+      ],
+      [
+        1,
+        7,
+        34,
+        113,
+        4
+      ],
+      [
+        0,
+        0,
+        0,
+        5,
+        32
+      ]
+    ],
+    "confusion_matrix_normalized": [
+      [
+        0.8243801652892562,
+        0.128099173553719,
+        0.04132231404958678,
+        0.006198347107438017,
+        0.0
+      ],
+      [
+        0.6181818181818182,
+        0.2318181818181818,
+        0.13636363636363635,
+        0.013636363636363636,
+        0.0
+      ],
+      [
+        0.28106508875739644,
+        0.23964497041420119,
+        0.3994082840236686,
+        0.07988165680473373,
+        0.0
+      ],
+      [
+        0.006289308176100629,
+        0.0440251572327044,
+        0.2138364779874214,
+        0.710691823899371,
+        0.025157232704402517
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.13513513513513514,
+        0.8648648648648649
+      ]
+    ],
+    "adjacent_confusions": {
+      "KL1_as_KL2": 30,
+      "KL2_as_KL1": 81,
+      "KL2_as_KL3": 27,
+      "KL3_as_KL2": 34,
+      "KL3_as_KL4": 4,
+      "KL4_as_KL3": 5
+    },
+    "errors_off_by_1": 379,
+    "errors_off_by_2plus": 129,
+    "roc_auc_ovr_macro": 0.8457947118491894,
+    "roc_auc_ovr_weighted": 0.813990526421272,
+    "roc_auc_per_class_ovr": {
+      "KL0": 0.8437726067036412,
+      "KL1": 0.6428871227004822,
+      "KL2": 0.7999769888231427,
+      "KL3": 0.9478727682864986,
+      "KL4": 0.9944640727321827
+    },
+    "loss": 0.47406188267402
+  }
+}

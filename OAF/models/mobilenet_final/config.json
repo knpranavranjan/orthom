@@ -1,0 +1,17 @@
+{
+  "experiment_id": "K6_kd_ens_long__seed123",
+  "kd": true,
+  "teachers": [
+    "vgg16",
+    "convnext_tiny"
+  ],
+  "temperature": 4.0,
+  "alpha": 0.8,
+  "ema": true,
+  "label_smoothing": 0.0,
+  "mixup_alpha": 0.0,
+  "max_epochs": 70,
+  "patience": 8,
+  "seed": 123,
+  "note": "K6_kd_ens_long @ seed 123"
+}

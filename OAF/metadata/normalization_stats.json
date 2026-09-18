@@ -1,0 +1,33 @@
+{
+  "source": "metadata\\train.csv",
+  "note": "TRAIN split only.",
+  "variants": {
+    "basic": {
+      "mean": 0.609158,
+      "std": 0.193888,
+      "min": 0.0,
+      "max": 1.0,
+      "n_pixels": 290117632,
+      "n_images": 5782,
+      "contrast": "none"
+    },
+    "clahe": {
+      "mean": 0.61092,
+      "std": 0.188657,
+      "min": 0.003922,
+      "max": 1.0,
+      "n_pixels": 290117632,
+      "n_images": 5782,
+      "contrast": "clahe"
+    },
+    "histeq": {
+      "mean": 0.504209,
+      "std": 0.291064,
+      "min": 0.0,
+      "max": 1.0,
+      "n_pixels": 290117632,
+      "n_images": 5782,
+      "contrast": "hist_eq"
+    }
+  }
+}

@@ -1,0 +1,3722 @@
+[
+  {
+    "model": "vgg16",
+    "status": "OK",
+    "backend": "timm",
+    "n_test": 1240,
+    "accuracy": 0.7258064516129032,
+    "macro_precision": 0.7460579989211666,
+    "macro_recall": 0.7391927991500502,
+    "macro_f1": 0.7382433076367481,
+    "weighted_precision": 0.7385042356767401,
+    "weighted_recall": 0.7258064516129032,
+    "weighted_f1": 0.7267481536490953,
+    "balanced_accuracy": 0.7391927991500502,
+    "cohen_kappa": 0.6244603175875674,
+    "qwk": 0.8752887800767174,
+    "kl4_f1": 0.88,
+    "kl4_precision": 0.8918918918918919,
+    "kl4_recall": 0.868421052631579,
+    "kl4_support": 38,
+    "mae": 0.3008064516129032,
+    "rmse_ordinal": 0.5977106862990899,
+    "exact_accuracy": 0.7258064516129032,
+    "within_1_accuracy": 0.975,
+    "within_2_accuracy": 0.9983870967741936,
+    "micro_f1": 0.7258064516129032,
+    "test_loss": 0.7259381569200947,
+    "roc_auc_ovr_macro": 0.9186615829713274,
+    "error_0": 900,
+    "error_1": 309,
+    "error_2": 29,
+    "error_3": 2,
+    "error_4": 0,
+    "underprediction_count": 209,
+    "overprediction_count": 131,
+    "adjacent_error_fraction_of_errors": 0.9088,
+    "confidence_mean": 0.7783799901604652,
+    "confidence_median": 0.8050660192966461,
+    "confidence_min": 0.41027262806892395,
+    "confidence_max": 1.0,
+    "confidence_mean_correct": 0.8163411252697309,
+    "confidence_mean_incorrect": 0.6778946325182915,
+    "parameters": 134281029,
+    "trainable_parameters": 134281029,
+    "mean_latency_ms": 3.0295,
+    "median_latency_ms": 3.0257,
+    "std_latency_ms": 0.0541,
+    "p90_latency_ms": 3.0786,
+    "throughput_img_per_s": 330.09,
+    "latency_device": "cuda",
+    "latency_warmup_iters": 20,
+    "latency_timed_iters": 100,
+    "phase4_best_epoch": 21,
+    "phase4_epochs_completed": 26,
+    "phase4_early_stop": true,
+    "checkpoint_path": "models\\phase4\\vgg16\\best.pt",
+    "checkpoint_val_selection_metric": "val_macro_f1",
+    "checkpoint_val_selection_value": 0.7077299594325329,
+    "validation_accuracy": 0.6688206785137318,
+    "test_accuracy": 0.7258064516129032,
+    "delta_accuracy": 0.056986,
+    "validation_macro_precision": 0.7170908851859848,
+    "test_macro_precision": 0.7460579989211666,
+    "delta_macro_precision": 0.028967,
+    "validation_macro_recall": 0.7057532516207803,
+    "test_macro_recall": 0.7391927991500502,
+    "delta_macro_recall": 0.03344,
+    "validation_macro_f1": 0.7077299594325329,
+    "test_macro_f1": 0.7382433076367481,
+    "delta_macro_f1": 0.030513,
+    "validation_weighted_f1": 0.6778610242129454,
+    "test_weighted_f1": 0.7267481536490953,
+    "delta_weighted_f1": 0.048887,
+    "validation_balanced_accuracy": 0.7057532516207803,
+    "test_balanced_accuracy": 0.7391927991500502,
+    "delta_balanced_accuracy": 0.03344,
+    "validation_qwk": 0.8440542936525102,
+    "test_qwk": 0.8752887800767174,
+    "delta_qwk": 0.031234,
+    "validation_kl4_f1": 0.918918918918919,
+    "test_kl4_f1": 0.88,
+    "delta_kl4_f1": -0.038919,
+    "_per_class": {
+      "KL0": {
+        "precision": 0.7952755905511811,
+        "recall": 0.8487394957983193,
+        "f1": 0.8211382113821138,
+        "support": 476
+      },
+      "KL1": {
+        "precision": 0.4548872180451128,
+        "recall": 0.5330396475770925,
+        "f1": 0.4908722109533469,
+        "support": 227
+      },
+      "KL2": {
+        "precision": 0.8181818181818182,
+        "recall": 0.6036585365853658,
+        "f1": 0.6947368421052632,
+        "support": 328
+      },
+      "KL3": {
+        "precision": 0.7700534759358288,
+        "recall": 0.8421052631578947,
+        "f1": 0.8044692737430168,
+        "support": 171
+      },
+      "KL4": {
+        "precision": 0.8918918918918919,
+        "recall": 0.868421052631579,
+        "f1": 0.88,
+        "support": 38
+      }
+    },
+    "_confusion_matrix": [
+      [
+        404,
+        65,
+        6,
+        1,
+        0
+      ],
+      [
+        85,
+        121,
+        18,
+        3,
+        0
+      ],
+      [
+        18,
+        78,
+        198,
+        34,
+        0
+      ],
+      [
+        1,
+        2,
+        20,
+        144,
+        4
+      ],
+      [
+        0,
+        0,
+        0,
+        5,
+        33
+      ]
+    ],
+    "_kl4_predicted_as": {
+      "KL0": 0,
+      "KL1": 0,
+      "KL2": 0,
+      "KL3": 5,
+      "KL4": 33
+    },
+    "_top_confusions": [
+      {
+        "true": 1,
+        "pred": 0,
+        "count": 85,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 1,
+        "count": 78,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 0,
+        "pred": 1,
+        "count": 65,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 3,
+        "count": 34,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 3,
+        "pred": 2,
+        "count": 20,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 1,
+        "pred": 2,
+        "count": 18,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 0,
+        "count": 18,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 0,
+        "pred": 2,
+        "count": 6,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 4,
+        "pred": 3,
+        "count": 5,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 3,
+        "pred": 4,
+        "count": 4,
+        "ordinal_distance": 1
+      }
+    ],
+    "_confusion_plots": {
+      "raw": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase5\\confusion_matrices\\vgg16_confusion_matrix.png",
+      "normalized": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase5\\confusion_matrices\\vgg16_confusion_matrix_normalized.png"
+    },
+    "_latency_full": {
+      "device": "cuda",
+      "input_shape": [
+        1,
+        3,
+        224,
+        224
+      ],
+      "warmup_iters": 20,
+      "timed_iters": 100,
+      "mean_ms": 3.0295,
+      "median_ms": 3.0257,
+      "std_ms": 0.0541,
+      "min_ms": 2.9511,
+      "max_ms": 3.4034,
+      "p90_ms": 3.0786,
+      "throughput_images_per_sec": 330.09,
+      "peak_memory": {
+        "cuda_peak_alloc_mb": 984.51,
+        "cuda_peak_reserved_mb": 1293.94,
+        "process_rss_mb": 1692.02
+      }
+    },
+    "eval_seconds": 4.1
+  },
+  {
+    "model": "vgg19",
+    "status": "OK",
+    "backend": "timm",
+    "n_test": 1240,
+    "accuracy": 0.6895161290322581,
+    "macro_precision": 0.719106705290085,
+    "macro_recall": 0.7123650745126108,
+    "macro_f1": 0.7109701033602291,
+    "weighted_precision": 0.7060486865669283,
+    "weighted_recall": 0.6895161290322581,
+    "weighted_f1": 0.6918339002881162,
+    "balanced_accuracy": 0.7123650745126108,
+    "cohen_kappa": 0.5750669131646478,
+    "qwk": 0.8636815539920465,
+    "kl4_f1": 0.8947368421052632,
+    "kl4_precision": 0.8947368421052632,
+    "kl4_recall": 0.8947368421052632,
+    "kl4_support": 38,
+    "mae": 0.3362903225806452,
+    "rmse_ordinal": 0.6241122727781101,
+    "exact_accuracy": 0.6895161290322581,
+    "within_1_accuracy": 0.975,
+    "within_2_accuracy": 0.9991935483870967,
+    "micro_f1": 0.6895161290322581,
+    "test_loss": 0.8013336384488691,
+    "roc_auc_ovr_macro": 0.9115701131820361,
+    "error_0": 855,
+    "error_1": 354,
+    "error_2": 30,
+    "error_3": 1,
+    "error_4": 0,
+    "underprediction_count": 234,
+    "overprediction_count": 151,
+    "adjacent_error_fraction_of_errors": 0.9195,
+    "confidence_mean": 0.799547529220581,
+    "confidence_median": 0.8466193675994873,
+    "confidence_min": 0.3704988956451416,
+    "confidence_max": 1.0,
+    "confidence_mean_correct": 0.8423026977226749,
+    "confidence_mean_incorrect": 0.704597739430217,
+    "parameters": 139590725,
+    "trainable_parameters": 139590725,
+    "mean_latency_ms": 3.3487,
+    "median_latency_ms": 3.3445,
+    "std_latency_ms": 0.0269,
+    "p90_latency_ms": 3.3692,
+    "throughput_img_per_s": 298.63,
+    "latency_device": "cuda",
+    "latency_warmup_iters": 20,
+    "latency_timed_iters": 100,
+    "phase4_best_epoch": 27,
+    "phase4_epochs_completed": 32,
+    "phase4_early_stop": true,
+    "checkpoint_path": "models\\phase4\\vgg19\\best.pt",
+    "checkpoint_val_selection_metric": "val_macro_f1",
+    "checkpoint_val_selection_value": 0.7079433268079229,
+    "validation_accuracy": 0.672859450726979,
+    "test_accuracy": 0.6895161290322581,
+    "delta_accuracy": 0.016657,
+    "validation_macro_precision": 0.718647081131523,
+    "test_macro_precision": 0.719106705290085,
+    "delta_macro_precision": 0.00046,
+    "validation_macro_recall": 0.7133475171171437,
+    "test_macro_recall": 0.7123650745126108,
+    "delta_macro_recall": -0.000982,
+    "validation_macro_f1": 0.7079433268079229,
+    "test_macro_f1": 0.7109701033602291,
+    "delta_macro_f1": 0.003027,
+    "validation_weighted_f1": 0.6789387654503023,
+    "test_weighted_f1": 0.6918339002881162,
+    "delta_weighted_f1": 0.012895,
+    "validation_balanced_accuracy": 0.7133475171171437,
+    "test_balanced_accuracy": 0.7123650745126108,
+    "delta_balanced_accuracy": -0.000982,
+    "validation_qwk": 0.8421940722246036,
+    "test_qwk": 0.8636815539920465,
+    "delta_qwk": 0.021487,
+    "validation_kl4_f1": 0.9210526315789473,
+    "test_kl4_f1": 0.8947368421052632,
+    "delta_kl4_f1": -0.026316,
+    "_per_class": {
+      "KL0": {
+        "precision": 0.7672583826429981,
+        "recall": 0.8172268907563025,
+        "f1": 0.7914547304170906,
+        "support": 476
+      },
+      "KL1": {
+        "precision": 0.391304347826087,
+        "recall": 0.47577092511013214,
+        "f1": 0.4294234592445328,
+        "support": 227
+      },
+      "KL2": {
+        "precision": 0.788135593220339,
+        "recall": 0.5670731707317073,
+        "f1": 0.6595744680851063,
+        "support": 328
+      },
+      "KL3": {
+        "precision": 0.7540983606557377,
+        "recall": 0.8070175438596491,
+        "f1": 0.7796610169491526,
+        "support": 171
+      },
+      "KL4": {
+        "precision": 0.8947368421052632,
+        "recall": 0.8947368421052632,
+        "f1": 0.8947368421052632,
+        "support": 38
+      }
+    },
+    "_confusion_matrix": [
+      [
+        389,
+        81,
+        5,
+        1,
+        0
+      ],
+      [
+        98,
+        108,
+        20,
+        1,
+        0
+      ],
+      [
+        20,
+        83,
+        186,
+        39,
+        0
+      ],
+      [
+        0,
+        4,
+        25,
+        138,
+        4
+      ],
+      [
+        0,
+        0,
+        0,
+        4,
+        34
+      ]
+    ],
+    "_kl4_predicted_as": {
+      "KL0": 0,
+      "KL1": 0,
+      "KL2": 0,
+      "KL3": 4,
+      "KL4": 34
+    },
+    "_top_confusions": [
+      {
+        "true": 1,
+        "pred": 0,
+        "count": 98,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 1,
+        "count": 83,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 0,
+        "pred": 1,
+        "count": 81,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 3,
+        "count": 39,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 3,
+        "pred": 2,
+        "count": 25,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 1,
+        "pred": 2,
+        "count": 20,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 0,
+        "count": 20,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 0,
+        "pred": 2,
+        "count": 5,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 3,
+        "pred": 1,
+        "count": 4,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 3,
+        "pred": 4,
+        "count": 4,
+        "ordinal_distance": 1
+      }
+    ],
+    "_confusion_plots": {
+      "raw": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase5\\confusion_matrices\\vgg19_confusion_matrix.png",
+      "normalized": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase5\\confusion_matrices\\vgg19_confusion_matrix_normalized.png"
+    },
+    "_latency_full": {
+      "device": "cuda",
+      "input_shape": [
+        1,
+        3,
+        224,
+        224
+      ],
+      "warmup_iters": 20,
+      "timed_iters": 100,
+      "mean_ms": 3.3487,
+      "median_ms": 3.3445,
+      "std_ms": 0.0269,
+      "min_ms": 3.3021,
+      "max_ms": 3.5174,
+      "p90_ms": 3.3692,
+      "throughput_images_per_sec": 298.63,
+      "peak_memory": {
+        "cuda_peak_alloc_mb": 1005.35,
+        "cuda_peak_reserved_mb": 1384.12,
+        "process_rss_mb": 1697.11
+      }
+    },
+    "eval_seconds": 3.88
+  },
+  {
+    "model": "googlenet",
+    "status": "OK",
+    "backend": "torchvision",
+    "n_test": 1240,
+    "accuracy": 0.646774193548387,
+    "macro_precision": 0.6664875599185585,
+    "macro_recall": 0.677040731504506,
+    "macro_f1": 0.671522912940926,
+    "weighted_precision": 0.6469968925057586,
+    "weighted_recall": 0.646774193548387,
+    "weighted_f1": 0.6467069887114155,
+    "balanced_accuracy": 0.677040731504506,
+    "cohen_kappa": 0.5173051850232362,
+    "qwk": 0.8168484454444509,
+    "kl4_f1": 0.8571428571428571,
+    "kl4_precision": 0.8461538461538461,
+    "kl4_recall": 0.868421052631579,
+    "kl4_support": 38,
+    "mae": 0.4088709677419355,
+    "rmse_ordinal": 0.7223393894481922,
+    "exact_accuracy": 0.646774193548387,
+    "within_1_accuracy": 0.9451612903225807,
+    "within_2_accuracy": 0.9991935483870967,
+    "micro_f1": 0.646774193548387,
+    "test_loss": 0.8753005393089787,
+    "roc_auc_ovr_macro": 0.8869497358560119,
+    "error_0": 802,
+    "error_1": 370,
+    "error_2": 67,
+    "error_3": 1,
+    "error_4": 0,
+    "underprediction_count": 206,
+    "overprediction_count": 232,
+    "adjacent_error_fraction_of_errors": 0.8447,
+    "confidence_mean": 0.7793943048965546,
+    "confidence_median": 0.8096181452274323,
+    "confidence_min": 0.3504121005535126,
+    "confidence_max": 0.9999908208847046,
+    "confidence_mean_correct": 0.8247922965861912,
+    "confidence_mean_incorrect": 0.6962683018484072,
+    "parameters": 5605029,
+    "trainable_parameters": 5605029,
+    "mean_latency_ms": 3.4735,
+    "median_latency_ms": 3.4562,
+    "std_latency_ms": 0.1429,
+    "p90_latency_ms": 3.6383,
+    "throughput_img_per_s": 287.9,
+    "latency_device": "cuda",
+    "latency_warmup_iters": 20,
+    "latency_timed_iters": 100,
+    "phase4_best_epoch": 28,
+    "phase4_epochs_completed": 33,
+    "phase4_early_stop": true,
+    "checkpoint_path": "models\\phase4\\googlenet\\best.pt",
+    "checkpoint_val_selection_metric": "val_macro_f1",
+    "checkpoint_val_selection_value": 0.6730563123233866,
+    "validation_accuracy": 0.6276252019386107,
+    "test_accuracy": 0.646774193548387,
+    "delta_accuracy": 0.019149,
+    "validation_macro_precision": 0.6692333108411644,
+    "test_macro_precision": 0.6664875599185585,
+    "delta_macro_precision": -0.002746,
+    "validation_macro_recall": 0.6800607023354088,
+    "test_macro_recall": 0.677040731504506,
+    "delta_macro_recall": -0.00302,
+    "validation_macro_f1": 0.6730563123233866,
+    "test_macro_f1": 0.671522912940926,
+    "delta_macro_f1": -0.001533,
+    "validation_weighted_f1": 0.6350175503903289,
+    "test_weighted_f1": 0.6467069887114155,
+    "delta_weighted_f1": 0.011689,
+    "validation_balanced_accuracy": 0.6800607023354088,
+    "test_balanced_accuracy": 0.677040731504506,
+    "delta_balanced_accuracy": -0.00302,
+    "validation_qwk": 0.7822635422175237,
+    "test_qwk": 0.8168484454444509,
+    "delta_qwk": 0.034585,
+    "validation_kl4_f1": 0.9210526315789473,
+    "test_kl4_f1": 0.8571428571428571,
+    "delta_kl4_f1": -0.06391,
+    "_per_class": {
+      "KL0": {
+        "precision": 0.7274678111587983,
+        "recall": 0.7121848739495799,
+        "f1": 0.7197452229299363,
+        "support": 476
+      },
+      "KL1": {
+        "precision": 0.32608695652173914,
+        "recall": 0.3303964757709251,
+        "f1": 0.3282275711159737,
+        "support": 227
+      },
+      "KL2": {
+        "precision": 0.6677018633540373,
+        "recall": 0.6554878048780488,
+        "f1": 0.6615384615384615,
+        "support": 328
+      },
+      "KL3": {
+        "precision": 0.7650273224043715,
+        "recall": 0.8187134502923976,
+        "f1": 0.7909604519774012,
+        "support": 171
+      },
+      "KL4": {
+        "precision": 0.8461538461538461,
+        "recall": 0.868421052631579,
+        "f1": 0.8571428571428571,
+        "support": 38
+      }
+    },
+    "_confusion_matrix": [
+      [
+        339,
+        105,
+        31,
+        1,
+        0
+      ],
+      [
+        96,
+        75,
+        52,
+        4,
+        0
+      ],
+      [
+        31,
+        49,
+        215,
+        33,
+        0
+      ],
+      [
+        0,
+        1,
+        24,
+        140,
+        6
+      ],
+      [
+        0,
+        0,
+        0,
+        5,
+        33
+      ]
+    ],
+    "_kl4_predicted_as": {
+      "KL0": 0,
+      "KL1": 0,
+      "KL2": 0,
+      "KL3": 5,
+      "KL4": 33
+    },
+    "_top_confusions": [
+      {
+        "true": 0,
+        "pred": 1,
+        "count": 105,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 1,
+        "pred": 0,
+        "count": 96,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 1,
+        "pred": 2,
+        "count": 52,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 1,
+        "count": 49,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 3,
+        "count": 33,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 0,
+        "pred": 2,
+        "count": 31,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 2,
+        "pred": 0,
+        "count": 31,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 3,
+        "pred": 2,
+        "count": 24,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 3,
+        "pred": 4,
+        "count": 6,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 4,
+        "pred": 3,
+        "count": 5,
+        "ordinal_distance": 1
+      }
+    ],
+    "_confusion_plots": {
+      "raw": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase5\\confusion_matrices\\googlenet_confusion_matrix.png",
+      "normalized": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase5\\confusion_matrices\\googlenet_confusion_matrix_normalized.png"
+    },
+    "_latency_full": {
+      "device": "cuda",
+      "input_shape": [
+        1,
+        3,
+        224,
+        224
+      ],
+      "warmup_iters": 20,
+      "timed_iters": 100,
+      "mean_ms": 3.4735,
+      "median_ms": 3.4562,
+      "std_ms": 0.1429,
+      "min_ms": 3.27,
+      "max_ms": 4.0983,
+      "p90_ms": 3.6383,
+      "throughput_images_per_sec": 287.9,
+      "peak_memory": {
+        "cuda_peak_alloc_mb": 75.49,
+        "cuda_peak_reserved_mb": 568.33,
+        "process_rss_mb": 1869.09
+      }
+    },
+    "eval_seconds": 2.04
+  },
+  {
+    "model": "squeezenet",
+    "status": "OK",
+    "backend": "torchvision",
+    "n_test": 1240,
+    "accuracy": 0.5959677419354839,
+    "macro_precision": 0.6563318971559388,
+    "macro_recall": 0.645524830321611,
+    "macro_f1": 0.647375783022058,
+    "weighted_precision": 0.6196800060222016,
+    "weighted_recall": 0.5959677419354839,
+    "weighted_f1": 0.6045714410676495,
+    "balanced_accuracy": 0.645524830321611,
+    "cohen_kappa": 0.4467120585314589,
+    "qwk": 0.7729986380851104,
+    "kl4_f1": 0.9,
+    "kl4_precision": 0.8571428571428571,
+    "kl4_recall": 0.9473684210526315,
+    "kl4_support": 38,
+    "mae": 0.4798387096774194,
+    "rmse_ordinal": 0.7956535151239088,
+    "exact_accuracy": 0.5959677419354839,
+    "within_1_accuracy": 0.925,
+    "within_2_accuracy": 0.9991935483870967,
+    "micro_f1": 0.5959677419354839,
+    "test_loss": 0.8538966763404108,
+    "roc_auc_ovr_macro": 0.8694446624663513,
+    "error_0": 739,
+    "error_1": 408,
+    "error_2": 92,
+    "error_3": 1,
+    "error_4": 0,
+    "underprediction_count": 292,
+    "overprediction_count": 209,
+    "adjacent_error_fraction_of_errors": 0.8144,
+    "confidence_mean": 0.5850106598629106,
+    "confidence_median": 0.5369488596916199,
+    "confidence_min": 0.3262600898742676,
+    "confidence_max": 0.9999849796295166,
+    "confidence_mean_correct": 0.6411377474645478,
+    "confidence_mean_incorrect": 0.5022204048976213,
+    "parameters": 725061,
+    "trainable_parameters": 725061,
+    "mean_latency_ms": 1.2547,
+    "median_latency_ms": 1.2084,
+    "std_latency_ms": 0.249,
+    "p90_latency_ms": 1.626,
+    "throughput_img_per_s": 796.98,
+    "latency_device": "cuda",
+    "latency_warmup_iters": 20,
+    "latency_timed_iters": 100,
+    "phase4_best_epoch": 18,
+    "phase4_epochs_completed": 23,
+    "phase4_early_stop": true,
+    "checkpoint_path": "models\\phase4\\squeezenet\\best.pt",
+    "checkpoint_val_selection_metric": "val_macro_f1",
+    "checkpoint_val_selection_value": 0.6345072073180875,
+    "validation_accuracy": 0.5718901453957996,
+    "test_accuracy": 0.5959677419354839,
+    "delta_accuracy": 0.024078,
+    "validation_macro_precision": 0.6402570334900226,
+    "test_macro_precision": 0.6563318971559388,
+    "delta_macro_precision": 0.016075,
+    "validation_macro_recall": 0.6392805674597468,
+    "test_macro_recall": 0.645524830321611,
+    "delta_macro_recall": 0.006244,
+    "validation_macro_f1": 0.6345072073180875,
+    "test_macro_f1": 0.647375783022058,
+    "delta_macro_f1": 0.012869,
+    "validation_weighted_f1": 0.5814872858813562,
+    "test_weighted_f1": 0.6045714410676495,
+    "delta_weighted_f1": 0.023084,
+    "validation_balanced_accuracy": 0.6392805674597468,
+    "test_balanced_accuracy": 0.645524830321611,
+    "delta_balanced_accuracy": 0.006244,
+    "validation_qwk": 0.7514231344467303,
+    "test_qwk": 0.7729986380851104,
+    "delta_qwk": 0.021576,
+    "validation_kl4_f1": 0.9230769230769231,
+    "test_kl4_f1": 0.9,
+    "delta_kl4_f1": -0.023077,
+    "_per_class": {
+      "KL0": {
+        "precision": 0.6686991869918699,
+        "recall": 0.6911764705882353,
+        "f1": 0.6797520661157025,
+        "support": 476
+      },
+      "KL1": {
+        "precision": 0.2568493150684932,
+        "recall": 0.3303964757709251,
+        "f1": 0.28901734104046245,
+        "support": 227
+      },
+      "KL2": {
+        "precision": 0.6554307116104869,
+        "recall": 0.5335365853658537,
+        "f1": 0.5882352941176471,
+        "support": 328
+      },
+      "KL3": {
+        "precision": 0.8435374149659864,
+        "recall": 0.7251461988304093,
+        "f1": 0.779874213836478,
+        "support": 171
+      },
+      "KL4": {
+        "precision": 0.8571428571428571,
+        "recall": 0.9473684210526315,
+        "f1": 0.9,
+        "support": 38
+      }
+    },
+    "_confusion_matrix": [
+      [
+        329,
+        116,
+        31,
+        0,
+        0
+      ],
+      [
+        116,
+        75,
+        35,
+        1,
+        0
+      ],
+      [
+        46,
+        87,
+        175,
+        20,
+        0
+      ],
+      [
+        1,
+        14,
+        26,
+        124,
+        6
+      ],
+      [
+        0,
+        0,
+        0,
+        2,
+        36
+      ]
+    ],
+    "_kl4_predicted_as": {
+      "KL0": 0,
+      "KL1": 0,
+      "KL2": 0,
+      "KL3": 2,
+      "KL4": 36
+    },
+    "_top_confusions": [
+      {
+        "true": 0,
+        "pred": 1,
+        "count": 116,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 1,
+        "pred": 0,
+        "count": 116,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 1,
+        "count": 87,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 0,
+        "count": 46,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 1,
+        "pred": 2,
+        "count": 35,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 0,
+        "pred": 2,
+        "count": 31,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 3,
+        "pred": 2,
+        "count": 26,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 3,
+        "count": 20,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 3,
+        "pred": 1,
+        "count": 14,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 3,
+        "pred": 4,
+        "count": 6,
+        "ordinal_distance": 1
+      }
+    ],
+    "_confusion_plots": {
+      "raw": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase5\\confusion_matrices\\squeezenet_confusion_matrix.png",
+      "normalized": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase5\\confusion_matrices\\squeezenet_confusion_matrix_normalized.png"
+    },
+    "_latency_full": {
+      "device": "cuda",
+      "input_shape": [
+        1,
+        3,
+        224,
+        224
+      ],
+      "warmup_iters": 20,
+      "timed_iters": 100,
+      "mean_ms": 1.2547,
+      "median_ms": 1.2084,
+      "std_ms": 0.249,
+      "min_ms": 0.9515,
+      "max_ms": 2.3533,
+      "p90_ms": 1.626,
+      "throughput_images_per_sec": 796.98,
+      "peak_memory": {
+        "cuda_peak_alloc_mb": 43.59,
+        "cuda_peak_reserved_mb": 339.74,
+        "process_rss_mb": 1910.55
+      }
+    },
+    "eval_seconds": 1.5
+  },
+  {
+    "model": "shufflenet",
+    "status": "OK",
+    "backend": "torchvision",
+    "n_test": 1240,
+    "accuracy": 0.6225806451612903,
+    "macro_precision": 0.6817280614745951,
+    "macro_recall": 0.6531476845147587,
+    "macro_f1": 0.6582938064783361,
+    "weighted_precision": 0.6392024693515997,
+    "weighted_recall": 0.6225806451612903,
+    "weighted_f1": 0.6178698319940326,
+    "balanced_accuracy": 0.6531476845147587,
+    "cohen_kappa": 0.4752262517090956,
+    "qwk": 0.7985733768412935,
+    "kl4_f1": 0.9066666666666666,
+    "kl4_precision": 0.918918918918919,
+    "kl4_recall": 0.8947368421052632,
+    "kl4_support": 38,
+    "mae": 0.4467741935483871,
+    "rmse_ordinal": 0.7662224051759048,
+    "exact_accuracy": 0.6225806451612903,
+    "within_1_accuracy": 0.9314516129032258,
+    "within_2_accuracy": 0.9991935483870967,
+    "micro_f1": 0.6225806451612903,
+    "test_loss": 0.8466498588362048,
+    "roc_auc_ovr_macro": 0.8674821958625387,
+    "error_0": 772,
+    "error_1": 383,
+    "error_2": 84,
+    "error_3": 1,
+    "error_4": 0,
+    "underprediction_count": 325,
+    "overprediction_count": 143,
+    "adjacent_error_fraction_of_errors": 0.8184,
+    "confidence_mean": 0.5981174603585274,
+    "confidence_median": 0.5720519125461578,
+    "confidence_min": 0.3147164583206177,
+    "confidence_max": 0.999518632888794,
+    "confidence_mean_correct": 0.6520806651736171,
+    "confidence_mean_incorrect": 0.5091012336122684,
+    "parameters": 1258729,
+    "trainable_parameters": 1258729,
+    "mean_latency_ms": 5.499,
+    "median_latency_ms": 5.5052,
+    "std_latency_ms": 0.1266,
+    "p90_latency_ms": 5.6214,
+    "throughput_img_per_s": 181.85,
+    "latency_device": "cuda",
+    "latency_warmup_iters": 20,
+    "latency_timed_iters": 100,
+    "phase4_best_epoch": 17,
+    "phase4_epochs_completed": 22,
+    "phase4_early_stop": true,
+    "checkpoint_path": "models\\phase4\\shufflenet\\best.pt",
+    "checkpoint_val_selection_metric": "val_macro_f1",
+    "checkpoint_val_selection_value": 0.6452080924655446,
+    "validation_accuracy": 0.5961227786752827,
+    "test_accuracy": 0.6225806451612903,
+    "delta_accuracy": 0.026458,
+    "validation_macro_precision": 0.6537701608046297,
+    "test_macro_precision": 0.6817280614745951,
+    "delta_macro_precision": 0.027958,
+    "validation_macro_recall": 0.6498075860537927,
+    "test_macro_recall": 0.6531476845147587,
+    "delta_macro_recall": 0.00334,
+    "validation_macro_f1": 0.6452080924655446,
+    "test_macro_f1": 0.6582938064783361,
+    "delta_macro_f1": 0.013086,
+    "validation_weighted_f1": 0.5968358469258181,
+    "test_weighted_f1": 0.6178698319940326,
+    "delta_weighted_f1": 0.021034,
+    "validation_balanced_accuracy": 0.6498075860537927,
+    "test_balanced_accuracy": 0.6531476845147587,
+    "delta_balanced_accuracy": 0.00334,
+    "validation_qwk": 0.7670526197241586,
+    "test_qwk": 0.7985733768412935,
+    "delta_qwk": 0.031521,
+    "validation_kl4_f1": 0.9210526315789473,
+    "test_kl4_f1": 0.9066666666666666,
+    "delta_kl4_f1": -0.014386,
+    "_per_class": {
+      "KL0": {
+        "precision": 0.6474576271186441,
+        "recall": 0.8025210084033614,
+        "f1": 0.7166979362101313,
+        "support": 476
+      },
+      "KL1": {
+        "precision": 0.24583333333333332,
+        "recall": 0.2599118942731278,
+        "f1": 0.25267665952890794,
+        "support": 227
+      },
+      "KL2": {
+        "precision": 0.7688442211055276,
+        "recall": 0.46646341463414637,
+        "f1": 0.5806451612903226,
+        "support": 328
+      },
+      "KL3": {
+        "precision": 0.8275862068965517,
+        "recall": 0.8421052631578947,
+        "f1": 0.8347826086956521,
+        "support": 171
+      },
+      "KL4": {
+        "precision": 0.918918918918919,
+        "recall": 0.8947368421052632,
+        "f1": 0.9066666666666666,
+        "support": 38
+      }
+    },
+    "_confusion_matrix": [
+      [
+        382,
+        82,
+        12,
+        0,
+        0
+      ],
+      [
+        146,
+        59,
+        20,
+        2,
+        0
+      ],
+      [
+        61,
+        90,
+        153,
+        24,
+        0
+      ],
+      [
+        1,
+        9,
+        14,
+        144,
+        3
+      ],
+      [
+        0,
+        0,
+        0,
+        4,
+        34
+      ]
+    ],
+    "_kl4_predicted_as": {
+      "KL0": 0,
+      "KL1": 0,
+      "KL2": 0,
+      "KL3": 4,
+      "KL4": 34
+    },
+    "_top_confusions": [
+      {
+        "true": 1,
+        "pred": 0,
+        "count": 146,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 1,
+        "count": 90,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 0,
+        "pred": 1,
+        "count": 82,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 0,
+        "count": 61,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 2,
+        "pred": 3,
+        "count": 24,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 1,
+        "pred": 2,
+        "count": 20,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 3,
+        "pred": 2,
+        "count": 14,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 0,
+        "pred": 2,
+        "count": 12,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 3,
+        "pred": 1,
+        "count": 9,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 4,
+        "pred": 3,
+        "count": 4,
+        "ordinal_distance": 1
+      }
+    ],
+    "_confusion_plots": {
+      "raw": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase5\\confusion_matrices\\shufflenet_confusion_matrix.png",
+      "normalized": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase5\\confusion_matrices\\shufflenet_confusion_matrix_normalized.png"
+    },
+    "_latency_full": {
+      "device": "cuda",
+      "input_shape": [
+        1,
+        3,
+        224,
+        224
+      ],
+      "warmup_iters": 20,
+      "timed_iters": 100,
+      "mean_ms": 5.499,
+      "median_ms": 5.5052,
+      "std_ms": 0.1266,
+      "min_ms": 4.7695,
+      "max_ms": 5.8216,
+      "p90_ms": 5.6214,
+      "throughput_images_per_sec": 181.85,
+      "peak_memory": {
+        "cuda_peak_alloc_mb": 43.49,
+        "cuda_peak_reserved_mb": 195.04,
+        "process_rss_mb": 2124.89
+      }
+    },
+    "eval_seconds": 3.18
+  },
+  {
+    "model": "convnext_tiny",
+    "status": "OK",
+    "backend": "timm",
+    "n_test": 1240,
+    "accuracy": 0.6967741935483871,
+    "macro_precision": 0.7098488652123157,
+    "macro_recall": 0.7305811970763132,
+    "macro_f1": 0.7168914279472121,
+    "weighted_precision": 0.7121724190423864,
+    "weighted_recall": 0.6967741935483871,
+    "weighted_f1": 0.7022897776567192,
+    "balanced_accuracy": 0.7305811970763132,
+    "cohen_kappa": 0.5868109897783931,
+    "qwk": 0.861849272109068,
+    "kl4_f1": 0.8571428571428571,
+    "kl4_precision": 0.782608695652174,
+    "kl4_recall": 0.9473684210526315,
+    "kl4_support": 38,
+    "mae": 0.33225806451612905,
+    "rmse_ordinal": 0.6260475092762271,
+    "exact_accuracy": 0.6967741935483871,
+    "within_1_accuracy": 0.9717741935483871,
+    "within_2_accuracy": 0.9991935483870967,
+    "micro_f1": 0.6967741935483871,
+    "test_loss": 0.6984830532343157,
+    "roc_auc_ovr_macro": 0.9185826353188673,
+    "error_0": 864,
+    "error_1": 341,
+    "error_2": 34,
+    "error_3": 1,
+    "error_4": 0,
+    "underprediction_count": 200,
+    "overprediction_count": 176,
+    "adjacent_error_fraction_of_errors": 0.9069,
+    "confidence_mean": 0.7062068785390546,
+    "confidence_median": 0.6759952008724213,
+    "confidence_min": 0.34589993953704834,
+    "confidence_max": 0.9999582767486572,
+    "confidence_mean_correct": 0.7502315556285558,
+    "confidence_mean_incorrect": 0.6050437907589242,
+    "parameters": 27823973,
+    "trainable_parameters": 27823973,
+    "mean_latency_ms": 4.2581,
+    "median_latency_ms": 5.1252,
+    "std_latency_ms": 1.1085,
+    "p90_latency_ms": 5.3546,
+    "throughput_img_per_s": 234.85,
+    "latency_device": "cuda",
+    "latency_warmup_iters": 20,
+    "latency_timed_iters": 100,
+    "phase4_best_epoch": 14,
+    "phase4_epochs_completed": 19,
+    "phase4_early_stop": true,
+    "checkpoint_path": "models\\phase4\\convnext_tiny\\best.pt",
+    "checkpoint_val_selection_metric": "val_macro_f1",
+    "checkpoint_val_selection_value": 0.7114966912691298,
+    "validation_accuracy": 0.678513731825525,
+    "test_accuracy": 0.6967741935483871,
+    "delta_accuracy": 0.01826,
+    "validation_macro_precision": 0.7052765804874755,
+    "test_macro_precision": 0.7098488652123157,
+    "delta_macro_precision": 0.004572,
+    "validation_macro_recall": 0.7365826011082641,
+    "test_macro_recall": 0.7305811970763132,
+    "delta_macro_recall": -0.006001,
+    "validation_macro_f1": 0.7114966912691298,
+    "test_macro_f1": 0.7168914279472121,
+    "delta_macro_f1": 0.005395,
+    "validation_weighted_f1": 0.6904307849971275,
+    "test_weighted_f1": 0.7022897776567192,
+    "delta_weighted_f1": 0.011859,
+    "validation_balanced_accuracy": 0.7365826011082641,
+    "test_balanced_accuracy": 0.7305811970763132,
+    "delta_balanced_accuracy": -0.006001,
+    "validation_qwk": 0.8451594314891016,
+    "test_qwk": 0.861849272109068,
+    "delta_qwk": 0.01669,
+    "validation_kl4_f1": 0.8705882352941177,
+    "test_kl4_f1": 0.8571428571428571,
+    "delta_kl4_f1": -0.013445,
+    "_per_class": {
+      "KL0": {
+        "precision": 0.7813163481953291,
+        "recall": 0.773109243697479,
+        "f1": 0.7771911298838438,
+        "support": 476
+      },
+      "KL1": {
+        "precision": 0.3898916967509025,
+        "recall": 0.47577092511013214,
+        "f1": 0.42857142857142855,
+        "support": 227
+      },
+      "KL2": {
+        "precision": 0.7651245551601423,
+        "recall": 0.6554878048780488,
+        "f1": 0.7060755336617406,
+        "support": 328
+      },
+      "KL3": {
+        "precision": 0.8303030303030303,
+        "recall": 0.8011695906432749,
+        "f1": 0.8154761904761905,
+        "support": 171
+      },
+      "KL4": {
+        "precision": 0.782608695652174,
+        "recall": 0.9473684210526315,
+        "f1": 0.8571428571428571,
+        "support": 38
+      }
+    },
+    "_confusion_matrix": [
+      [
+        368,
+        96,
+        11,
+        1,
+        0
+      ],
+      [
+        84,
+        108,
+        33,
+        2,
+        0
+      ],
+      [
+        19,
+        71,
+        215,
+        23,
+        0
+      ],
+      [
+        0,
+        2,
+        22,
+        137,
+        10
+      ],
+      [
+        0,
+        0,
+        0,
+        2,
+        36
+      ]
+    ],
+    "_kl4_predicted_as": {
+      "KL0": 0,
+      "KL1": 0,
+      "KL2": 0,
+      "KL3": 2,
+      "KL4": 36
+    },
+    "_top_confusions": [
+      {
+        "true": 0,
+        "pred": 1,
+        "count": 96,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 1,
+        "pred": 0,
+        "count": 84,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 1,
+        "count": 71,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 1,
+        "pred": 2,
+        "count": 33,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 3,
+        "count": 23,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 3,
+        "pred": 2,
+        "count": 22,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 0,
+        "count": 19,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 0,
+        "pred": 2,
+        "count": 11,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 3,
+        "pred": 4,
+        "count": 10,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 1,
+        "pred": 3,
+        "count": 2,
+        "ordinal_distance": 2
+      }
+    ],
+    "_confusion_plots": {
+      "raw": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase5\\confusion_matrices\\convnext_tiny_confusion_matrix.png",
+      "normalized": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase5\\confusion_matrices\\convnext_tiny_confusion_matrix_normalized.png"
+    },
+    "_latency_full": {
+      "device": "cuda",
+      "input_shape": [
+        1,
+        3,
+        224,
+        224
+      ],
+      "warmup_iters": 20,
+      "timed_iters": 100,
+      "mean_ms": 4.2581,
+      "median_ms": 5.1252,
+      "std_ms": 1.1085,
+      "min_ms": 3.0248,
+      "max_ms": 7.0772,
+      "p90_ms": 5.3546,
+      "throughput_images_per_sec": 234.85,
+      "peak_memory": {
+        "cuda_peak_alloc_mb": 162.96,
+        "cuda_peak_reserved_mb": 1128.27,
+        "process_rss_mb": 2262.7
+      }
+    },
+    "eval_seconds": 7.76
+  },
+  {
+    "model": "densenet121",
+    "status": "OK",
+    "backend": "timm",
+    "n_test": 1240,
+    "accuracy": 0.6862903225806452,
+    "macro_precision": 0.7039107642882214,
+    "macro_recall": 0.712429606799619,
+    "macro_f1": 0.7061225172697967,
+    "weighted_precision": 0.6893429874660404,
+    "weighted_recall": 0.6862903225806452,
+    "weighted_f1": 0.6854682637106772,
+    "balanced_accuracy": 0.712429606799619,
+    "cohen_kappa": 0.5701963859286452,
+    "qwk": 0.8439623496250063,
+    "kl4_f1": 0.8831168831168831,
+    "kl4_precision": 0.8717948717948718,
+    "kl4_recall": 0.8947368421052632,
+    "kl4_support": 38,
+    "mae": 0.3580645161290323,
+    "rmse_ordinal": 0.672021505032247,
+    "exact_accuracy": 0.6862903225806452,
+    "within_1_accuracy": 0.9580645161290322,
+    "within_2_accuracy": 0.9975806451612903,
+    "micro_f1": 0.6862903225806452,
+    "test_loss": 0.7903567983258155,
+    "roc_auc_ovr_macro": 0.9016881532743536,
+    "error_0": 851,
+    "error_1": 337,
+    "error_2": 49,
+    "error_3": 3,
+    "error_4": 0,
+    "underprediction_count": 210,
+    "overprediction_count": 179,
+    "adjacent_error_fraction_of_errors": 0.8663,
+    "confidence_mean": 0.7775585426197898,
+    "confidence_median": 0.8157265186309814,
+    "confidence_min": 0.3447074592113495,
+    "confidence_max": 0.9999134540557861,
+    "confidence_mean_correct": 0.8213347957571301,
+    "confidence_mean_incorrect": 0.6817909554221636,
+    "parameters": 6958981,
+    "trainable_parameters": 6958981,
+    "mean_latency_ms": 8.1832,
+    "median_latency_ms": 8.1408,
+    "std_latency_ms": 0.2485,
+    "p90_latency_ms": 8.472,
+    "throughput_img_per_s": 122.2,
+    "latency_device": "cuda",
+    "latency_warmup_iters": 20,
+    "latency_timed_iters": 100,
+    "phase4_best_epoch": 19,
+    "phase4_epochs_completed": 24,
+    "phase4_early_stop": true,
+    "checkpoint_path": "models\\phase4\\densenet121\\best.pt",
+    "checkpoint_val_selection_metric": "val_macro_f1",
+    "checkpoint_val_selection_value": 0.7017031065920285,
+    "validation_accuracy": 0.659935379644588,
+    "test_accuracy": 0.6862903225806452,
+    "delta_accuracy": 0.026355,
+    "validation_macro_precision": 0.6983137057907419,
+    "test_macro_precision": 0.7039107642882214,
+    "delta_macro_precision": 0.005597,
+    "validation_macro_recall": 0.7108161954500521,
+    "test_macro_recall": 0.712429606799619,
+    "delta_macro_recall": 0.001613,
+    "validation_macro_f1": 0.7017031065920285,
+    "test_macro_f1": 0.7061225172697967,
+    "delta_macro_f1": 0.004419,
+    "validation_weighted_f1": 0.6636798482308366,
+    "test_weighted_f1": 0.6854682637106772,
+    "delta_weighted_f1": 0.021788,
+    "validation_balanced_accuracy": 0.7108161954500521,
+    "test_balanced_accuracy": 0.712429606799619,
+    "delta_balanced_accuracy": 0.001613,
+    "validation_qwk": 0.8095497376146028,
+    "test_qwk": 0.8439623496250063,
+    "delta_qwk": 0.034413,
+    "validation_kl4_f1": 0.918918918918919,
+    "test_kl4_f1": 0.8831168831168831,
+    "delta_kl4_f1": -0.035802,
+    "_per_class": {
+      "KL0": {
+        "precision": 0.7485029940119761,
+        "recall": 0.7878151260504201,
+        "f1": 0.7676560900716479,
+        "support": 476
+      },
+      "KL1": {
+        "precision": 0.3924050632911392,
+        "recall": 0.40969162995594716,
+        "f1": 0.40086206896551724,
+        "support": 227
+      },
+      "KL2": {
+        "precision": 0.7555555555555555,
+        "recall": 0.6219512195121951,
+        "f1": 0.6822742474916388,
+        "support": 328
+      },
+      "KL3": {
+        "precision": 0.7512953367875648,
+        "recall": 0.847953216374269,
+        "f1": 0.7967032967032966,
+        "support": 171
+      },
+      "KL4": {
+        "precision": 0.8717948717948718,
+        "recall": 0.8947368421052632,
+        "f1": 0.8831168831168831,
+        "support": 38
+      }
+    },
+    "_confusion_matrix": [
+      [
+        375,
+        81,
+        18,
+        2,
+        0
+      ],
+      [
+        100,
+        93,
+        31,
+        3,
+        0
+      ],
+      [
+        25,
+        60,
+        204,
+        39,
+        0
+      ],
+      [
+        1,
+        3,
+        17,
+        145,
+        5
+      ],
+      [
+        0,
+        0,
+        0,
+        4,
+        34
+      ]
+    ],
+    "_kl4_predicted_as": {
+      "KL0": 0,
+      "KL1": 0,
+      "KL2": 0,
+      "KL3": 4,
+      "KL4": 34
+    },
+    "_top_confusions": [
+      {
+        "true": 1,
+        "pred": 0,
+        "count": 100,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 0,
+        "pred": 1,
+        "count": 81,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 1,
+        "count": 60,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 3,
+        "count": 39,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 1,
+        "pred": 2,
+        "count": 31,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 0,
+        "count": 25,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 0,
+        "pred": 2,
+        "count": 18,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 3,
+        "pred": 2,
+        "count": 17,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 3,
+        "pred": 4,
+        "count": 5,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 4,
+        "pred": 3,
+        "count": 4,
+        "ordinal_distance": 1
+      }
+    ],
+    "_confusion_plots": {
+      "raw": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase5\\confusion_matrices\\densenet121_confusion_matrix.png",
+      "normalized": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase5\\confusion_matrices\\densenet121_confusion_matrix_normalized.png"
+    },
+    "_latency_full": {
+      "device": "cuda",
+      "input_shape": [
+        1,
+        3,
+        224,
+        224
+      ],
+      "warmup_iters": 20,
+      "timed_iters": 100,
+      "mean_ms": 8.1832,
+      "median_ms": 8.1408,
+      "std_ms": 0.2485,
+      "min_ms": 7.8123,
+      "max_ms": 9.6186,
+      "p90_ms": 8.472,
+      "throughput_images_per_sec": 122.2,
+      "peak_memory": {
+        "cuda_peak_alloc_mb": 78.83,
+        "cuda_peak_reserved_mb": 608.17,
+        "process_rss_mb": 2236.99
+      }
+    },
+    "eval_seconds": 3.22
+  },
+  {
+    "model": "inception_v3",
+    "status": "OK",
+    "backend": "timm",
+    "n_test": 1240,
+    "accuracy": 0.6862903225806452,
+    "macro_precision": 0.7137812040173496,
+    "macro_recall": 0.7053388381869292,
+    "macro_f1": 0.705040907937444,
+    "weighted_precision": 0.6903752948683275,
+    "weighted_recall": 0.6862903225806452,
+    "weighted_f1": 0.6819509666792499,
+    "balanced_accuracy": 0.7053388381869292,
+    "cohen_kappa": 0.5659388520542226,
+    "qwk": 0.8441789001618457,
+    "kl4_f1": 0.8947368421052632,
+    "kl4_precision": 0.8947368421052632,
+    "kl4_recall": 0.8947368421052632,
+    "kl4_support": 38,
+    "mae": 0.3596774193548387,
+    "rmse_ordinal": 0.6744173112231175,
+    "exact_accuracy": 0.6862903225806452,
+    "within_1_accuracy": 0.9556451612903226,
+    "within_2_accuracy": 0.9983870967741936,
+    "micro_f1": 0.6862903225806452,
+    "test_loss": 0.7604701126775434,
+    "roc_auc_ovr_macro": 0.8993103213333207,
+    "error_0": 851,
+    "error_1": 334,
+    "error_2": 53,
+    "error_3": 2,
+    "error_4": 0,
+    "underprediction_count": 250,
+    "overprediction_count": 139,
+    "adjacent_error_fraction_of_errors": 0.8586,
+    "confidence_mean": 0.7325287538190042,
+    "confidence_median": 0.7537039518356323,
+    "confidence_min": 0.32861757278442383,
+    "confidence_max": 0.9999353885650635,
+    "confidence_mean_correct": 0.7741537764756016,
+    "confidence_mean_incorrect": 0.6414673289327205,
+    "parameters": 21795813,
+    "trainable_parameters": 21795813,
+    "mean_latency_ms": 9.389,
+    "median_latency_ms": 10.0895,
+    "std_latency_ms": 1.5598,
+    "p90_latency_ms": 10.392,
+    "throughput_img_per_s": 106.51,
+    "latency_device": "cuda",
+    "latency_warmup_iters": 20,
+    "latency_timed_iters": 100,
+    "phase4_best_epoch": 12,
+    "phase4_epochs_completed": 17,
+    "phase4_early_stop": true,
+    "checkpoint_path": "models\\phase4\\inception_v3\\best.pt",
+    "checkpoint_val_selection_metric": "val_macro_f1",
+    "checkpoint_val_selection_value": 0.6839627487238185,
+    "validation_accuracy": 0.6518578352180937,
+    "test_accuracy": 0.6862903225806452,
+    "delta_accuracy": 0.034432,
+    "validation_macro_precision": 0.6845137345329878,
+    "test_macro_precision": 0.7137812040173496,
+    "delta_macro_precision": 0.029267,
+    "validation_macro_recall": 0.6907656806047096,
+    "test_macro_recall": 0.7053388381869292,
+    "delta_macro_recall": 0.014573,
+    "validation_macro_f1": 0.6839627487238185,
+    "test_macro_f1": 0.705040907937444,
+    "delta_macro_f1": 0.021078,
+    "validation_weighted_f1": 0.6499574089387264,
+    "test_weighted_f1": 0.6819509666792499,
+    "delta_weighted_f1": 0.031994,
+    "validation_balanced_accuracy": 0.6907656806047096,
+    "test_balanced_accuracy": 0.7053388381869292,
+    "delta_balanced_accuracy": 0.014573,
+    "validation_qwk": 0.8097189918174617,
+    "test_qwk": 0.8441789001618457,
+    "delta_qwk": 0.03446,
+    "validation_kl4_f1": 0.9210526315789473,
+    "test_kl4_f1": 0.8947368421052632,
+    "delta_kl4_f1": -0.026316,
+    "_per_class": {
+      "KL0": {
+        "precision": 0.7171171171171171,
+        "recall": 0.8361344537815126,
+        "f1": 0.7720659553831232,
+        "support": 476
+      },
+      "KL1": {
+        "precision": 0.3794642857142857,
+        "recall": 0.3744493392070485,
+        "f1": 0.376940133037694,
+        "support": 227
+      },
+      "KL2": {
+        "precision": 0.7949790794979079,
+        "recall": 0.5792682926829268,
+        "f1": 0.6701940035273368,
+        "support": 328
+      },
+      "KL3": {
+        "precision": 0.782608695652174,
+        "recall": 0.8421052631578947,
+        "f1": 0.8112676056338028,
+        "support": 171
+      },
+      "KL4": {
+        "precision": 0.8947368421052632,
+        "recall": 0.8947368421052632,
+        "f1": 0.8947368421052632,
+        "support": 38
+      }
+    },
+    "_confusion_matrix": [
+      [
+        398,
+        69,
+        8,
+        1,
+        0
+      ],
+      [
+        117,
+        85,
+        22,
+        3,
+        0
+      ],
+      [
+        39,
+        67,
+        190,
+        32,
+        0
+      ],
+      [
+        1,
+        3,
+        19,
+        144,
+        4
+      ],
+      [
+        0,
+        0,
+        0,
+        4,
+        34
+      ]
+    ],
+    "_kl4_predicted_as": {
+      "KL0": 0,
+      "KL1": 0,
+      "KL2": 0,
+      "KL3": 4,
+      "KL4": 34
+    },
+    "_top_confusions": [
+      {
+        "true": 1,
+        "pred": 0,
+        "count": 117,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 0,
+        "pred": 1,
+        "count": 69,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 1,
+        "count": 67,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 0,
+        "count": 39,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 2,
+        "pred": 3,
+        "count": 32,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 1,
+        "pred": 2,
+        "count": 22,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 3,
+        "pred": 2,
+        "count": 19,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 0,
+        "pred": 2,
+        "count": 8,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 3,
+        "pred": 4,
+        "count": 4,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 4,
+        "pred": 3,
+        "count": 4,
+        "ordinal_distance": 1
+      }
+    ],
+    "_confusion_plots": {
+      "raw": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase5\\confusion_matrices\\inception_v3_confusion_matrix.png",
+      "normalized": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase5\\confusion_matrices\\inception_v3_confusion_matrix_normalized.png"
+    },
+    "_latency_full": {
+      "device": "cuda",
+      "input_shape": [
+        1,
+        3,
+        224,
+        224
+      ],
+      "warmup_iters": 20,
+      "timed_iters": 100,
+      "mean_ms": 9.389,
+      "median_ms": 10.0895,
+      "std_ms": 1.5598,
+      "min_ms": 5.9299,
+      "max_ms": 10.8278,
+      "p90_ms": 10.392,
+      "throughput_images_per_sec": 106.51,
+      "peak_memory": {
+        "cuda_peak_alloc_mb": 133.16,
+        "cuda_peak_reserved_mb": 719.32,
+        "process_rss_mb": 2275.35
+      }
+    },
+    "eval_seconds": 3.26
+  },
+  {
+    "model": "xception",
+    "status": "OK",
+    "backend": "timm",
+    "n_test": 1240,
+    "accuracy": 0.6290322580645161,
+    "macro_precision": 0.6589697929760865,
+    "macro_recall": 0.6246014407301095,
+    "macro_f1": 0.6350338122946517,
+    "weighted_precision": 0.6116898406376655,
+    "weighted_recall": 0.6290322580645161,
+    "weighted_f1": 0.613820895013582,
+    "balanced_accuracy": 0.6246014407301095,
+    "cohen_kappa": 0.4804522906916797,
+    "qwk": 0.7776831043419605,
+    "kl4_f1": 0.8235294117647058,
+    "kl4_precision": 0.9333333333333333,
+    "kl4_recall": 0.7368421052631579,
+    "kl4_support": 38,
+    "mae": 0.4629032258064516,
+    "rmse_ordinal": 0.8072254351950305,
+    "exact_accuracy": 0.6290322580645161,
+    "within_1_accuracy": 0.910483870967742,
+    "within_2_accuracy": 0.9975806451612903,
+    "micro_f1": 0.6290322580645161,
+    "test_loss": 0.8449823671771634,
+    "roc_auc_ovr_macro": 0.8721761150373128,
+    "error_0": 780,
+    "error_1": 349,
+    "error_2": 108,
+    "error_3": 3,
+    "error_4": 0,
+    "underprediction_count": 296,
+    "overprediction_count": 164,
+    "adjacent_error_fraction_of_errors": 0.7587,
+    "confidence_mean": 0.6568493747182431,
+    "confidence_median": 0.6468201875686646,
+    "confidence_min": 0.27789953351020813,
+    "confidence_max": 0.9992892742156982,
+    "confidence_mean_correct": 0.7121302307416231,
+    "confidence_mean_incorrect": 0.5631122710264247,
+    "parameters": 20817197,
+    "trainable_parameters": 20817197,
+    "mean_latency_ms": 2.9777,
+    "median_latency_ms": 2.969,
+    "std_latency_ms": 0.1001,
+    "p90_latency_ms": 3.1104,
+    "throughput_img_per_s": 335.83,
+    "latency_device": "cuda",
+    "latency_warmup_iters": 20,
+    "latency_timed_iters": 100,
+    "phase4_best_epoch": 7,
+    "phase4_epochs_completed": 12,
+    "phase4_early_stop": true,
+    "checkpoint_path": "models\\phase4\\xception\\best.pt",
+    "checkpoint_val_selection_metric": "val_macro_f1",
+    "checkpoint_val_selection_value": 0.6522922718019676,
+    "validation_accuracy": 0.6195476575121163,
+    "test_accuracy": 0.6290322580645161,
+    "delta_accuracy": 0.009485,
+    "validation_macro_precision": 0.6599020140704395,
+    "test_macro_precision": 0.6589697929760865,
+    "delta_macro_precision": -0.000932,
+    "validation_macro_recall": 0.653414795099714,
+    "test_macro_recall": 0.6246014407301095,
+    "delta_macro_recall": -0.028813,
+    "validation_macro_f1": 0.6522922718019676,
+    "test_macro_f1": 0.6350338122946517,
+    "delta_macro_f1": -0.017258,
+    "validation_weighted_f1": 0.6088770348297176,
+    "test_weighted_f1": 0.613820895013582,
+    "delta_weighted_f1": 0.004944,
+    "validation_balanced_accuracy": 0.653414795099714,
+    "test_balanced_accuracy": 0.6246014407301095,
+    "delta_balanced_accuracy": -0.028813,
+    "validation_qwk": 0.7595035927183359,
+    "test_qwk": 0.7776831043419605,
+    "delta_qwk": 0.01818,
+    "validation_kl4_f1": 0.9166666666666666,
+    "test_kl4_f1": 0.8235294117647058,
+    "delta_kl4_f1": -0.093137,
+    "_per_class": {
+      "KL0": {
+        "precision": 0.6514382402707276,
+        "recall": 0.8088235294117647,
+        "f1": 0.7216494845360825,
+        "support": 476
+      },
+      "KL1": {
+        "precision": 0.2865853658536585,
+        "recall": 0.20704845814977973,
+        "f1": 0.24040920716112532,
+        "support": 227
+      },
+      "KL2": {
+        "precision": 0.6654275092936803,
+        "recall": 0.5457317073170732,
+        "f1": 0.5996649916247906,
+        "support": 328
+      },
+      "KL3": {
+        "precision": 0.7580645161290323,
+        "recall": 0.8245614035087719,
+        "f1": 0.7899159663865546,
+        "support": 171
+      },
+      "KL4": {
+        "precision": 0.9333333333333333,
+        "recall": 0.7368421052631579,
+        "f1": 0.8235294117647058,
+        "support": 38
+      }
+    },
+    "_confusion_matrix": [
+      [
+        385,
+        59,
+        30,
+        2,
+        0
+      ],
+      [
+        137,
+        47,
+        38,
+        5,
+        0
+      ],
+      [
+        68,
+        53,
+        179,
+        28,
+        0
+      ],
+      [
+        1,
+        5,
+        22,
+        141,
+        2
+      ],
+      [
+        0,
+        0,
+        0,
+        10,
+        28
+      ]
+    ],
+    "_kl4_predicted_as": {
+      "KL0": 0,
+      "KL1": 0,
+      "KL2": 0,
+      "KL3": 10,
+      "KL4": 28
+    },
+    "_top_confusions": [
+      {
+        "true": 1,
+        "pred": 0,
+        "count": 137,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 0,
+        "count": 68,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 0,
+        "pred": 1,
+        "count": 59,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 1,
+        "count": 53,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 1,
+        "pred": 2,
+        "count": 38,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 0,
+        "pred": 2,
+        "count": 30,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 2,
+        "pred": 3,
+        "count": 28,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 3,
+        "pred": 2,
+        "count": 22,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 4,
+        "pred": 3,
+        "count": 10,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 1,
+        "pred": 3,
+        "count": 5,
+        "ordinal_distance": 2
+      }
+    ],
+    "_confusion_plots": {
+      "raw": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase5\\confusion_matrices\\xception_confusion_matrix.png",
+      "normalized": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase5\\confusion_matrices\\xception_confusion_matrix_normalized.png"
+    },
+    "_latency_full": {
+      "device": "cuda",
+      "input_shape": [
+        1,
+        3,
+        224,
+        224
+      ],
+      "warmup_iters": 20,
+      "timed_iters": 100,
+      "mean_ms": 2.9777,
+      "median_ms": 2.969,
+      "std_ms": 0.1001,
+      "min_ms": 2.7287,
+      "max_ms": 3.3359,
+      "p90_ms": 3.1104,
+      "throughput_images_per_sec": 335.83,
+      "peak_memory": {
+        "cuda_peak_alloc_mb": 140.28,
+        "cuda_peak_reserved_mb": 1390.41,
+        "process_rss_mb": 2376.26
+      }
+    },
+    "eval_seconds": 5.52
+  },
+  {
+    "model": "efficientnet_b1",
+    "status": "OK",
+    "backend": "timm",
+    "n_test": 1240,
+    "accuracy": 0.6314516129032258,
+    "macro_precision": 0.7026031785112009,
+    "macro_recall": 0.6659639067267268,
+    "macro_f1": 0.6741587353960605,
+    "weighted_precision": 0.6823228312976684,
+    "weighted_recall": 0.6314516129032258,
+    "weighted_f1": 0.6457502503207038,
+    "balanced_accuracy": 0.6659639067267268,
+    "cohen_kappa": 0.5020636048985244,
+    "qwk": 0.8153625826484996,
+    "kl4_f1": 0.8493150684931506,
+    "kl4_precision": 0.8857142857142857,
+    "kl4_recall": 0.8157894736842105,
+    "kl4_support": 38,
+    "mae": 0.4120967741935484,
+    "rmse_ordinal": 0.7088154589445053,
+    "exact_accuracy": 0.6314516129032258,
+    "within_1_accuracy": 0.9580645161290322,
+    "within_2_accuracy": 0.9983870967741936,
+    "micro_f1": 0.6314516129032258,
+    "test_loss": 0.8096949346603886,
+    "roc_auc_ovr_macro": 0.8932182655664228,
+    "error_0": 783,
+    "error_1": 405,
+    "error_2": 50,
+    "error_3": 2,
+    "error_4": 0,
+    "underprediction_count": 265,
+    "overprediction_count": 192,
+    "adjacent_error_fraction_of_errors": 0.8862,
+    "confidence_mean": 0.6519226236208793,
+    "confidence_median": 0.6086587011814117,
+    "confidence_min": 0.3209318518638611,
+    "confidence_max": 0.9986667633056641,
+    "confidence_mean_correct": 0.7037666097454641,
+    "confidence_mean_incorrect": 0.5630958377662842,
+    "parameters": 6519589,
+    "trainable_parameters": 6519589,
+    "mean_latency_ms": 5.7207,
+    "median_latency_ms": 5.7257,
+    "std_latency_ms": 0.1227,
+    "p90_latency_ms": 5.8709,
+    "throughput_img_per_s": 174.8,
+    "latency_device": "cuda",
+    "latency_warmup_iters": 20,
+    "latency_timed_iters": 100,
+    "phase4_best_epoch": 7,
+    "phase4_epochs_completed": 12,
+    "phase4_early_stop": true,
+    "checkpoint_path": "models\\phase4\\efficientnet_b1\\best.pt",
+    "checkpoint_val_selection_metric": "val_macro_f1",
+    "checkpoint_val_selection_value": 0.6387010362523116,
+    "validation_accuracy": 0.5872374798061389,
+    "test_accuracy": 0.6314516129032258,
+    "delta_accuracy": 0.044214,
+    "validation_macro_precision": 0.6656446084407378,
+    "test_macro_precision": 0.7026031785112009,
+    "delta_macro_precision": 0.036959,
+    "validation_macro_recall": 0.6348896071234111,
+    "test_macro_recall": 0.6659639067267268,
+    "delta_macro_recall": 0.031074,
+    "validation_macro_f1": 0.6387010362523116,
+    "test_macro_f1": 0.6741587353960605,
+    "delta_macro_f1": 0.035458,
+    "validation_weighted_f1": 0.5999834292770474,
+    "test_weighted_f1": 0.6457502503207038,
+    "delta_weighted_f1": 0.045767,
+    "validation_balanced_accuracy": 0.6348896071234111,
+    "test_balanced_accuracy": 0.6659639067267268,
+    "delta_balanced_accuracy": 0.031074,
+    "validation_qwk": 0.7724104743521116,
+    "test_qwk": 0.8153625826484996,
+    "delta_qwk": 0.042952,
+    "validation_kl4_f1": 0.8571428571428571,
+    "test_kl4_f1": 0.8493150684931506,
+    "delta_kl4_f1": -0.007828,
+    "_per_class": {
+      "KL0": {
+        "precision": 0.7321428571428571,
+        "recall": 0.6890756302521008,
+        "f1": 0.70995670995671,
+        "support": 476
+      },
+      "KL1": {
+        "precision": 0.3252032520325203,
+        "recall": 0.5286343612334802,
+        "f1": 0.40268456375838924,
+        "support": 227
+      },
+      "KL2": {
+        "precision": 0.7747747747747747,
+        "recall": 0.524390243902439,
+        "f1": 0.6254545454545455,
+        "support": 328
+      },
+      "KL3": {
+        "precision": 0.7951807228915663,
+        "recall": 0.7719298245614035,
+        "f1": 0.7833827893175074,
+        "support": 171
+      },
+      "KL4": {
+        "precision": 0.8857142857142857,
+        "recall": 0.8157894736842105,
+        "f1": 0.8493150684931506,
+        "support": 38
+      }
+    },
+    "_confusion_matrix": [
+      [
+        328,
+        140,
+        6,
+        2,
+        0
+      ],
+      [
+        87,
+        120,
+        15,
+        5,
+        0
+      ],
+      [
+        33,
+        103,
+        172,
+        20,
+        0
+      ],
+      [
+        0,
+        6,
+        29,
+        132,
+        4
+      ],
+      [
+        0,
+        0,
+        0,
+        7,
+        31
+      ]
+    ],
+    "_kl4_predicted_as": {
+      "KL0": 0,
+      "KL1": 0,
+      "KL2": 0,
+      "KL3": 7,
+      "KL4": 31
+    },
+    "_top_confusions": [
+      {
+        "true": 0,
+        "pred": 1,
+        "count": 140,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 1,
+        "count": 103,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 1,
+        "pred": 0,
+        "count": 87,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 0,
+        "count": 33,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 3,
+        "pred": 2,
+        "count": 29,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 3,
+        "count": 20,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 1,
+        "pred": 2,
+        "count": 15,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 4,
+        "pred": 3,
+        "count": 7,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 0,
+        "pred": 2,
+        "count": 6,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 3,
+        "pred": 1,
+        "count": 6,
+        "ordinal_distance": 2
+      }
+    ],
+    "_confusion_plots": {
+      "raw": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase5\\confusion_matrices\\efficientnet_b1_confusion_matrix.png",
+      "normalized": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase5\\confusion_matrices\\efficientnet_b1_confusion_matrix_normalized.png"
+    },
+    "_latency_full": {
+      "device": "cuda",
+      "input_shape": [
+        1,
+        3,
+        224,
+        224
+      ],
+      "warmup_iters": 20,
+      "timed_iters": 100,
+      "mean_ms": 5.7207,
+      "median_ms": 5.7257,
+      "std_ms": 0.1227,
+      "min_ms": 5.472,
+      "max_ms": 6.1524,
+      "p90_ms": 5.8709,
+      "throughput_images_per_sec": 174.8,
+      "peak_memory": {
+        "cuda_peak_alloc_mb": 73.69,
+        "cuda_peak_reserved_mb": 635.44,
+        "process_rss_mb": 2505.33
+      }
+    },
+    "eval_seconds": 6.38
+  },
+  {
+    "model": "resnet50",
+    "status": "OK",
+    "backend": "timm",
+    "n_test": 1240,
+    "accuracy": 0.6524193548387097,
+    "macro_precision": 0.7042120098283291,
+    "macro_recall": 0.6989549852653659,
+    "macro_f1": 0.6967157165920742,
+    "weighted_precision": 0.672374965907297,
+    "weighted_recall": 0.6524193548387097,
+    "weighted_f1": 0.6563683160155817,
+    "balanced_accuracy": 0.6989549852653659,
+    "cohen_kappa": 0.5240304761565487,
+    "qwk": 0.8264001812461403,
+    "kl4_f1": 0.9487179487179487,
+    "kl4_precision": 0.925,
+    "kl4_recall": 0.9736842105263158,
+    "kl4_support": 38,
+    "mae": 0.3959677419354839,
+    "rmse_ordinal": 0.7031037183159234,
+    "exact_accuracy": 0.6524193548387097,
+    "within_1_accuracy": 0.9524193548387097,
+    "within_2_accuracy": 0.9991935483870967,
+    "micro_f1": 0.6524193548387097,
+    "test_loss": 0.775826695369136,
+    "roc_auc_ovr_macro": 0.8886088528481254,
+    "error_0": 809,
+    "error_1": 372,
+    "error_2": 58,
+    "error_3": 1,
+    "error_4": 0,
+    "underprediction_count": 262,
+    "overprediction_count": 169,
+    "adjacent_error_fraction_of_errors": 0.8631,
+    "confidence_mean": 0.6813905587119441,
+    "confidence_median": 0.6552718281745911,
+    "confidence_min": 0.33186355233192444,
+    "confidence_max": 0.9999796152114868,
+    "confidence_mean_correct": 0.7316505173301815,
+    "confidence_mean_incorrect": 0.5870511004238836,
+    "parameters": 23518277,
+    "trainable_parameters": 23518277,
+    "mean_latency_ms": 3.076,
+    "median_latency_ms": 2.9413,
+    "std_latency_ms": 0.3496,
+    "p90_latency_ms": 3.8231,
+    "throughput_img_per_s": 325.09,
+    "latency_device": "cuda",
+    "latency_warmup_iters": 20,
+    "latency_timed_iters": 100,
+    "phase4_best_epoch": 29,
+    "phase4_epochs_completed": 34,
+    "phase4_early_stop": true,
+    "checkpoint_path": "models\\phase4\\resnet50\\best.pt",
+    "checkpoint_val_selection_metric": "val_macro_f1",
+    "checkpoint_val_selection_value": 0.6686131332788822,
+    "validation_accuracy": 0.6219709208400647,
+    "test_accuracy": 0.6524193548387097,
+    "delta_accuracy": 0.030448,
+    "validation_macro_precision": 0.6778622116973808,
+    "test_macro_precision": 0.7042120098283291,
+    "delta_macro_precision": 0.02635,
+    "validation_macro_recall": 0.6724928470739264,
+    "test_macro_recall": 0.6989549852653659,
+    "delta_macro_recall": 0.026462,
+    "validation_macro_f1": 0.6686131332788822,
+    "test_macro_f1": 0.6967157165920742,
+    "delta_macro_f1": 0.028103,
+    "validation_weighted_f1": 0.6290160973576558,
+    "test_weighted_f1": 0.6563683160155817,
+    "delta_weighted_f1": 0.027352,
+    "validation_balanced_accuracy": 0.6724928470739264,
+    "test_balanced_accuracy": 0.6989549852653659,
+    "delta_balanced_accuracy": 0.026462,
+    "validation_qwk": 0.8008217763163801,
+    "test_qwk": 0.8264001812461403,
+    "delta_qwk": 0.025578,
+    "validation_kl4_f1": 0.9066666666666666,
+    "test_kl4_f1": 0.9487179487179487,
+    "delta_kl4_f1": 0.042051,
+    "_per_class": {
+      "KL0": {
+        "precision": 0.7196078431372549,
+        "recall": 0.7710084033613446,
+        "f1": 0.744421906693712,
+        "support": 476
+      },
+      "KL1": {
+        "precision": 0.3204225352112676,
+        "recall": 0.4008810572687225,
+        "f1": 0.3561643835616438,
+        "support": 227
+      },
+      "KL2": {
+        "precision": 0.7467811158798283,
+        "recall": 0.5304878048780488,
+        "f1": 0.6203208556149733,
+        "support": 328
+      },
+      "KL3": {
+        "precision": 0.8092485549132948,
+        "recall": 0.8187134502923976,
+        "f1": 0.813953488372093,
+        "support": 171
+      },
+      "KL4": {
+        "precision": 0.925,
+        "recall": 0.9736842105263158,
+        "f1": 0.9487179487179487,
+        "support": 38
+      }
+    },
+    "_confusion_matrix": [
+      [
+        367,
+        95,
+        13,
+        1,
+        0
+      ],
+      [
+        108,
+        91,
+        26,
+        2,
+        0
+      ],
+      [
+        35,
+        90,
+        174,
+        29,
+        0
+      ],
+      [
+        0,
+        8,
+        20,
+        140,
+        3
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        37
+      ]
+    ],
+    "_kl4_predicted_as": {
+      "KL0": 0,
+      "KL1": 0,
+      "KL2": 0,
+      "KL3": 1,
+      "KL4": 37
+    },
+    "_top_confusions": [
+      {
+        "true": 1,
+        "pred": 0,
+        "count": 108,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 0,
+        "pred": 1,
+        "count": 95,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 1,
+        "count": 90,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 0,
+        "count": 35,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 2,
+        "pred": 3,
+        "count": 29,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 1,
+        "pred": 2,
+        "count": 26,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 3,
+        "pred": 2,
+        "count": 20,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 0,
+        "pred": 2,
+        "count": 13,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 3,
+        "pred": 1,
+        "count": 8,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 3,
+        "pred": 4,
+        "count": 3,
+        "ordinal_distance": 1
+      }
+    ],
+    "_confusion_plots": {
+      "raw": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase5\\confusion_matrices\\resnet50_confusion_matrix.png",
+      "normalized": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase5\\confusion_matrices\\resnet50_confusion_matrix_normalized.png"
+    },
+    "_latency_full": {
+      "device": "cuda",
+      "input_shape": [
+        1,
+        3,
+        224,
+        224
+      ],
+      "warmup_iters": 20,
+      "timed_iters": 100,
+      "mean_ms": 3.076,
+      "median_ms": 2.9413,
+      "std_ms": 0.3496,
+      "min_ms": 2.7376,
+      "max_ms": 4.2904,
+      "p90_ms": 3.8231,
+      "throughput_images_per_sec": 325.09,
+      "peak_memory": {
+        "cuda_peak_alloc_mb": 148.13,
+        "cuda_peak_reserved_mb": 775.95,
+        "process_rss_mb": 2564.11
+      }
+    },
+    "eval_seconds": 2.52
+  },
+  {
+    "model": "mobilenet_v3_large",
+    "status": "OK",
+    "backend": "timm",
+    "n_test": 1240,
+    "accuracy": 0.6459677419354839,
+    "macro_precision": 0.644508267036332,
+    "macro_recall": 0.6632675609211713,
+    "macro_f1": 0.6517877986039696,
+    "weighted_precision": 0.6279961740229189,
+    "weighted_recall": 0.6459677419354839,
+    "weighted_f1": 0.6351208183560326,
+    "balanced_accuracy": 0.6632675609211713,
+    "cohen_kappa": 0.5099934829025208,
+    "qwk": 0.7929110342659541,
+    "kl4_f1": 0.825,
+    "kl4_precision": 0.7857142857142857,
+    "kl4_recall": 0.868421052631579,
+    "kl4_support": 38,
+    "mae": 0.43548387096774194,
+    "rmse_ordinal": 0.7766761271286848,
+    "exact_accuracy": 0.6459677419354839,
+    "within_1_accuracy": 0.9209677419354839,
+    "within_2_accuracy": 0.9975806451612903,
+    "micro_f1": 0.6459677419354839,
+    "test_loss": 0.8569976329803467,
+    "roc_auc_ovr_macro": 0.8830791117005333,
+    "error_0": 801,
+    "error_1": 341,
+    "error_2": 95,
+    "error_3": 3,
+    "error_4": 0,
+    "underprediction_count": 225,
+    "overprediction_count": 214,
+    "adjacent_error_fraction_of_errors": 0.7768,
+    "confidence_mean": 0.7517860780560202,
+    "confidence_median": 0.7855190336704254,
+    "confidence_min": 0.34067919850349426,
+    "confidence_max": 0.9999997615814209,
+    "confidence_mean_correct": 0.8065540235810512,
+    "confidence_mean_incorrect": 0.6518564097973644,
+    "parameters": 4208437,
+    "trainable_parameters": 4208437,
+    "mean_latency_ms": 3.2768,
+    "median_latency_ms": 3.2759,
+    "std_latency_ms": 0.0793,
+    "p90_latency_ms": 3.3859,
+    "throughput_img_per_s": 305.18,
+    "latency_device": "cuda",
+    "latency_warmup_iters": 20,
+    "latency_timed_iters": 100,
+    "phase4_best_epoch": 19,
+    "phase4_epochs_completed": 24,
+    "phase4_early_stop": true,
+    "checkpoint_path": "models\\phase4\\mobilenet_v3_large\\best.pt",
+    "checkpoint_val_selection_metric": "val_macro_f1",
+    "checkpoint_val_selection_value": 0.6595731669824706,
+    "validation_accuracy": 0.6365105008077544,
+    "test_accuracy": 0.6459677419354839,
+    "delta_accuracy": 0.009457,
+    "validation_macro_precision": 0.6541916993826916,
+    "test_macro_precision": 0.644508267036332,
+    "delta_macro_precision": -0.009683,
+    "validation_macro_recall": 0.6706472328388149,
+    "test_macro_recall": 0.6632675609211713,
+    "delta_macro_recall": -0.00738,
+    "validation_macro_f1": 0.6595731669824706,
+    "test_macro_f1": 0.6517877986039696,
+    "delta_macro_f1": -0.007785,
+    "validation_weighted_f1": 0.6278439521018373,
+    "test_weighted_f1": 0.6351208183560326,
+    "delta_weighted_f1": 0.007277,
+    "validation_balanced_accuracy": 0.6706472328388149,
+    "test_balanced_accuracy": 0.6632675609211713,
+    "delta_balanced_accuracy": -0.00738,
+    "validation_qwk": 0.7593729509270138,
+    "test_qwk": 0.7929110342659541,
+    "delta_qwk": 0.033538,
+    "validation_kl4_f1": 0.8860759493670886,
+    "test_kl4_f1": 0.825,
+    "delta_kl4_f1": -0.061076,
+    "_per_class": {
+      "KL0": {
+        "precision": 0.7145631067961165,
+        "recall": 0.773109243697479,
+        "f1": 0.7426841574167508,
+        "support": 476
+      },
+      "KL1": {
+        "precision": 0.3313253012048193,
+        "recall": 0.2422907488986784,
+        "f1": 0.27989821882951654,
+        "support": 227
+      },
+      "KL2": {
+        "precision": 0.60932944606414,
+        "recall": 0.6371951219512195,
+        "f1": 0.6229508196721312,
+        "support": 328
+      },
+      "KL3": {
+        "precision": 0.7816091954022989,
+        "recall": 0.7953216374269005,
+        "f1": 0.7884057971014493,
+        "support": 171
+      },
+      "KL4": {
+        "precision": 0.7857142857142857,
+        "recall": 0.868421052631579,
+        "f1": 0.825,
+        "support": 38
+      }
+    },
+    "_confusion_matrix": [
+      [
+        368,
+        59,
+        47,
+        2,
+        0
+      ],
+      [
+        104,
+        55,
+        66,
+        2,
+        0
+      ],
+      [
+        42,
+        48,
+        209,
+        29,
+        0
+      ],
+      [
+        1,
+        4,
+        21,
+        136,
+        9
+      ],
+      [
+        0,
+        0,
+        0,
+        5,
+        33
+      ]
+    ],
+    "_kl4_predicted_as": {
+      "KL0": 0,
+      "KL1": 0,
+      "KL2": 0,
+      "KL3": 5,
+      "KL4": 33
+    },
+    "_top_confusions": [
+      {
+        "true": 1,
+        "pred": 0,
+        "count": 104,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 1,
+        "pred": 2,
+        "count": 66,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 0,
+        "pred": 1,
+        "count": 59,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 1,
+        "count": 48,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 0,
+        "pred": 2,
+        "count": 47,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 2,
+        "pred": 0,
+        "count": 42,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 2,
+        "pred": 3,
+        "count": 29,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 3,
+        "pred": 2,
+        "count": 21,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 3,
+        "pred": 4,
+        "count": 9,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 4,
+        "pred": 3,
+        "count": 5,
+        "ordinal_distance": 1
+      }
+    ],
+    "_confusion_plots": {
+      "raw": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase5\\confusion_matrices\\mobilenet_v3_large_confusion_matrix.png",
+      "normalized": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase5\\confusion_matrices\\mobilenet_v3_large_confusion_matrix_normalized.png"
+    },
+    "_latency_full": {
+      "device": "cuda",
+      "input_shape": [
+        1,
+        3,
+        224,
+        224
+      ],
+      "warmup_iters": 20,
+      "timed_iters": 100,
+      "mean_ms": 3.2768,
+      "median_ms": 3.2759,
+      "std_ms": 0.0793,
+      "min_ms": 3.0927,
+      "max_ms": 3.4898,
+      "p90_ms": 3.3859,
+      "throughput_images_per_sec": 305.18,
+      "peak_memory": {
+        "cuda_peak_alloc_mb": 60.25,
+        "cuda_peak_reserved_mb": 423.62,
+        "process_rss_mb": 2591.84
+      }
+    },
+    "eval_seconds": 4.36
+  },
+  {
+    "model": "resnet18",
+    "status": "OK",
+    "backend": "timm",
+    "n_test": 1240,
+    "accuracy": 0.6282258064516129,
+    "macro_precision": 0.6666492845015765,
+    "macro_recall": 0.6707884435774841,
+    "macro_f1": 0.6595255547071502,
+    "weighted_precision": 0.6429540657053664,
+    "weighted_recall": 0.6282258064516129,
+    "weighted_f1": 0.6237444402496861,
+    "balanced_accuracy": 0.6707884435774841,
+    "cohen_kappa": 0.48757390933310374,
+    "qwk": 0.8160152896664041,
+    "kl4_f1": 0.9,
+    "kl4_precision": 0.8571428571428571,
+    "kl4_recall": 0.9473684210526315,
+    "kl4_support": 38,
+    "mae": 0.4274193548387097,
+    "rmse_ordinal": 0.7361626748694665,
+    "exact_accuracy": 0.6282258064516129,
+    "within_1_accuracy": 0.9459677419354838,
+    "within_2_accuracy": 0.9983870967741936,
+    "micro_f1": 0.6282258064516129,
+    "test_loss": 0.8075134137945791,
+    "roc_auc_ovr_macro": 0.8822318883806733,
+    "error_0": 779,
+    "error_1": 394,
+    "error_2": 65,
+    "error_3": 2,
+    "error_4": 0,
+    "underprediction_count": 292,
+    "overprediction_count": 169,
+    "adjacent_error_fraction_of_errors": 0.8547,
+    "confidence_mean": 0.6380507707956338,
+    "confidence_median": 0.6077381670475006,
+    "confidence_min": 0.23428507149219513,
+    "confidence_max": 0.9998817443847656,
+    "confidence_mean_correct": 0.6925344093964556,
+    "confidence_mean_incorrect": 0.5459840582792774,
+    "parameters": 11179077,
+    "trainable_parameters": 11179077,
+    "mean_latency_ms": 3.0162,
+    "median_latency_ms": 3.3062,
+    "std_latency_ms": 0.8921,
+    "p90_latency_ms": 4.1002,
+    "throughput_img_per_s": 331.54,
+    "latency_device": "cuda",
+    "latency_warmup_iters": 20,
+    "latency_timed_iters": 100,
+    "phase4_best_epoch": 26,
+    "phase4_epochs_completed": 31,
+    "phase4_early_stop": true,
+    "checkpoint_path": "models\\phase4\\resnet18\\best.pt",
+    "checkpoint_val_selection_metric": "val_macro_f1",
+    "checkpoint_val_selection_value": 0.6456653907603925,
+    "validation_accuracy": 0.6009693053311793,
+    "test_accuracy": 0.6282258064516129,
+    "delta_accuracy": 0.027257,
+    "validation_macro_precision": 0.6527287114598747,
+    "test_macro_precision": 0.6666492845015765,
+    "delta_macro_precision": 0.013921,
+    "validation_macro_recall": 0.6589930762024706,
+    "test_macro_recall": 0.6707884435774841,
+    "delta_macro_recall": 0.011795,
+    "validation_macro_f1": 0.6456653907603925,
+    "test_macro_f1": 0.6595255547071502,
+    "delta_macro_f1": 0.01386,
+    "validation_weighted_f1": 0.6007101760739673,
+    "test_weighted_f1": 0.6237444402496861,
+    "delta_weighted_f1": 0.023034,
+    "validation_balanced_accuracy": 0.6589930762024706,
+    "test_balanced_accuracy": 0.6707884435774841,
+    "delta_balanced_accuracy": 0.011795,
+    "validation_qwk": 0.7811941618507526,
+    "test_qwk": 0.8160152896664041,
+    "delta_qwk": 0.034821,
+    "validation_kl4_f1": 0.9090909090909091,
+    "test_kl4_f1": 0.9,
+    "delta_kl4_f1": -0.009091,
+    "_per_class": {
+      "KL0": {
+        "precision": 0.6774193548387096,
+        "recall": 0.7941176470588235,
+        "f1": 0.7311411992263056,
+        "support": 476
+      },
+      "KL1": {
+        "precision": 0.26,
+        "recall": 0.28634361233480177,
+        "f1": 0.27253668763102723,
+        "support": 227
+      },
+      "KL2": {
+        "precision": 0.765,
+        "recall": 0.46646341463414637,
+        "f1": 0.5795454545454546,
+        "support": 328
+      },
+      "KL3": {
+        "precision": 0.7736842105263158,
+        "recall": 0.8596491228070176,
+        "f1": 0.814404432132964,
+        "support": 171
+      },
+      "KL4": {
+        "precision": 0.8571428571428571,
+        "recall": 0.9473684210526315,
+        "f1": 0.9,
+        "support": 38
+      }
+    },
+    "_confusion_matrix": [
+      [
+        378,
+        87,
+        10,
+        1,
+        0
+      ],
+      [
+        133,
+        65,
+        25,
+        4,
+        0
+      ],
+      [
+        46,
+        93,
+        153,
+        36,
+        0
+      ],
+      [
+        1,
+        5,
+        12,
+        147,
+        6
+      ],
+      [
+        0,
+        0,
+        0,
+        2,
+        36
+      ]
+    ],
+    "_kl4_predicted_as": {
+      "KL0": 0,
+      "KL1": 0,
+      "KL2": 0,
+      "KL3": 2,
+      "KL4": 36
+    },
+    "_top_confusions": [
+      {
+        "true": 1,
+        "pred": 0,
+        "count": 133,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 1,
+        "count": 93,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 0,
+        "pred": 1,
+        "count": 87,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 0,
+        "count": 46,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 2,
+        "pred": 3,
+        "count": 36,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 1,
+        "pred": 2,
+        "count": 25,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 3,
+        "pred": 2,
+        "count": 12,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 0,
+        "pred": 2,
+        "count": 10,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 3,
+        "pred": 4,
+        "count": 6,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 3,
+        "pred": 1,
+        "count": 5,
+        "ordinal_distance": 2
+      }
+    ],
+    "_confusion_plots": {
+      "raw": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase5\\confusion_matrices\\resnet18_confusion_matrix.png",
+      "normalized": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase5\\confusion_matrices\\resnet18_confusion_matrix_normalized.png"
+    },
+    "_latency_full": {
+      "device": "cuda",
+      "input_shape": [
+        1,
+        3,
+        224,
+        224
+      ],
+      "warmup_iters": 20,
+      "timed_iters": 100,
+      "mean_ms": 3.0162,
+      "median_ms": 3.3062,
+      "std_ms": 0.8921,
+      "min_ms": 1.5748,
+      "max_ms": 4.8737,
+      "p90_ms": 4.1002,
+      "throughput_images_per_sec": 331.54,
+      "peak_memory": {
+        "cuda_peak_alloc_mb": 96.67,
+        "cuda_peak_reserved_mb": 404.75,
+        "process_rss_mb": 2617.76
+      }
+    },
+    "eval_seconds": 2.28
+  },
+  {
+    "model": "mobilenet_v2",
+    "status": "OK",
+    "backend": "timm",
+    "n_test": 1240,
+    "accuracy": 0.6362903225806451,
+    "macro_precision": 0.637591789169366,
+    "macro_recall": 0.6779626751765553,
+    "macro_f1": 0.6546650479487768,
+    "weighted_precision": 0.623703201512968,
+    "weighted_recall": 0.6362903225806451,
+    "weighted_f1": 0.6284052765840975,
+    "balanced_accuracy": 0.6779626751765553,
+    "cohen_kappa": 0.4993518538412507,
+    "qwk": 0.795793997463717,
+    "kl4_f1": 0.8705882352941177,
+    "kl4_precision": 0.7872340425531915,
+    "kl4_recall": 0.9736842105263158,
+    "kl4_support": 38,
+    "mae": 0.44193548387096776,
+    "rmse_ordinal": 0.7766761271286848,
+    "exact_accuracy": 0.6362903225806451,
+    "within_1_accuracy": 0.9241935483870968,
+    "within_2_accuracy": 0.9975806451612903,
+    "micro_f1": 0.6362903225806451,
+    "test_loss": 0.871371312679783,
+    "roc_auc_ovr_macro": 0.8765509300578384,
+    "error_0": 789,
+    "error_1": 357,
+    "error_2": 91,
+    "error_3": 3,
+    "error_4": 0,
+    "underprediction_count": 222,
+    "overprediction_count": 229,
+    "adjacent_error_fraction_of_errors": 0.7916,
+    "confidence_mean": 0.7182443620697144,
+    "confidence_median": 0.7099704146385193,
+    "confidence_min": 0.2647342383861542,
+    "confidence_max": 0.9999998807907104,
+    "confidence_mean_correct": 0.7679027949751406,
+    "confidence_mean_incorrect": 0.6313696313327274,
+    "parameters": 2230277,
+    "trainable_parameters": 2230277,
+    "mean_latency_ms": 4.6835,
+    "median_latency_ms": 4.6625,
+    "std_latency_ms": 0.1295,
+    "p90_latency_ms": 4.8384,
+    "throughput_img_per_s": 213.51,
+    "latency_device": "cuda",
+    "latency_warmup_iters": 20,
+    "latency_timed_iters": 100,
+    "phase4_best_epoch": 26,
+    "phase4_epochs_completed": 31,
+    "phase4_early_stop": true,
+    "checkpoint_path": "models\\phase4\\mobilenet_v2\\best.pt",
+    "checkpoint_val_selection_metric": "val_macro_f1",
+    "checkpoint_val_selection_value": 0.6468854851037238,
+    "validation_accuracy": 0.6138933764135702,
+    "test_accuracy": 0.6362903225806451,
+    "delta_accuracy": 0.022397,
+    "validation_macro_precision": 0.6334548024241984,
+    "test_macro_precision": 0.637591789169366,
+    "delta_macro_precision": 0.004137,
+    "validation_macro_recall": 0.6633489811059412,
+    "test_macro_recall": 0.6779626751765553,
+    "delta_macro_recall": 0.014614,
+    "validation_macro_f1": 0.6468854851037238,
+    "test_macro_f1": 0.6546650479487768,
+    "delta_macro_f1": 0.00778,
+    "validation_weighted_f1": 0.6117077857583625,
+    "test_weighted_f1": 0.6284052765840975,
+    "delta_weighted_f1": 0.016697,
+    "validation_balanced_accuracy": 0.6633489811059412,
+    "test_balanced_accuracy": 0.6779626751765553,
+    "delta_balanced_accuracy": 0.014614,
+    "validation_qwk": 0.7558871172536041,
+    "test_qwk": 0.795793997463717,
+    "delta_qwk": 0.039907,
+    "validation_kl4_f1": 0.8974358974358975,
+    "test_kl4_f1": 0.8705882352941177,
+    "delta_kl4_f1": -0.026848,
+    "_per_class": {
+      "KL0": {
+        "precision": 0.7003891050583657,
+        "recall": 0.7563025210084033,
+        "f1": 0.7272727272727273,
+        "support": 476
+      },
+      "KL1": {
+        "precision": 0.3333333333333333,
+        "recall": 0.28193832599118945,
+        "f1": 0.3054892601431981,
+        "support": 227
+      },
+      "KL2": {
+        "precision": 0.6411960132890365,
+        "recall": 0.5884146341463414,
+        "f1": 0.6136724960254372,
+        "support": 328
+      },
+      "KL3": {
+        "precision": 0.7258064516129032,
+        "recall": 0.7894736842105263,
+        "f1": 0.7563025210084033,
+        "support": 171
+      },
+      "KL4": {
+        "precision": 0.7872340425531915,
+        "recall": 0.9736842105263158,
+        "f1": 0.8705882352941177,
+        "support": 38
+      }
+    },
+    "_confusion_matrix": [
+      [
+        360,
+        82,
+        33,
+        1,
+        0
+      ],
+      [
+        103,
+        64,
+        54,
+        6,
+        0
+      ],
+      [
+        49,
+        43,
+        193,
+        43,
+        0
+      ],
+      [
+        2,
+        3,
+        21,
+        135,
+        10
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        37
+      ]
+    ],
+    "_kl4_predicted_as": {
+      "KL0": 0,
+      "KL1": 0,
+      "KL2": 0,
+      "KL3": 1,
+      "KL4": 37
+    },
+    "_top_confusions": [
+      {
+        "true": 1,
+        "pred": 0,
+        "count": 103,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 0,
+        "pred": 1,
+        "count": 82,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 1,
+        "pred": 2,
+        "count": 54,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 0,
+        "count": 49,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 2,
+        "pred": 1,
+        "count": 43,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 3,
+        "count": 43,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 0,
+        "pred": 2,
+        "count": 33,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 3,
+        "pred": 2,
+        "count": 21,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 3,
+        "pred": 4,
+        "count": 10,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 1,
+        "pred": 3,
+        "count": 6,
+        "ordinal_distance": 2
+      }
+    ],
+    "_confusion_plots": {
+      "raw": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase5\\confusion_matrices\\mobilenet_v2_confusion_matrix.png",
+      "normalized": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase5\\confusion_matrices\\mobilenet_v2_confusion_matrix_normalized.png"
+    },
+    "_latency_full": {
+      "device": "cuda",
+      "input_shape": [
+        1,
+        3,
+        224,
+        224
+      ],
+      "warmup_iters": 20,
+      "timed_iters": 100,
+      "mean_ms": 4.6835,
+      "median_ms": 4.6625,
+      "std_ms": 0.1295,
+      "min_ms": 4.4678,
+      "max_ms": 5.3599,
+      "p90_ms": 4.8384,
+      "throughput_images_per_sec": 213.51,
+      "peak_memory": {
+        "cuda_peak_alloc_mb": 56.39,
+        "cuda_peak_reserved_mb": 589.3,
+        "process_rss_mb": 2653.48
+      }
+    },
+    "eval_seconds": 4.06
+  },
+  {
+    "model": "efficientnet_b0",
+    "status": "OK",
+    "backend": "timm",
+    "n_test": 1240,
+    "accuracy": 0.6516129032258065,
+    "macro_precision": 0.6714327437485823,
+    "macro_recall": 0.6752540276505061,
+    "macro_f1": 0.6704710085541505,
+    "weighted_precision": 0.6389368305851404,
+    "weighted_recall": 0.6516129032258065,
+    "weighted_f1": 0.6415137300628446,
+    "balanced_accuracy": 0.6752540276505061,
+    "cohen_kappa": 0.5168918309554301,
+    "qwk": 0.8044208971155308,
+    "kl4_f1": 0.8947368421052632,
+    "kl4_precision": 0.8947368421052632,
+    "kl4_recall": 0.8947368421052632,
+    "kl4_support": 38,
+    "mae": 0.42258064516129035,
+    "rmse_ordinal": 0.7588191165310104,
+    "exact_accuracy": 0.6516129032258065,
+    "within_1_accuracy": 0.9282258064516129,
+    "within_2_accuracy": 0.9975806451612903,
+    "micro_f1": 0.6516129032258065,
+    "test_loss": 1.0038784042481452,
+    "roc_auc_ovr_macro": 0.8765135707397391,
+    "error_0": 808,
+    "error_1": 343,
+    "error_2": 86,
+    "error_3": 3,
+    "error_4": 0,
+    "underprediction_count": 251,
+    "overprediction_count": 181,
+    "adjacent_error_fraction_of_errors": 0.794,
+    "confidence_mean": 0.8048379518572362,
+    "confidence_median": 0.8575136363506317,
+    "confidence_min": 0.34009742736816406,
+    "confidence_max": 1.0,
+    "confidence_mean_correct": 0.8433066558941166,
+    "confidence_mean_incorrect": 0.7328872276401078,
+    "parameters": 4013953,
+    "trainable_parameters": 4013953,
+    "mean_latency_ms": 4.182,
+    "median_latency_ms": 4.0767,
+    "std_latency_ms": 0.3657,
+    "p90_latency_ms": 4.4021,
+    "throughput_img_per_s": 239.12,
+    "latency_device": "cuda",
+    "latency_warmup_iters": 20,
+    "latency_timed_iters": 100,
+    "phase4_best_epoch": 19,
+    "phase4_epochs_completed": 24,
+    "phase4_early_stop": true,
+    "checkpoint_path": "models\\phase4\\efficientnet_b0\\best.pt",
+    "checkpoint_val_selection_metric": "val_macro_f1",
+    "checkpoint_val_selection_value": 0.6498439588704789,
+    "validation_accuracy": 0.6316639741518578,
+    "test_accuracy": 0.6516129032258065,
+    "delta_accuracy": 0.019949,
+    "validation_macro_precision": 0.6367778791988637,
+    "test_macro_precision": 0.6714327437485823,
+    "delta_macro_precision": 0.034655,
+    "validation_macro_recall": 0.6673355794572313,
+    "test_macro_recall": 0.6752540276505061,
+    "delta_macro_recall": 0.007918,
+    "validation_macro_f1": 0.6498439588704789,
+    "test_macro_f1": 0.6704710085541505,
+    "delta_macro_f1": 0.020627,
+    "validation_weighted_f1": 0.6239187581482208,
+    "test_weighted_f1": 0.6415137300628446,
+    "delta_weighted_f1": 0.017595,
+    "validation_balanced_accuracy": 0.6673355794572313,
+    "test_balanced_accuracy": 0.6752540276505061,
+    "delta_balanced_accuracy": 0.007918,
+    "validation_qwk": 0.7718164939405192,
+    "test_qwk": 0.8044208971155308,
+    "delta_qwk": 0.032604,
+    "validation_kl4_f1": 0.875,
+    "test_kl4_f1": 0.8947368421052632,
+    "delta_kl4_f1": 0.019737,
+    "_per_class": {
+      "KL0": {
+        "precision": 0.6902173913043478,
+        "recall": 0.8004201680672269,
+        "f1": 0.7412451361867705,
+        "support": 476
+      },
+      "KL1": {
+        "precision": 0.3387096774193548,
+        "recall": 0.2775330396475771,
+        "f1": 0.3050847457627119,
+        "support": 227
+      },
+      "KL2": {
+        "precision": 0.6861313868613139,
+        "recall": 0.573170731707317,
+        "f1": 0.6245847176079734,
+        "support": 328
+      },
+      "KL3": {
+        "precision": 0.7473684210526316,
+        "recall": 0.8304093567251462,
+        "f1": 0.7867036011080333,
+        "support": 171
+      },
+      "KL4": {
+        "precision": 0.8947368421052632,
+        "recall": 0.8947368421052632,
+        "f1": 0.8947368421052632,
+        "support": 38
+      }
+    },
+    "_confusion_matrix": [
+      [
+        381,
+        68,
+        26,
+        1,
+        0
+      ],
+      [
+        118,
+        63,
+        39,
+        7,
+        0
+      ],
+      [
+        51,
+        53,
+        188,
+        36,
+        0
+      ],
+      [
+        2,
+        2,
+        21,
+        142,
+        4
+      ],
+      [
+        0,
+        0,
+        0,
+        4,
+        34
+      ]
+    ],
+    "_kl4_predicted_as": {
+      "KL0": 0,
+      "KL1": 0,
+      "KL2": 0,
+      "KL3": 4,
+      "KL4": 34
+    },
+    "_top_confusions": [
+      {
+        "true": 1,
+        "pred": 0,
+        "count": 118,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 0,
+        "pred": 1,
+        "count": 68,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 1,
+        "count": 53,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 0,
+        "count": 51,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 1,
+        "pred": 2,
+        "count": 39,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 2,
+        "pred": 3,
+        "count": 36,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 0,
+        "pred": 2,
+        "count": 26,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 3,
+        "pred": 2,
+        "count": 21,
+        "ordinal_distance": 1
+      },
+      {
+        "true": 1,
+        "pred": 3,
+        "count": 7,
+        "ordinal_distance": 2
+      },
+      {
+        "true": 3,
+        "pred": 4,
+        "count": 4,
+        "ordinal_distance": 1
+      }
+    ],
+    "_confusion_plots": {
+      "raw": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase5\\confusion_matrices\\efficientnet_b0_confusion_matrix.png",
+      "normalized": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase5\\confusion_matrices\\efficientnet_b0_confusion_matrix_normalized.png"
+    },
+    "_latency_full": {
+      "device": "cuda",
+      "input_shape": [
+        1,
+        3,
+        224,
+        224
+      ],
+      "warmup_iters": 20,
+      "timed_iters": 100,
+      "mean_ms": 4.182,
+      "median_ms": 4.0767,
+      "std_ms": 0.3657,
+      "min_ms": 3.8443,
+      "max_ms": 5.4329,
+      "p90_ms": 4.4021,
+      "throughput_images_per_sec": 239.12,
+      "peak_memory": {
+        "cuda_peak_alloc_mb": 63.55,
+        "cuda_peak_reserved_mb": 603.98,
+        "process_rss_mb": 2623.72
+      }
+    },
+    "eval_seconds": 2.41
+  }
+]

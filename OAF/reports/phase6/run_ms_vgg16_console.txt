@@ -1,0 +1,23 @@
+03:35:55 | INFO    | exp | logging to reports\phase6\run_ms_vgg16.log
+03:35:58 | INFO    | exp | PHASE 3 EXPERIMENTS | families=['multiseed'] | models=['vgg16'] | device=cuda | dry_run=False
+03:35:58 | INFO    | exp |   patient overlap train n val: 0  |  sample overlap: 0
+03:35:58 | INFO    | exp |   patient overlap train n test: 0  |  sample overlap: 0
+03:35:58 | INFO    | exp |   patient overlap val n test: 0  |  sample overlap: 0
+03:35:58 | INFO    | exp |   train n= 5782  KL dist={0: 2293, 1: 1048, 2: 1509, 3: 756, 4: 176}
+03:35:58 | INFO    | exp |   val   n= 1238  KL dist={0: 484, 1: 220, 2: 338, 3: 159, 4: 37}
+03:35:58 | INFO    | exp |   test  n= 1240  KL dist={0: 476, 1: 227, 2: 328, 3: 171, 4: 38}
+03:35:58 | INFO    | exp |   leakage + distribution check PASSED (patient- and sample-disjoint; all 5 classes present)
+03:35:58 | INFO    | exp | 3 experiment runs queued
+03:35:58 | INFO    | exp | [1/3] vgg16__seed__42 : result.json exists -> reuse (append if new to master)
+03:35:58 | INFO    | exp |    vgg16__seed__42 macro_f1=0.6602 qwk=0.7947 bAcc=0.6799 best_ep=7  -> master already present
+03:35:58 | INFO    | exp | [2/3] vgg16__seed__123 : result.json exists -> reuse (append if new to master)
+03:35:58 | INFO    | exp |    vgg16__seed__123 macro_f1=0.7086 qwk=0.8358 bAcc=0.7089 best_ep=25  -> master already present
+03:35:58 | INFO    | exp | [3/3] vgg16__seed__3407 : result.json exists -> reuse (append if new to master)
+03:35:58 | INFO    | exp |    vgg16__seed__3407 macro_f1=0.7090 qwk=0.8388 bAcc=0.7033 best_ep=21  -> master already present
+03:35:58 | INFO    | exp | experiments done in 0.0 min
+03:35:59 | INFO    | exp | multi-seed summary:
+        model  n_seeds  macro_f1_mean  macro_f1_std  qwk_mean  qwk_std  bacc_mean  bacc_std
+convnext_tiny        3       0.709326      0.003447  0.829929 0.007132   0.716058  0.004205
+        vgg16        3       0.692628      0.022896  0.823110 0.020098   0.697372  0.012548
+03:35:59 | INFO    | exp | master table: C:\Users\knpra\OneDrive\Documents\projects\OA\reports\phase6\experiment_results.csv
+03:35:59 | INFO    | exp | per-family CSVs + comparison plots written under C:\Users\knpra\OneDrive\Documents\projects\OA\reports\phase6

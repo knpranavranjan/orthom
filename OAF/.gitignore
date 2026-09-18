@@ -1,0 +1,128 @@
+# ============================================================================
+#  AETHER-OA  —  X-ray / Knee-OA module  —  .gitignore
+#
+#  Commit:      source, configs, docs, metadata, reports, and the FINAL
+#               MobileNetV2 deployment model (all < 10 MB — normal Git, no LFS).
+#  Never commit: virtual envs, raw/derived data, training checkpoints,
+#               large archives, logs, secrets.
+#
+#  Structure: broad ignores first, then a whitelist of exceptions at the end
+#  (last match wins; parent dirs are ignored with `dir/*`, never `dir/`, so the
+#  exceptions can re-include specific paths).
+# ============================================================================
+
+# ---- Python environments & caches ----
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.pyd
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# ---- Datasets (external licence: OAI DUA / Kaggle terms; pixels not shipped) ----
+data/*
+data/raw/*
+kaggle/
+OAI-KL-Grade-Classification/
+
+# ---- Model weights / training artifacts ----
+models/*
+models/mobilenet_final/*
+models/phase3/**/*.pt
+models/phase4/**/*.pt
+models/phase7/**/*.pt
+models/**/last.pt
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+
+# ---- ONNX (only the final deploy graphs are kept — see exceptions below) ----
+*.onnx
+*.onnx.data
+
+# ---- Archives ----
+*.zip
+*.7z
+*.rar
+*.tar
+*.tar.gz
+*.tgz
+archive/
+
+# ---- Logs / locks / scratch ----
+*.log
+*.stdout
+*.output
+*.lock
+.p*.lock
+nohup.out
+tmp/
+scratch/
+
+# ---- OS / editor ----
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*~
+
+# ---- Secrets ----
+.env
+.env.*
+*.pem
+*.key
+*.pfx
+*.p12
+credentials*
+secrets*
+
+# ============================================================================
+#  EXCEPTIONS — things we DO commit (kept last so they win)
+# ============================================================================
+
+# dataset documentation
+!data/README.md
+!data/raw/
+!data/raw/README.md
+
+# models/ : final deployment artifacts + small JSON provenance only
+!models/README.md
+!models/deploy/
+!models/deploy/**
+!models/deploy/*.onnx
+!models/risk/
+!models/risk/**
+!models/risk/*.onnx
+!models/mobilenet_final/
+!models/mobilenet_final/best.pt
+!models/mobilenet_final/config.json
+!models/mobilenet_final/result.json
+!models/mobilenet_final/teacher_logits/
+!models/mobilenet_final/teacher_logits/**
+!models/phase3/
+!models/phase3/**
+!models/phase4/
+!models/phase4/**
+!models/phase7/
+!models/phase7/**
+
+# the packaged edge bundle (self-contained dashboard)
+!dist/
+!dist/**
+!dist/**/*.onnx
+
+# final safety net: no weight file anywhere except the one checkpoint we ship
+models/**/*.pt
+models/**/*.pth
+models/**/*.ckpt
+models/**/last.pt
+!models/mobilenet_final/best.pt

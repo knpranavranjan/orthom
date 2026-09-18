@@ -1,0 +1,56 @@
+[
+  {
+    "model": "mobilenet_v2_oa",
+    "precision": "int8",
+    "size_mb": 2.41,
+    "threads": 1,
+    "median_ms": 69.23,
+    "mean_ms": 72.53,
+    "p90_ms": 87.8,
+    "min_ms": 65.31,
+    "fps": 13.8,
+    "warm_first_infer_ms": 66.98,
+    "rss_mb": 96.1
+  },
+  {
+    "model": "mobilenet_v2_oa",
+    "precision": "int8",
+    "size_mb": 2.41,
+    "threads": 4,
+    "median_ms": 52.04,
+    "mean_ms": 52.11,
+    "p90_ms": 52.48,
+    "min_ms": 51.27,
+    "fps": 19.2,
+    "warm_first_infer_ms": 52.56,
+    "rss_mb": 97.8
+  },
+  {
+    "model": "mobilenet_v2_oa",
+    "precision": "fp32",
+    "size_mb": 8.89,
+    "threads": 1,
+    "median_ms": 3.48,
+    "mean_ms": 3.46,
+    "p90_ms": 3.87,
+    "min_ms": 2.94,
+    "fps": 288.7,
+    "warm_first_infer_ms": 3.65,
+    "rss_mb": 91.4
+  },
+  {
+    "model": "mobilenet_v2_oa",
+    "precision": "fp32",
+    "size_mb": 8.89,
+    "threads": 4,
+    "median_ms": 1.45,
+    "mean_ms": 1.47,
+    "p90_ms": 1.51,
+    "min_ms": 1.4,
+    "fps": 678.9,
+    "warm_first_infer_ms": 1.59,
+    "rss_mb": 92.5,
+    "real_pipeline_median_ms": 2.33,
+    "real_pipeline_fps": 427.1
+  }
+]

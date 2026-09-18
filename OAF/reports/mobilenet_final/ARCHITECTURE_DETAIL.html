@@ -1,0 +1,435 @@
+<title>KD-MobileNetV2 Architecture, Annotated</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+  :root{
+    --paper:#FBFAF7; --ink:#1A2430; --muted:#5C6672; --accent:#2C6E8F; --xai:#1F6E8C;
+    --good:#3E7D5A; --rule:#E4E0D7; --panel:#F3F0E8; --band:#EEF4F2; --measure:46rem;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --paper:#11161B; --ink:#E7E5E0; --muted:#98A2AC; --accent:#63A9C6; --xai:#63B4CE;
+      --good:#6FB88E; --rule:#29323A; --panel:#1A2027; --band:#16232A;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#11161B; --ink:#E7E5E0; --muted:#98A2AC; --accent:#63A9C6; --xai:#63B4CE;
+    --good:#6FB88E; --rule:#29323A; --panel:#1A2027; --band:#16232A;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--paper); color:var(--ink);
+    font-family:"IBM Plex Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    font-size:16px; line-height:1.62; -webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--measure); margin:0 auto; padding:4rem 1.5rem 6rem}
+
+  h1,h2,h3{font-family:"IBM Plex Serif",Georgia,serif; font-weight:600; text-wrap:balance; line-height:1.24}
+  h1{font-size:2.1rem; letter-spacing:-.01em; margin:0 0 .5rem}
+  h2{font-size:1.4rem; margin:3rem 0 .9rem; padding-top:1rem; border-top:1px solid var(--rule)}
+  h2 .n{font-family:"IBM Plex Mono",monospace; font-size:.8rem; color:var(--accent); margin-right:.7rem}
+  h3{font-size:1.05rem; margin:1.8rem 0 .4rem}
+  p{margin:0 0 1rem}
+  a{color:var(--accent)}
+  small{font-size:.82rem; color:var(--muted)}
+  .lede{font-size:1.1rem; margin-bottom:1.4rem}
+  .eyebrow{font-family:"IBM Plex Mono",monospace; font-size:.72rem; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--accent); margin:0 0 1rem}
+
+  code{font-family:"IBM Plex Mono",monospace; font-size:.86em; background:var(--band); padding:.06em .38em; border-radius:3px}
+  pre{background:var(--panel); border:1px solid var(--rule); border-radius:5px; padding:1rem 1.1rem;
+    overflow-x:auto; font-family:"IBM Plex Mono",monospace; font-size:.8rem; line-height:1.65; margin:1.1rem 0}
+  pre code{background:none; padding:0}
+
+  .tw{overflow-x:auto; margin:1.1rem 0; border:1px solid var(--rule); border-radius:5px}
+  table{border-collapse:collapse; width:100%; font-size:.85rem; font-variant-numeric:tabular-nums}
+  th,td{padding:.5rem .7rem; text-align:right; border-bottom:1px solid var(--rule); white-space:nowrap}
+  th:first-child,td:first-child{text-align:left; white-space:normal}
+  thead th{font-family:"IBM Plex Mono",monospace; font-size:.71rem; font-weight:500; letter-spacing:.04em;
+    text-transform:uppercase; color:var(--muted); border-bottom:1.5px solid var(--ink)}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr.hi td{background:color-mix(in srgb,var(--accent) 9%,var(--paper)); font-weight:500}
+  td.mono,th.mono{font-family:"IBM Plex Mono",monospace}
+  caption{caption-side:bottom; text-align:left; color:var(--muted); font-size:.78rem; padding:.5rem .2rem 0; font-style:italic}
+
+  .panel{background:var(--panel); border:1px solid var(--rule); border-radius:5px; padding:1.1rem 1.3rem; margin:1.4rem 0}
+  .panel.accent{border-left:3px solid var(--accent)}
+  .panel.xai{border-left:3px solid var(--xai)}
+  .panel.good{border-left:3px solid var(--good)}
+  .panel :last-child{margin-bottom:0}
+  .panel h3{margin-top:0}
+
+  ul,ol{margin:0 0 1rem; padding-left:1.25rem}
+  li{margin:.32rem 0}
+  li::marker{color:var(--muted)}
+  .key{font-weight:600}
+  .eq{font-family:"IBM Plex Mono",monospace; font-size:.92rem; background:var(--band);
+    border:1px solid var(--rule); border-radius:5px; padding:.9rem 1.1rem; margin:1rem 0; overflow-x:auto}
+
+  figure{margin:1.6rem 0}
+  figure svg{display:block; width:100%; min-width:520px; height:auto; color:var(--ink)}
+  figcaption{color:var(--muted); font-size:.8rem; font-style:italic; margin-top:.5rem}
+  .box{fill:var(--paper); stroke:currentColor; stroke-width:1.4}
+  .box.b{fill:var(--band)}
+  .t{fill:currentColor; font:500 12px "IBM Plex Sans",sans-serif}
+  .t.s{font-weight:400; font-size:10.5px; fill:var(--muted)}
+  .t.m{font-family:"IBM Plex Mono",monospace; font-size:11px}
+  .fl{stroke:currentColor; stroke-width:1.5; fill:none}
+
+  .foot{margin-top:3.5rem; padding-top:1.1rem; border-top:1px solid var(--rule); color:var(--muted); font-size:.82rem}
+  :focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+  @media print{
+    :root{--paper:#fff;--ink:#111;--muted:#555;--panel:#f5f3ef;--band:#eef;--rule:#ccc;--accent:#1d5a78;--xai:#1a5f7a}
+    .wrap{max-width:none;padding:0} h2{break-before:page;padding-top:0} h2:first-of-type{break-before:auto}
+    h3{break-after:avoid} .tw,table,figure,.panel,.eq,pre{break-inside:avoid} thead{display:table-header-group} a{color:inherit}
+  }
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">AETHER-OA &nbsp;/&nbsp; X-ray module &nbsp;/&nbsp; architecture reference</p>
+  <h1>KD-MobileNetV2 &mdash; the architecture, component by component</h1>
+  <p class="lede">A guided read of the pipeline diagram: every tensor shape, what each block does, the
+  exact maths of the classification head, the calibration, the four clinical read-outs, and the
+  grad-free Grad-CAM &mdash; plus the knowledge-distillation objective that trained the weights.</p>
+  <p><small>Companion to <code>ARCHITECTURE.html</code> (the diagram) and <code>PROJECT_REPORT.html</code>
+  (results &amp; methodology). Shapes below are traced from the actual model
+  (<code>timm mobilenetv2_100</code>, 5-class head).</small></p>
+
+  <!-- ============================================================= -->
+  <h2><span class="n">0</span>The shape trace, in one glance</h2>
+  <p>Everything that follows is an expansion of this table. A single 224&times;224 grayscale knee film
+  enters on the left; five calibrated probabilities and a 224&times;224 heatmap leave on the right.</p>
+
+  <div class="tw">
+  <table>
+    <caption>Table 0. Forward pass, exact tensor shapes (batch = 1). &ldquo;F&rdquo; is the feature map the
+    Grad-CAM branch taps.</caption>
+    <thead><tr><th>Stage</th><th>Operation</th><th>Output shape</th><th>What changed</th></tr></thead>
+    <tbody>
+      <tr><td>input</td><td>knee radiograph, preprocessed</td><td class="mono">1 &times; 3 &times; 224 &times; 224</td><td>grayscale copied to 3 channels, ImageNet-normalised</td></tr>
+      <tr><td>stem</td><td><code>Conv2d(3&rarr;32, 3&times;3, s2)</code> + BN + ReLU6</td><td class="mono">1 &times; 32 &times; 112 &times; 112</td><td>&frac12; resolution, 32 feature channels</td></tr>
+      <tr><td>block-group 0</td><td>1 &times; inverted residual, <code>t=1</code></td><td class="mono">1 &times; 16 &times; 112 &times; 112</td><td>channels &rarr; 16</td></tr>
+      <tr><td>block-group 1</td><td>2 &times; inverted residual, <code>t=6, s2</code></td><td class="mono">1 &times; 24 &times; 56 &times; 56</td><td>&frac14; resolution</td></tr>
+      <tr><td>block-group 2</td><td>3 &times; inverted residual, <code>t=6, s2</code></td><td class="mono">1 &times; 32 &times; 28 &times; 28</td><td>&#8539; resolution</td></tr>
+      <tr><td>block-group 3</td><td>4 &times; inverted residual, <code>t=6, s2</code></td><td class="mono">1 &times; 64 &times; 14 &times; 14</td><td>1/16 resolution</td></tr>
+      <tr><td>block-group 4</td><td>3 &times; inverted residual, <code>t=6, s1</code></td><td class="mono">1 &times; 96 &times; 14 &times; 14</td><td>channels &rarr; 96, resolution held</td></tr>
+      <tr><td>block-group 5</td><td>3 &times; inverted residual, <code>t=6, s2</code></td><td class="mono">1 &times; 160 &times; 7 &times; 7</td><td>1/32 resolution</td></tr>
+      <tr><td>block-group 6</td><td>1 &times; inverted residual, <code>t=6, s1</code></td><td class="mono">1 &times; 320 &times; 7 &times; 7</td><td>channels &rarr; 320</td></tr>
+      <tr class="hi"><td>conv_head</td><td><code>Conv2d(320&rarr;1280, 1&times;1)</code> + BN + ReLU6</td><td class="mono">1 &times; 1280 &times; 7 &times; 7 &nbsp;(= F)</td><td>the feature map both heads read</td></tr>
+      <tr><td>global pool</td><td>average over the 7&times;7 grid</td><td class="mono">1 &times; 1280</td><td>one number per channel</td></tr>
+      <tr><td>classifier</td><td><code>Linear(1280 &rarr; 5)</code></td><td class="mono">1 &times; 5</td><td>raw logits <code>z</code></td></tr>
+      <tr><td>calibrate</td><td><code>softmax(z / T)</code>, T = 1.39</td><td class="mono">1 &times; 5</td><td>probabilities <code>p</code>, rows sum to 1</td></tr>
+      <tr><td>grade head</td><td><code>argmax(p)</code></td><td class="mono">scalar 0&ndash;4</td><td>Kellgren&ndash;Lawrence grade</td></tr>
+      <tr class="hi"><td>CAM branch</td><td><code>ReLU(&Sigma;&#8342; W[grade,k] &middot; F&#8342;)</code></td><td class="mono">7 &times; 7 &rarr; 224 &times; 224</td><td>heatmap, upsampled + colour-mapped + blended</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- ============================================================= -->
+  <h2><span class="n">1</span>Input &amp; preprocessing</h2>
+  <p>The model only ever sees a fixed <code>1&times;3&times;224&times;224</code> float tensor. Turning an
+  arbitrary uploaded X-ray into that tensor is done with NumPy and OpenCV only &mdash; no PyTorch &mdash;
+  so the same code runs on a Raspberry&nbsp;Pi:</p>
+  <ol>
+    <li><span class="key">Read &amp; grayscale.</span> Any format &rarr; single-channel 8-bit. Colour
+      inputs are converted by luminance; 16-bit films are min&ndash;max normalised to 0&ndash;255.</li>
+    <li><span class="key">Letterbox to a square.</span> The image is padded (never stretched) with black
+      to the larger side, so aspect ratio &mdash; and therefore joint-space geometry &mdash; is preserved.</li>
+    <li><span class="key">Resize to 224&times;224.</span> <code>INTER_AREA</code> when shrinking,
+      <code>INTER_LINEAR</code> when enlarging.</li>
+    <li><span class="key">Scale to [0,1]</span> by dividing by 255.</li>
+    <li><span class="key">Replicate to 3 channels.</span> The grayscale plane is copied three times. The
+      backbone was pretrained on 3-channel ImageNet; the image is <em>never</em> colourised.</li>
+    <li><span class="key">ImageNet normalisation.</span> <code>(x &minus; mean) / std</code> per channel
+      with <code>mean = (0.485, 0.456, 0.406)</code>, <code>std = (0.229, 0.224, 0.225)</code>.</li>
+  </ol>
+  <p>At inference no augmentation is applied. During training only, a clinically constrained set was
+  used &mdash; small rotation / translation / scale / shear, horizontal flip (the KL grade is
+  side-agnostic), mild brightness &amp; contrast, light noise &mdash; with vertical flip, large
+  rotation, elastic warp and random erasing disabled because they corrupt the joint-space and
+  osteophyte cues.</p>
+
+  <!-- ============================================================= -->
+  <h2><span class="n">2</span>The MobileNetV2 backbone</h2>
+  <p>MobileNetV2 is a stack of <span class="key">17 &ldquo;inverted residual&rdquo; bottleneck blocks</span>
+  organised into 7 groups, preceded by one ordinary convolution (the stem) and followed by a 1&times;1
+  &ldquo;head&rdquo; convolution that widens to 1280 channels. It has 2.23&nbsp;M parameters &mdash;
+  roughly 1/60th of VGG16 &mdash; because almost every 3&times;3 convolution is <em>depthwise</em>
+  (one filter per channel) rather than dense.</p>
+
+  <h3>2.1 &nbsp;The stem</h3>
+  <p><code>Conv2d(3&rarr;32, kernel 3&times;3, stride 2, pad 1)</code> &rarr; BatchNorm &rarr; ReLU6.
+  It halves the resolution to 112&times;112 and lifts the 3 input channels to 32 feature channels. This
+  is the only &ldquo;full&rdquo; (non-separable) spatial convolution in the network.</p>
+
+  <h3>2.2 &nbsp;The inverted-residual block &mdash; the repeated unit</h3>
+  <p>Every one of the 17 blocks has the same three-step shape: <span class="key">expand &rarr; filter
+  &rarr; project</span>, with a skip connection when the shape is unchanged.</p>
+
+  <figure>
+  <svg viewBox="0 0 760 210" role="img" aria-label="Inverted residual block: a 1x1 pointwise convolution expands the channel count by factor t with BatchNorm and ReLU6; a 3x3 depthwise convolution filters each channel spatially with BatchNorm and ReLU6; a 1x1 pointwise-linear convolution projects back down with BatchNorm and no activation; when stride is 1 and input channels equal output channels, the block input is added to the block output.">
+    <defs><marker id="a2" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="currentColor"/></marker></defs>
+    <rect class="box" x="14" y="78" width="92" height="52" rx="4"/><text class="t" x="60" y="100" text-anchor="middle">input</text><text class="t s" x="60" y="116" text-anchor="middle">C ch</text>
+    <rect class="box b" x="150" y="70" width="132" height="68" rx="4"/><text class="t" x="216" y="92" text-anchor="middle">expand</text><text class="t s" x="216" y="108" text-anchor="middle">1&times;1 conv, C&rarr;C&middot;t</text><text class="t s" x="216" y="123" text-anchor="middle">BN + ReLU6</text>
+    <rect class="box b" x="322" y="70" width="132" height="68" rx="4"/><text class="t" x="388" y="92" text-anchor="middle">filter</text><text class="t s" x="388" y="108" text-anchor="middle">3&times;3 depthwise</text><text class="t s" x="388" y="123" text-anchor="middle">stride s &middot; BN + ReLU6</text>
+    <rect class="box b" x="494" y="70" width="140" height="68" rx="4"/><text class="t" x="564" y="92" text-anchor="middle">project (linear)</text><text class="t s" x="564" y="108" text-anchor="middle">1&times;1 conv, C&middot;t&rarr;C&prime;</text><text class="t s" x="564" y="123" text-anchor="middle">BN, <em>no</em> activation</text>
+    <rect class="box" x="672" y="78" width="76" height="52" rx="4"/><text class="t" x="710" y="100" text-anchor="middle">output</text><text class="t s" x="710" y="116" text-anchor="middle">C&prime; ch</text>
+    <path class="fl" d="M106 104 L148 104" marker-end="url(#a2)"/>
+    <path class="fl" d="M282 104 L320 104" marker-end="url(#a2)"/>
+    <path class="fl" d="M454 104 L492 104" marker-end="url(#a2)"/>
+    <path class="fl" d="M634 104 L670 104" marker-end="url(#a2)"/>
+    <path class="fl" d="M60 78 C 60 24, 710 24, 710 78" marker-end="url(#a2)" stroke-dasharray="5 4"/>
+    <text class="t s" x="385" y="30" text-anchor="middle">residual add &mdash; only when s = 1 and C = C&prime;</text>
+  </svg>
+  <figcaption>The inverted-residual bottleneck. &ldquo;Inverted&rdquo; because the channel count goes
+  <em>up</em> in the middle (expansion factor <code>t</code>, usually 6) and the skip connection joins
+  the <em>narrow</em> ends, opposite to a classic ResNet bottleneck. The middle projection has no
+  activation (&ldquo;linear bottleneck&rdquo;) to avoid destroying information in the low-dimensional space.</figcaption>
+  </figure>
+
+  <ul>
+    <li><span class="key">Expand</span> &mdash; a 1&times;1 convolution multiplies channels by <code>t</code>
+      (t = 1 in the first block, t = 6 everywhere after). BatchNorm + ReLU6.</li>
+    <li><span class="key">Filter</span> &mdash; a 3&times;3 <em>depthwise</em> convolution: each of the
+      <code>C&middot;t</code> channels gets its own single 3&times;3 filter, with no mixing between
+      channels. This is where nearly all the parameter and compute saving comes from. Stride <code>s</code>
+      is 2 in the first block of a downsampling group, 1 otherwise. BatchNorm + ReLU6.</li>
+    <li><span class="key">Project</span> &mdash; a 1&times;1 convolution brings channels back down to the
+      block&rsquo;s output width <code>C&prime;</code>. BatchNorm, <strong>no activation</strong>.</li>
+    <li><span class="key">Residual</span> &mdash; if the block did not change shape (<code>s = 1</code>
+      and <code>C = C&prime;</code>), the input is added to the output.</li>
+  </ul>
+  <p><small>This build (<code>mobilenetv2_100</code>) has no squeeze-and-excite and no attention inside
+  the blocks &mdash; those slots are <code>Identity</code>.</small></p>
+
+  <h3>2.3 &nbsp;The 7 stages</h3>
+  <div class="tw">
+  <table>
+    <caption>Table 1. Backbone configuration. <code>t</code> = expansion factor, <code>c</code> = output
+    channels, <code>n</code> = blocks in the group, <code>s</code> = stride of the group&rsquo;s first block.</caption>
+    <thead><tr><th>Group</th><th>t</th><th>c</th><th>n</th><th>s</th><th>Output</th></tr></thead>
+    <tbody>
+      <tr><td>stem</td><td>&mdash;</td><td>32</td><td>1</td><td>2</td><td class="mono">32 &times; 112&sup2;</td></tr>
+      <tr><td>0</td><td>1</td><td>16</td><td>1</td><td>1</td><td class="mono">16 &times; 112&sup2;</td></tr>
+      <tr><td>1</td><td>6</td><td>24</td><td>2</td><td>2</td><td class="mono">24 &times; 56&sup2;</td></tr>
+      <tr><td>2</td><td>6</td><td>32</td><td>3</td><td>2</td><td class="mono">32 &times; 28&sup2;</td></tr>
+      <tr><td>3</td><td>6</td><td>64</td><td>4</td><td>2</td><td class="mono">64 &times; 14&sup2;</td></tr>
+      <tr><td>4</td><td>6</td><td>96</td><td>3</td><td>1</td><td class="mono">96 &times; 14&sup2;</td></tr>
+      <tr><td>5</td><td>6</td><td>160</td><td>3</td><td>2</td><td class="mono">160 &times; 7&sup2;</td></tr>
+      <tr><td>6</td><td>6</td><td>320</td><td>1</td><td>1</td><td class="mono">320 &times; 7&sup2;</td></tr>
+      <tr class="hi"><td>conv_head</td><td>&mdash;</td><td>1280</td><td>1</td><td>1</td><td class="mono">1280 &times; 7&sup2; &nbsp;= F</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>Resolution drops in five steps (224 &rarr; 112 &rarr; 56 &rarr; 28 &rarr; 14 &rarr; 7) while the
+  channel count climbs (3 &rarr; 32 &rarr; &hellip; &rarr; 320). The final <code>conv_head</code> is a
+  1&times;1 convolution that widens 320 &rarr; 1280, followed by BatchNorm and ReLU6.</p>
+
+  <h3>2.4 &nbsp;The feature map <code>F</code></h3>
+  <p>The output of <code>conv_head</code> is <span class="key"><code>F</code>, shape
+  <code>1&times;1280&times;7&times;7</code></span> &mdash; a 7&times;7 spatial grid with 1280 channels,
+  each cell covering roughly a 32&times;32-pixel patch of the input. <strong>This one tensor is read by
+  both heads:</strong> the classifier pools it to a vector, and the Grad-CAM branch keeps its spatial
+  layout to build the heatmap. Exporting it as a second ONNX output is what makes grad-free
+  explainability possible.</p>
+
+  <!-- ============================================================= -->
+  <h2><span class="n">3</span>The classification head</h2>
+  <p>Two operations, nothing else between them &mdash; this is the fact the whole explainability design
+  rests on.</p>
+
+  <h3>3.1 &nbsp;Global average pooling</h3>
+  <p>Each of the 1280 channels of <code>F</code> is collapsed to a single number by averaging its
+  49 spatial cells:</p>
+  <div class="eq">a<sub>k</sub> = (1 / 49) &middot; &Sigma;<sub>x,y</sub> F<sub>k</sub>(x, y) &nbsp;&nbsp;&nbsp; &rarr; &nbsp;&nbsp;&nbsp; a &isin; &#8477;<sup>1280</sup></div>
+  <p>No parameters. It makes the network size-agnostic and, crucially, keeps the map linear from
+  <code>F</code> to the logits.</p>
+
+  <h3>3.2 &nbsp;The linear classifier</h3>
+  <p>A single fully-connected layer with a <code>5&times;1280</code> weight matrix <code>W</code> and a
+  5-vector bias <code>b</code> (6,405 parameters &mdash; the entire task-specific head):</p>
+  <div class="eq">z<sub>c</sub> = &Sigma;<sub>k</sub> W[c, k] &middot; a<sub>k</sub> + b<sub>c</sub> &nbsp;&nbsp;&nbsp; c = 0 &hellip; 4 &nbsp;&nbsp;&nbsp; (raw logits)</div>
+  <p>There is no dropout, no extra dense layer, no non-linearity here at inference. The 5 outputs
+  correspond to KL0&hellip;KL4.</p>
+
+  <!-- ============================================================= -->
+  <h2><span class="n">4</span>Calibration &mdash; temperature scaling</h2>
+  <p>Raw <code>softmax(z)</code> from a modern CNN is over-confident: it says 95% when it is right 80%
+  of the time. A single scalar <code>T</code> fixes most of this without touching accuracy:</p>
+  <div class="eq">p<sub>c</sub> = softmax(z / T)<sub>c</sub> = exp(z<sub>c</sub> / T) / &Sigma;<sub>j</sub> exp(z<sub>j</sub> / T)</div>
+  <ul>
+    <li><code>T &gt; 1</code> softens the distribution (less peaky); <code>T &lt; 1</code> sharpens it.</li>
+    <li><code>T = 1.39</code> here, found by minimising negative log-likelihood on the
+      <em>validation</em> set only &mdash; the test set is never used for this.</li>
+    <li>Effect: expected calibration error drops from &asymp; 0.10 to &asymp; 0.057. Rankings and
+      <code>argmax</code> are unchanged, so accuracy and QWK are identical; only the confidence numbers
+      move.</li>
+  </ul>
+  <p>All probabilities the system reports &mdash; the bars, the OA screen, the abstention check &mdash;
+  are the calibrated <code>p</code>, not the raw softmax.</p>
+
+  <!-- ============================================================= -->
+  <h2><span class="n">5</span>The four clinical read-outs</h2>
+  <p>Every downstream answer is a deterministic function of the same 5-vector <code>p</code> &mdash;
+  <em>one</em> model, several views. Nothing below has its own trained parameters.</p>
+
+  <div class="tw">
+  <table>
+    <caption>Table 2. Derived heads. All computed from calibrated <code>p = (p&#8320;, p&#8321;, p&#8322;, p&#8323;, p&#8324;)</code>.</caption>
+    <thead><tr><th>Read-out</th><th>Definition</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td>KL grade</td><td class="mono">argmax<sub>c</sub> p<sub>c</sub></td><td>the headline 0&ndash;4 grade</td></tr>
+      <tr><td>Expected grade</td><td class="mono">&Sigma;<sub>c</sub> c &middot; p<sub>c</sub></td><td>a continuous severity estimate (ordinal)</td></tr>
+      <tr><td>Binary OA screen</td><td class="mono">P(OA) = p&#8322; + p&#8323; + p&#8324; &nbsp;&rarr;&nbsp; OA if &ge; 0.5</td><td>&ldquo;is there radiographic OA (KL&ge;2)?&rdquo; &mdash; test AUC 0.941</td></tr>
+      <tr><td>3-class band</td><td class="mono">[ p&#8320; , p&#8321;+p&#8322; , p&#8323;+p&#8324; ] &rarr; argmax</td><td>Normal / Early / Advanced &mdash; test acc 0.765</td></tr>
+      <tr><td>Abstention</td><td class="mono">max<sub>c</sub> p<sub>c</sub> &lt; 0.73 &nbsp;&rarr;&nbsp; REFER</td><td>threshold chosen on validation for 90% selective accuracy</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>The abstention policy has three bands: <code>&ge; 0.73</code> shows the grade automatically;
+  <code>0.50&ndash;0.73</code> shows it with a caution banner; <code>&lt; 0.50</code> asks for manual
+  radiologist review.</p>
+
+  <!-- ============================================================= -->
+  <h2><span class="n">6</span>The explainability branch &mdash; grad-free Grad-CAM</h2>
+
+  <div class="panel xai">
+    <h3>Why Grad-CAM here needs no gradients</h3>
+    <p>Grad-CAM weights each feature-map channel by the average gradient of the class score with
+    respect to that channel. Substitute the head from &sect;3:</p>
+    <div class="eq" style="background:var(--paper)">
+&part; z<sub>c</sub> / &part; F<sub>k</sub>(x, y) = &part; / &part; F<sub>k</sub>(x, y) &nbsp;[ &Sigma;<sub>k&prime;</sub> W[c,k&prime;] &middot; (1/49) &Sigma;<sub>x&prime;,y&prime;</sub> F<sub>k&prime;</sub>(x&prime;,y&prime;) + b<sub>c</sub> ]
+&nbsp;&nbsp;=&nbsp;&nbsp; W[c, k] / 49
+    </div>
+    <p>The gradient is a <strong>constant</strong> &mdash; it does not depend on <code>x, y</code> or on
+    the image. So Grad-CAM&rsquo;s channel weight <code>&alpha;<sub>k</sub><sup>c</sup></code> is just
+    <code>W[c,k] / 49</code>, and the map collapses to the original Class Activation Mapping
+    (Zhou et&nbsp;al. 2016):</p>
+    <div class="eq" style="background:var(--paper)">CAM<sub>c</sub>(x, y) = ReLU( &Sigma;<sub>k</sub> W[c, k] &middot; F<sub>k</sub>(x, y) )</div>
+    <p>This is <strong>exact</strong> for any global-average-pool &rarr; single-linear head (which is
+    what MobileNetV2 has), needs only a forward pass, and adds ~3.2&nbsp;ms on one CPU core. The CAM-enabled
+    ONNX produces logits <em>bit-identical</em> to the deployed model.</p>
+  </div>
+
+  <h3>6.1 &nbsp;Building the heatmap</h3>
+  <ol>
+    <li><span class="key">Select the row.</span> Take <code>W[grade]</code> &mdash; the 1280-length
+      weight row for the predicted grade (from the sidecar <code>_cam.npz</code>).</li>
+    <li><span class="key">Weighted sum + ReLU.</span> <code>CAM = ReLU(einsum("kij,k-&gt;ij", F, W[grade]))</code>
+      &rarr; a 7&times;7 map. ReLU keeps only evidence <em>for</em> the grade.</li>
+    <li><span class="key">Normalise</span> to [0,1] by dividing by its own maximum.</li>
+    <li><span class="key">Upsample</span> 7&times;7 &rarr; 224&times;224 with bicubic interpolation.</li>
+    <li><span class="key">Colour-map</span> with JET (blue = low, red = high).</li>
+    <li><span class="key">Blend</span> over the letterboxed grayscale film with a per-pixel alpha that
+      fades to transparent where the map is cold, so cold regions still show the anatomy.</li>
+  </ol>
+
+  <h3>6.2 &nbsp;Focus region &amp; text</h3>
+  <ul>
+    <li><span class="key">Focus region</span> &mdash; the intensity-weighted centroid of the 7&times;7 map
+      plus the spread of its hot cells is mapped to one of: <em>central joint line</em> /
+      <em>one compartment</em> (with a lateral-vs-medial-third hint) / <em>diffuse &ndash;
+      bicompartmental</em>. It is deliberately conservative: without the knee&rsquo;s L/R laterality the
+      system does not claim &ldquo;medial&rdquo; vs &ldquo;lateral&rdquo; definitively.</li>
+    <li><span class="key">Templated findings</span> &mdash; a fixed phrase set per grade (e.g. KL2 &rarr;
+      &ldquo;definite osteophytes; possible joint-space narrowing&rdquo;), combined with the focus-region
+      phrase. Clearly labelled AI-generated, not patient-specific.</li>
+    <li><span class="key">Recommendation</span> &mdash; grade-banded (KL0&ndash;1 &rarr; correlate if
+      symptomatic; KL2 &rarr; early-OA management; KL3 &rarr; orthopaedic review; KL4 &rarr; referral,
+      assess arthroplasty). Overridden by a REFER message when the model abstains.</li>
+  </ul>
+
+  <!-- ============================================================= -->
+  <h2><span class="n">7</span>How the weights were trained &mdash; knowledge distillation</h2>
+  <p class="panel accent"><strong>This section is training-time only.</strong> None of it runs at
+  inference; it explains where the numbers in <code>W</code> and the backbone came from.</p>
+
+  <p>MobileNetV2 tuned on its own plateaued around Macro-F1 0.67. The lift to 0.68&ndash;0.69 came from
+  training it to imitate two larger networks rather than only the hard labels.</p>
+
+  <h3>7.1 &nbsp;Teachers</h3>
+  <p><span class="key">VGG16</span> (test Macro-F1 0.74) and <span class="key">ConvNeXt-Tiny</span>
+  (0.72), both frozen from the earlier 15-model benchmark. Their logits were run once over every
+  training image and cached; for each image the two teachers&rsquo; softmax outputs (at temperature
+  <code>T&#8202;=&#8202;4</code>) are averaged into a soft target <code>q</code>.</p>
+
+  <h3>7.2 &nbsp;The loss</h3>
+  <div class="eq">L = &alpha; &middot; T&sup2; &middot; KL( q &Vert; softmax(z<sup>S</sup> / T) ) &nbsp;+&nbsp; (1 &minus; &alpha;) &middot; CE( softmax(z<sup>S</sup>), y<sub>true</sub> ; class-weights )</div>
+  <ul>
+    <li><span class="key">Soft term</span> &mdash; KL divergence between the teacher distribution
+      <code>q</code> and the student&rsquo;s softened distribution. It transfers the teachers&rsquo;
+      &ldquo;dark knowledge&rdquo;: which wrong grades are plausible, how close KL1 and KL2 look. The
+      <code>T&sup2;</code> factor keeps this term&rsquo;s gradient on the same scale as the hard term as
+      <code>T</code> grows.</li>
+    <li><span class="key">Hard term</span> &mdash; ordinary weighted cross-entropy against the true
+      grade, with train-only class weights so the rare KL4 (176 training knees) is not ignored.</li>
+    <li><span class="key">&alpha; = 0.8</span> &mdash; 80% of the signal is the teachers, 20% the hard
+      label. (A sweep of <code>&alpha;</code> and <code>T</code> picked this.)</li>
+  </ul>
+
+  <h3>7.3 &nbsp;The rest of the recipe</h3>
+  <ul>
+    <li><span class="key">Weight EMA</span> &mdash; an exponential moving average of the weights
+      (<code>&theta;<sub>EMA</sub> &larr; 0.999&thinsp;&theta;<sub>EMA</sub> + 0.001&thinsp;&theta;</code>
+      per step) is what gets evaluated and exported; it is smoother than the raw end-of-epoch weights.</li>
+    <li><span class="key">Two-stage transfer</span> &mdash; 3 epochs training only the new 5-way head
+      with the backbone frozen, then full fine-tuning; cosine learning-rate schedule with a 1-epoch
+      warm-up; up to 70 epochs with early stopping on validation Macro-F1.</li>
+    <li><span class="key">Strong-but-medical augmentation</span> as listed in &sect;1.</li>
+    <li><span class="key">Seed 123</span> &mdash; the deployed checkpoint is the seed selected on
+      validation from a 3-seed run (mean test Macro-F1 0.686 &plusmn; 0.007).</li>
+  </ul>
+  <p><small>What did <em>not</em> help, tested and dropped: mixup, label smoothing, stacking the
+  Phase-7 tuning dimensions, a CORN ordinal head, and int8 quantization.</small></p>
+
+  <!-- ============================================================= -->
+  <h2><span class="n">8</span>Deployment shape</h2>
+  <p>Two ONNX graphs are shipped:</p>
+  <div class="tw">
+  <table>
+    <thead><tr><th>File</th><th>Inputs &rarr; outputs</th><th>Size</th><th>Used for</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">mobilenet_v2_oa.onnx</td><td><code>input(1&times;3&times;224&times;224) &rarr; logits(1&times;5)</code></td><td class="mono">8.9 MB</td><td>grading only, minimum latency</td></tr>
+      <tr><td class="mono">mobilenet_v2_oa_cam.onnx</td><td><code>input &rarr; logits(1&times;5), features(1&times;1280&times;7&times;7)</code></td><td class="mono">8.9 MB</td><td>grading + heatmap</td></tr>
+      <tr><td class="mono">mobilenet_v2_oa_cam.npz</td><td><code>W(5&times;1280), b(5)</code></td><td class="mono">26 KB</td><td>the CAM weighted sum</td></tr>
+      <tr><td class="mono">mobilenet_v2_oa_deploy.json</td><td>T, abstain threshold, class names, test metrics</td><td class="mono">1 KB</td><td>runtime config</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="tw">
+  <table>
+    <caption>Table 3. Latency budget, one CPU core, x86 (a Raspberry Pi 4 CPU is ~4&ndash;10&times; slower).</caption>
+    <thead><tr><th>Path</th><th>Preprocess</th><th>Backbone</th><th>Head + calib</th><th>CAM + render</th><th>Total</th></tr></thead>
+    <tbody>
+      <tr><td>grade only</td><td class="mono">~0.9 ms</td><td class="mono">~2.4 ms</td><td class="mono">~0.1 ms</td><td class="mono">&mdash;</td><td class="mono">~3.5 ms</td></tr>
+      <tr class="hi"><td>grade + heatmap</td><td class="mono">~0.9 ms</td><td class="mono">~2.4 ms</td><td class="mono">~0.1 ms</td><td class="mono">~3.2 ms</td><td class="mono">~4.7 ms</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>Runtime is <code>onnxruntime</code> on CPU with NumPy + OpenCV pre/post-processing &mdash; no
+  PyTorch on the device. Resident memory is ~92&nbsp;MB. The frontend is a Gradio kiosk app driving
+  the same predictor.</p>
+
+  <!-- ============================================================= -->
+  <h2><span class="n">9</span>Reading the diagram</h2>
+  <ul>
+    <li><span class="key">Solid arrows, left&ndash;right</span> = the inference data path (this document,
+      &sect;1&ndash;6).</li>
+    <li><span class="key">Teal boxes and arrows</span> = the explainability branch (&sect;6). It taps
+      the feature map <code>F</code> and the classifier row <code>W[grade]</code>, and also takes the
+      preprocessed film for the blend.</li>
+    <li><span class="key">Dashed box, top</span> = the knowledge-distillation objective (&sect;7). Its
+      only connection to the rest is the dashed &ldquo;student weights&rdquo; arrow into the backbone
+      &mdash; it produced the weights and is otherwise absent at inference.</li>
+    <li><span class="key">Output card, bottom</span> = what the dashboard assembles from the two paths:
+      grade + confidence, probability bars, OA screen, 3-class band, heatmap, interpretation,
+      recommendation, abstain banner, disclaimer.</li>
+  </ul>
+
+  <p class="foot">
+  AETHER-OA X-ray module &mdash; architecture reference, 2026-08-28. Shapes traced from
+  <code>timm mobilenetv2_100</code> with a 5-class head. Companion files:
+  <code>reports/mobilenet_final/ARCHITECTURE.html</code> (diagram),
+  <code>PROJECT_REPORT.html</code> (results). To save as PDF: open in a browser and Print &rarr; Save as PDF.
+  </p>
+</div>

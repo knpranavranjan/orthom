@@ -1,0 +1,5 @@
+model,precision,size_mb,threads,median_ms,mean_ms,p90_ms,min_ms,fps,warm_first_infer_ms,rss_mb,real_pipeline_median_ms,real_pipeline_fps
+mobilenet_v2_oa,int8,2.41,1,69.23,72.53,87.8,65.31,13.8,66.98,96.1,,
+mobilenet_v2_oa,int8,2.41,4,52.04,52.11,52.48,51.27,19.2,52.56,97.8,,
+mobilenet_v2_oa,fp32,8.89,1,3.48,3.46,3.87,2.94,288.7,3.65,91.4,,
+mobilenet_v2_oa,fp32,8.89,4,1.45,1.47,1.51,1.4,678.9,1.59,92.5,2.33,427.1

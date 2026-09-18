@@ -1,0 +1,14 @@
+# AETHER-OA — INFERENCE / DEPLOYMENT runtime (no PyTorch, no CUDA).
+# Sufficient to run scripts/serve_api.py and src/deploy/KneeOAPredictor on a
+# CPU box or a Raspberry Pi. For training use requirements.txt instead.
+
+onnxruntime>=1.19          # CPU inference of the MobileNetV2 ONNX
+numpy>=1.26
+opencv-python-headless>=4.9 # preprocessing + CAM colormap/overlay
+pillow>=10.0               # image decode fallback
+psutil>=5.9                # optional: edge latency/RSS benchmark
+
+# --- REST inference API (scripts/serve_api.py); the frontend is external ---
+fastapi>=0.110             # JSON service consumed by the OA-screening kiosk
+uvicorn[standard]>=0.29    # ASGI server
+python-multipart>=0.0.9    # multipart/form-data image upload parsing

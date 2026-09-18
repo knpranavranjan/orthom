@@ -1,0 +1,113 @@
+{
+  "model": "inception_v3",
+  "timm_name": "inception_v3",
+  "accuracy": 0.6518578352180937,
+  "macro_precision": 0.6845137345329878,
+  "macro_recall": 0.6907656806047096,
+  "macro_f1": 0.6839627487238185,
+  "weighted_f1": 0.6499574089387264,
+  "balanced_accuracy": 0.6907656806047096,
+  "cohen_kappa": 0.5181848473000172,
+  "quadratic_weighted_kappa": 0.8097189918174617,
+  "roc_auc_ovr_macro": 0.8863122249753197,
+  "kl0_f1": 0.7583497053045186,
+  "kl1_f1": 0.33905579399141633,
+  "kl2_f1": 0.5928449744463373,
+  "kl3_f1": 0.8085106382978723,
+  "kl4_f1": 0.9210526315789473,
+  "kl0_support": 484,
+  "kl1_support": 220,
+  "kl2_support": 338,
+  "kl3_support": 159,
+  "kl4_support": 37,
+  "parameters": 21795813,
+  "trainable_parameters": 21795813,
+  "non_trainable_parameters": 0,
+  "model_size_mb": 83.444,
+  "gmacs": 2.8452,
+  "flops_or_macs": 2.8452,
+  "flops_estimate_g": 5.6905,
+  "gmacs_method": "fvcore.FlopCountAnalysis (MAC=1)",
+  "mean_latency_ms": 6.1267,
+  "median_latency_ms": 6.0921,
+  "std_latency_ms": 0.2375,
+  "min_latency_ms": 5.7836,
+  "max_latency_ms": 7.5936,
+  "throughput_images_per_sec": 163.22,
+  "latency_device": "cuda",
+  "cpu_mean_latency_ms": 23.5802,
+  "peak_memory_mb": 345.4,
+  "train_peak_cuda_mb": 2171.86,
+  "best_epoch": 12,
+  "epochs_run": 17,
+  "training_time_sec": 113.7,
+  "training_time": 113.7,
+  "stopped_early": true,
+  "adjacent_confusions": {
+    "KL1_as_KL2": 41,
+    "KL2_as_KL1": 84,
+    "KL2_as_KL3": 29,
+    "KL3_as_KL2": 19,
+    "KL3_as_KL4": 4,
+    "KL4_as_KL3": 2
+  },
+  "confusion_matrix": [
+    [
+      386,
+      80,
+      15,
+      3,
+      0
+    ],
+    [
+      97,
+      79,
+      41,
+      3,
+      0
+    ],
+    [
+      51,
+      84,
+      174,
+      29,
+      0
+    ],
+    [
+      0,
+      3,
+      19,
+      133,
+      4
+    ],
+    [
+      0,
+      0,
+      0,
+      2,
+      35
+    ]
+  ],
+  "gradcam_layer_candidates": [
+    "Mixed_7c.branch_pool.conv"
+  ],
+  "backend": "timm",
+  "preprocessing_variant": "basic",
+  "loss_name": "weighted_cross_entropy",
+  "seed": 42,
+  "stage_a_epochs": 3,
+  "max_epochs_budget": 50,
+  "patience": 5,
+  "differential_lr": null,
+  "artefacts": {
+    "best_ckpt": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\models\\phase4\\inception_v3\\best.pt",
+    "confusion": {
+      "raw": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase4\\confusion_matrices\\inception_v3_confusion_matrix.png",
+      "normalized": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase4\\confusion_matrices\\inception_v3_confusion_matrix_normalized.png"
+    },
+    "training_curve": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase4\\training_curves\\inception_v3_training_curve.png",
+    "config": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\models\\phase4\\inception_v3\\config.json"
+  },
+  "phase": "phase4",
+  "max_epochs_config": 50
+}

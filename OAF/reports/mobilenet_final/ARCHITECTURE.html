@@ -1,0 +1,239 @@
+<title>KD-MobileNetV2 System Architecture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+  :root{
+    --paper:#FBFAF7; --ink:#1A2430; --muted:#5C6672; --xai:#1F6E8C;
+    --rule:#E4E0D7; --panel:#F3F0E8; --band:#EEF4F2;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --paper:#11161B; --ink:#E7E5E0; --muted:#98A2AC; --xai:#63B4CE;
+      --rule:#29323A; --panel:#1A2027; --band:#16232A;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#11161B; --ink:#E7E5E0; --muted:#98A2AC; --xai:#63B4CE;
+    --rule:#29323A; --panel:#1A2027; --band:#16232A;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:"IBM Plex Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:74rem; margin:0 auto; padding:3rem 1.5rem 4rem}
+  .eyebrow{
+    font-family:"IBM Plex Mono",monospace; font-size:.72rem; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--xai); margin:0 0 .6rem
+  }
+  h1{font-size:1.65rem; font-weight:600; margin:0 0 .4rem; text-wrap:balance}
+  .sub{color:var(--muted); margin:0 0 1.6rem; max-width:60ch}
+
+  figure{margin:0}
+  .diagram{
+    background:var(--panel); border:1px solid var(--rule); border-radius:8px;
+    padding:1.4rem 1.2rem 1rem; overflow-x:auto;
+  }
+  svg.arch{display:block; width:100%; min-width:940px; height:auto; color:var(--ink)}
+  svg .xai{color:var(--xai)}
+  .box{fill:var(--paper); stroke:currentColor; stroke-width:1.4}
+  .box.soft{fill:var(--band)}
+  .lbl{fill:currentColor; font:500 13px "IBM Plex Sans",sans-serif}
+  .lbl.sm{font-weight:400; font-size:11px; fill:var(--muted)}
+  .lbl.mono{font-family:"IBM Plex Mono",monospace; font-size:11.5px}
+  .lbl.tag{font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.08em; text-transform:uppercase; fill:var(--muted)}
+  .flow{stroke:currentColor; stroke-width:1.5; fill:none}
+  .flow.dash{stroke-dasharray:5 4}
+  .alab{fill:var(--muted); font:400 10.5px "IBM Plex Mono",monospace}
+
+  figcaption{color:var(--muted); font-size:.85rem; margin-top:1rem; max-width:70ch}
+  .legend{display:flex; flex-wrap:wrap; gap:1.4rem; margin:1rem 0 0; font-size:.8rem; color:var(--muted); font-family:"IBM Plex Mono",monospace}
+  .legend span{display:inline-flex; align-items:center; gap:.5rem}
+  .legend i{width:26px; height:0; border-top:2px solid currentColor; display:inline-block}
+  .legend i.d{border-top-style:dashed}
+  .legend i.x{border-color:var(--xai)}
+  .note{margin-top:1.6rem; font-size:.82rem; color:var(--muted)}
+  .note code{font-family:"IBM Plex Mono",monospace; background:var(--band); padding:.05em .35em; border-radius:3px}
+  @media print{
+    :root{--paper:#fff;--ink:#111;--muted:#555;--panel:#fff;--band:#f2f2f2;--rule:#bbb;--xai:#1a5f7a}
+    .wrap{padding:0} .diagram{border:none;padding:0} a{color:inherit}
+  }
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">AETHER-OA &nbsp;/&nbsp; X-ray module</p>
+  <h1>KD-MobileNetV2 &mdash; end-to-end system architecture</h1>
+  <p class="sub">One knee radiograph to a graded, calibrated, visually explained result: the inference
+  spine, the distillation that trained it (annotated above), and the grad-free Class Activation Map
+  branch (in teal).</p>
+
+  <figure>
+    <div class="diagram">
+    <svg class="arch" viewBox="0 0 1280 900" role="img"
+      aria-label="Pipeline: a knee X-ray is preprocessed to a 1x3x224x224 tensor, passed through MobileNetV2 to a 1280x7x7 feature map, then global-average-pooled and classified to five logits, temperature-scaled to calibrated probabilities, from which the KL grade, binary OA screen and abstention are derived. The 1280x7x7 feature map and the classifier weight row also feed a grad-free Class Activation Map that is upsampled, colour-mapped and blended over the film to a heatmap overlay with a focus region and templated findings. Both paths feed one output card. Above the backbone, a dashed training-time-only block shows frozen VGG16 and ConvNeXt-Tiny teachers, softmax at temperature 4, and a knowledge-distillation loss that produced the student weights.">
+
+      <defs>
+        <marker id="ah" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="currentColor"/>
+        </marker>
+      </defs>
+
+      <!-- ============ TRAINING-TIME BAND (dashed) ============ -->
+      <text class="lbl tag" x="40" y="34">Training-time only &mdash; knowledge distillation</text>
+      <rect class="box soft" x="40" y="46" width="238" height="58" rx="4"/>
+      <text class="lbl" x="159" y="70" text-anchor="middle">VGG16 + ConvNeXt-Tiny</text>
+      <text class="lbl sm" x="159" y="88" text-anchor="middle">frozen teachers</text>
+
+      <rect class="box soft" x="316" y="46" width="150" height="58" rx="4"/>
+      <text class="lbl mono" x="391" y="70" text-anchor="middle">softmax(z / T)</text>
+      <text class="lbl sm" x="391" y="88" text-anchor="middle">T = 4</text>
+
+      <rect class="box soft" x="504" y="40" width="430" height="70" rx="4"/>
+      <text class="lbl mono" x="719" y="66" text-anchor="middle">L = &#945;&#183;T&#178;&#183;KL(teacher &#8214; student) + (1&#8722;&#945;)&#183;weighted-CE</text>
+      <text class="lbl sm" x="719" y="90" text-anchor="middle">&#945; = 0.8 &#183; weight EMA &#183; 70-epoch schedule &#183; strong augmentation</text>
+
+      <path class="flow dash" d="M278 75 L314 75" marker-end="url(#ah)"/>
+      <path class="flow dash" d="M466 75 L502 75" marker-end="url(#ah)"/>
+      <path class="flow dash" d="M690 110 L690 150 L560 150 L560 214" marker-end="url(#ah)"/>
+      <text class="alab" x="566" y="145">student weights</text>
+
+      <!-- ============ INFERENCE SPINE ============ -->
+      <text class="lbl tag" x="40" y="196">Inference &mdash; ONNX Runtime, CPU, torch-free</text>
+
+      <rect class="box" x="40" y="214" width="116" height="70" rx="4"/>
+      <text class="lbl" x="98" y="245" text-anchor="middle">Knee</text>
+      <text class="lbl" x="98" y="262" text-anchor="middle">radiograph</text>
+
+      <rect class="box" x="188" y="214" width="196" height="70" rx="4"/>
+      <text class="lbl" x="286" y="240" text-anchor="middle">Preprocess</text>
+      <text class="lbl sm" x="286" y="258" text-anchor="middle">grayscale &#183; letterbox 224&#178;</text>
+      <text class="lbl sm" x="286" y="273" text-anchor="middle">3-ch replicate &#183; ImageNet norm</text>
+
+      <rect class="box" x="416" y="206" width="252" height="86" rx="4"/>
+      <text class="lbl" x="542" y="234" text-anchor="middle">MobileNetV2 (distilled)</text>
+      <text class="lbl sm" x="542" y="252" text-anchor="middle">stem 3&#215;3 &#183; 17&#215; inverted-residual</text>
+      <text class="lbl sm" x="542" y="267" text-anchor="middle">bottleneck &#183; conv_head 1&#215;1</text>
+      <text class="lbl sm" x="542" y="282" text-anchor="middle">2.23 M params</text>
+
+      <g class="xai">
+        <rect class="box" x="700" y="214" width="128" height="70" rx="4"/>
+        <text class="lbl" x="764" y="242" text-anchor="middle">Feature map</text>
+        <text class="lbl mono" x="764" y="262" text-anchor="middle">F : 1280&#215;7&#215;7</text>
+        <text class="lbl sm" x="764" y="278" text-anchor="middle">CAM tap</text>
+      </g>
+
+      <rect class="box" x="860" y="206" width="214" height="86" rx="4"/>
+      <text class="lbl" x="967" y="232" text-anchor="middle">Head</text>
+      <text class="lbl sm" x="967" y="250" text-anchor="middle">global-avg-pool &#8594; 1280-vec</text>
+      <text class="lbl mono" x="967" y="266" text-anchor="middle">Linear(1280 &#8594; 5) &#8594; logits</text>
+      <text class="lbl sm" x="967" y="282" text-anchor="middle">temperature scale &#183; T = 1.39</text>
+
+      <rect class="box soft" x="1106" y="214" width="134" height="70" rx="4"/>
+      <text class="lbl" x="1173" y="242" text-anchor="middle">Calibrated</text>
+      <text class="lbl mono" x="1173" y="262" text-anchor="middle">p&#8320; &#8230; p&#8324;</text>
+      <text class="lbl sm" x="1173" y="278" text-anchor="middle">rows sum to 1</text>
+
+      <path class="flow" d="M156 249 L186 249" marker-end="url(#ah)"/>
+      <path class="flow" d="M384 249 L414 249" marker-end="url(#ah)"/>
+      <path class="flow" d="M668 249 L698 249" marker-end="url(#ah)"/>
+      <text class="alab" x="672" y="242">1280&#215;7&#215;7</text>
+      <path class="flow" d="M828 249 L858 249" marker-end="url(#ah)"/>
+      <path class="flow" d="M1074 249 L1104 249" marker-end="url(#ah)"/>
+      <text class="alab" x="1076" y="242">softmax(z/T)</text>
+
+      <!-- derived heads from calibrated p -->
+      <path class="flow" d="M1173 284 L1173 322 L900 322 L900 470" marker-end="url(#ah)"/>
+      <text class="alab" x="1010" y="316">argmax &#8594; grade 0&#8211;4 &#183; p&#8322;+p&#8323;+p&#8324; &#8594; P(OA) &#183; conf &lt; 0.73 &#8594; abstain</text>
+
+      <!-- ============ EXPLAINABILITY BRANCH (teal) ============ -->
+      <g class="xai">
+        <text class="lbl tag" x="416" y="360" fill="currentColor">Explainability &mdash; grad-free Class Activation Map</text>
+
+        <path class="flow" d="M764 284 L764 372" marker-end="url(#ah)"/>
+        <text class="alab" x="772" y="330" fill="currentColor">F + classifier row W[grade]</text>
+
+        <rect class="box" x="416" y="372" width="316" height="82" rx="4"/>
+        <text class="lbl mono" x="574" y="400" text-anchor="middle">CAM_c(x,y) = ReLU( &#931;&#8342; W[c,k]&#183;F&#8342;(x,y) )</text>
+        <text class="lbl sm" x="574" y="420" text-anchor="middle">exact for a GAP&#8594;Linear head &#183; no gradients</text>
+        <text class="lbl sm" x="574" y="436" text-anchor="middle">bit-identical logits &#183; +3.2 ms CPU</text>
+
+        <rect class="box" x="760" y="372" width="230" height="82" rx="4"/>
+        <text class="lbl" x="875" y="398" text-anchor="middle">Render</text>
+        <text class="lbl sm" x="875" y="416" text-anchor="middle">upsample 7&#215;7 &#8594; 224 (bicubic)</text>
+        <text class="lbl sm" x="875" y="431" text-anchor="middle">JET colormap &#183; &#945;-blend over film</text>
+
+        <rect class="box" x="1018" y="372" width="222" height="82" rx="4"/>
+        <text class="lbl" x="1129" y="398" text-anchor="middle">Explanation</text>
+        <text class="lbl sm" x="1129" y="416" text-anchor="middle">heatmap overlay &#183; focus region</text>
+        <text class="lbl sm" x="1129" y="431" text-anchor="middle">grade-typical findings + recommendation</text>
+
+        <path class="flow" d="M732 413 L758 413" marker-end="url(#ah)"/>
+        <path class="flow" d="M990 413 L1016 413" marker-end="url(#ah)"/>
+      </g>
+
+      <!-- preprocessed film also feeds the blend -->
+      <path class="flow dash" d="M286 284 L286 500 L860 500 L860 454" marker-end="url(#ah)"/>
+      <text class="alab" x="300" y="496">letterboxed film (for the overlay)</text>
+
+      <!-- ============ OUTPUT CARD ============ -->
+      <rect class="box soft" x="120" y="540" width="1040" height="150" rx="6"/>
+      <text class="lbl tag" x="140" y="566">Output &mdash; kiosk dashboard (Gradio)</text>
+
+      <g>
+        <rect class="box" x="140" y="580" width="150" height="44" rx="4"/><text class="lbl sm" x="215" y="607" text-anchor="middle">KL grade + confidence</text>
+        <rect class="box" x="304" y="580" width="150" height="44" rx="4"/><text class="lbl sm" x="379" y="607" text-anchor="middle">probability bars KL0&#8211;4</text>
+        <rect class="box" x="468" y="580" width="150" height="44" rx="4"/><text class="lbl sm" x="543" y="607" text-anchor="middle">OA / No-OA screen</text>
+        <rect class="box" x="632" y="580" width="150" height="44" rx="4"/><text class="lbl sm" x="707" y="607" text-anchor="middle">3-class band</text>
+        <rect class="box" x="796" y="580" width="160" height="44" rx="4"/><text class="lbl sm" x="876" y="607" text-anchor="middle">abstain banner</text>
+      </g>
+      <g class="xai">
+        <rect class="box" x="970" y="580" width="170" height="44" rx="4"/><text class="lbl sm" x="1055" y="607" text-anchor="middle" fill="currentColor">Grad-CAM overlay</text>
+        <rect class="box" x="632" y="634" width="324" height="44" rx="4"/><text class="lbl sm" x="794" y="661" text-anchor="middle" fill="currentColor">clinical interpretation + findings</text>
+      </g>
+      <rect class="box" x="140" y="634" width="470" height="44" rx="4"/>
+      <text class="lbl sm" x="375" y="655" text-anchor="middle">recommendation (grade-banded)</text>
+      <text class="lbl sm" x="375" y="670" text-anchor="middle">&ldquo;AI-assisted &mdash; not a diagnosis&rdquo;</text>
+      <rect class="box" x="970" y="634" width="170" height="44" rx="4"/>
+      <text class="lbl sm" x="1055" y="661" text-anchor="middle">inference time + model version</text>
+
+      <path class="flow" d="M900 490 L900 538" marker-end="url(#ah)"/>
+      <g class="xai"><path class="flow" d="M1129 454 L1129 538" marker-end="url(#ah)"/></g>
+
+      <!-- ============ FOOTER STRIP ============ -->
+      <line x1="40" y1="740" x2="1240" y2="740" stroke="var(--rule)" stroke-width="1"/>
+      <text class="lbl mono" x="40" y="766" fill="var(--muted)" font-size="11">
+        Deploy: ONNX fp32 &#183; 8.9 MB &#183; onnxruntime CPU &#183; ~3.5 ms grade / ~4.7 ms with heatmap &#183; ~92 MB RSS &#183; Raspberry Pi kiosk
+      </text>
+      <text class="lbl mono" x="40" y="786" fill="var(--muted)" font-size="11">
+        Test (n=1240): accuracy 0.661 &#183; Macro-F1 0.681 &#183; QWK 0.835 &#183; within-&#177;1 0.954 &#183; binary-OA AUC 0.941
+      </text>
+    </svg>
+    </div>
+
+    <div class="legend">
+      <span><i></i> data flow (inference)</span>
+      <span><i class="d"></i> training-time only / auxiliary input</span>
+      <span><i class="x"></i> <span style="color:var(--xai)">explainability path</span></span>
+    </div>
+
+    <figcaption>
+      The classification spine (X-ray &rarr; preprocess &rarr; MobileNetV2 &rarr; 1280&times;7&times;7 feature
+      map <em>F</em> &rarr; global-average-pool + linear head &rarr; temperature-scaled probabilities)
+      produces the KL grade, the binary OA screen and the abstention decision. Because the head is a bare
+      GAP&rarr;Linear, Grad-CAM collapses exactly to <code>ReLU(&Sigma;<sub>k</sub> W[grade,k]&middot;F<sub>k</sub>)</code>
+      &mdash; computed from the same feature map with no gradients, adding ~3.2&nbsp;ms. The dashed block
+      above is the knowledge-distillation objective that trained the student weights; it is not part of
+      inference.
+    </figcaption>
+  </figure>
+
+  <p class="note">
+    This figure is a scalable vector graphic &mdash; it stays crisp at any size. To use it as an image:
+    open this page and <strong>Print &rarr; Save as PDF</strong>, or take a full-page screenshot, or
+    right-click the diagram and <strong>Save image</strong>. The local source is
+    <code>reports/mobilenet_final/ARCHITECTURE.html</code>.
+  </p>
+</div>

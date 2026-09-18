@@ -1,0 +1,200 @@
+{
+  "experiment_id": "efficientnet_b0__M0_baseline__seed123",
+  "family": "multiseed",
+  "model": "efficientnet_b0",
+  "seed": 123,
+  "ordinal": "",
+  "ema": false,
+  "preprocessing": "basic",
+  "loss": "weighted_cross_entropy",
+  "imbalance": "weighted_ce",
+  "augmentation": "augmentation.yaml",
+  "differential_lr": false,
+  "stage_a_epochs": 3,
+  "weight_decay": 0.0001,
+  "max_epochs": 50,
+  "patience": 5,
+  "best_epoch": 13,
+  "epochs_run": 18,
+  "stopped_early": true,
+  "val_accuracy": 0.5994,
+  "val_macro_f1": 0.6357,
+  "val_weighted_f1": 0.5951,
+  "val_balanced_accuracy": 0.6534,
+  "val_qwk": 0.7526,
+  "val_KL0_F1": 0.704,
+  "val_KL1_F1": 0.3394,
+  "val_KL2_F1": 0.5,
+  "val_KL3_F1": 0.7521,
+  "val_KL4_F1": 0.8831,
+  "val_binary_oa_acc": 0.811,
+  "val_binary_oa_auc": 0.8869,
+  "val_3class_acc": 0.7003,
+  "val_mae": 0.5008,
+  "val_within1": 0.9063,
+  "parameters": 4013953,
+  "model_size_mb": 15.577,
+  "gmacs": 0.3981,
+  "gpu_latency_ms": 4.3061,
+  "cpu_latency_ms": 9.636,
+  "training_time_sec": 99.5,
+  "checkpoint": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\models\\phase7\\efficientnet_b0__M0_baseline__seed123\\best.pt",
+  "note": "efficientnet_b0__M0_baseline @ seed 123",
+  "val_full": {
+    "n_samples": 1238,
+    "accuracy": 0.5993537964458805,
+    "balanced_accuracy": 0.6534089811223998,
+    "macro_precision": 0.6382784031686471,
+    "macro_recall": 0.6534089811223998,
+    "macro_f1": 0.6357358079481973,
+    "weighted_f1": 0.595058937024997,
+    "cohen_kappa": 0.4494028191241347,
+    "quadratic_weighted_kappa": 0.752570513623417,
+    "per_class": {
+      "KL0": {
+        "precision": 0.6716697936210131,
+        "recall": 0.7396694214876033,
+        "f1": 0.704031465093412,
+        "support": 484
+      },
+      "KL1": {
+        "precision": 0.3054545454545455,
+        "recall": 0.38181818181818183,
+        "f1": 0.3393939393939394,
+        "support": 220
+      },
+      "KL2": {
+        "precision": 0.6767676767676768,
+        "recall": 0.39644970414201186,
+        "f1": 0.5,
+        "support": 338
+      },
+      "KL3": {
+        "precision": 0.6875,
+        "recall": 0.8301886792452831,
+        "f1": 0.7521367521367521,
+        "support": 159
+      },
+      "KL4": {
+        "precision": 0.85,
+        "recall": 0.918918918918919,
+        "f1": 0.8831168831168831,
+        "support": 37
+      }
+    },
+    "kl0_f1": 0.704031465093412,
+    "kl0_precision": 0.6716697936210131,
+    "kl0_recall": 0.7396694214876033,
+    "kl0_support": 484,
+    "kl1_f1": 0.3393939393939394,
+    "kl1_precision": 0.3054545454545455,
+    "kl1_recall": 0.38181818181818183,
+    "kl1_support": 220,
+    "kl2_f1": 0.5,
+    "kl2_precision": 0.6767676767676768,
+    "kl2_recall": 0.39644970414201186,
+    "kl2_support": 338,
+    "kl3_f1": 0.7521367521367521,
+    "kl3_precision": 0.6875,
+    "kl3_recall": 0.8301886792452831,
+    "kl3_support": 159,
+    "kl4_f1": 0.8831168831168831,
+    "kl4_precision": 0.85,
+    "kl4_recall": 0.918918918918919,
+    "kl4_support": 37,
+    "confusion_matrix": [
+      [
+        358,
+        97,
+        24,
+        5,
+        0
+      ],
+      [
+        101,
+        84,
+        28,
+        7,
+        0
+      ],
+      [
+        71,
+        88,
+        134,
+        45,
+        0
+      ],
+      [
+        3,
+        6,
+        12,
+        132,
+        6
+      ],
+      [
+        0,
+        0,
+        0,
+        3,
+        34
+      ]
+    ],
+    "confusion_matrix_normalized": [
+      [
+        0.7396694214876033,
+        0.20041322314049587,
+        0.049586776859504134,
+        0.010330578512396695,
+        0.0
+      ],
+      [
+        0.4590909090909091,
+        0.38181818181818183,
+        0.12727272727272726,
+        0.031818181818181815,
+        0.0
+      ],
+      [
+        0.21005917159763313,
+        0.2603550295857988,
+        0.39644970414201186,
+        0.13313609467455623,
+        0.0
+      ],
+      [
+        0.018867924528301886,
+        0.03773584905660377,
+        0.07547169811320754,
+        0.8301886792452831,
+        0.03773584905660377
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.08108108108108109,
+        0.918918918918919
+      ]
+    ],
+    "adjacent_confusions": {
+      "KL1_as_KL2": 28,
+      "KL2_as_KL1": 88,
+      "KL2_as_KL3": 45,
+      "KL3_as_KL2": 12,
+      "KL3_as_KL4": 6,
+      "KL4_as_KL3": 3
+    },
+    "errors_off_by_1": 380,
+    "errors_off_by_2plus": 116,
+    "roc_auc_ovr_macro": 0.8552560514727819,
+    "roc_auc_ovr_weighted": 0.8239299853731605,
+    "roc_auc_per_class_ovr": {
+      "KL0": 0.8440000438433041,
+      "KL1": 0.6821128772995178,
+      "KL2": 0.8060322156476002,
+      "KL3": 0.95977524029354,
+      "KL4": 0.9843598802799469
+    },
+    "loss": 1.0739518652439888
+  }
+}

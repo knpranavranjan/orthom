@@ -1,0 +1,112 @@
+{
+  "model": "squeezenet",
+  "timm_name": "squeezenet1_1",
+  "accuracy": 0.592891760904685,
+  "macro_precision": 0.6737567263171794,
+  "macro_recall": 0.6274956629581251,
+  "macro_f1": 0.6340335200331203,
+  "weighted_f1": 0.5878473640965076,
+  "balanced_accuracy": 0.6274956629581251,
+  "cohen_kappa": 0.4361152582320854,
+  "quadratic_weighted_kappa": 0.7527958727470734,
+  "roc_auc_ovr_macro": 0.8543827066170199,
+  "kl0_f1": 0.7222748815165877,
+  "kl1_f1": 0.3106060606060606,
+  "kl2_f1": 0.44488977955911824,
+  "kl3_f1": 0.7938461538461539,
+  "kl4_f1": 0.8985507246376812,
+  "kl0_support": 484,
+  "kl1_support": 220,
+  "kl2_support": 338,
+  "kl3_support": 159,
+  "kl4_support": 37,
+  "parameters": 725061,
+  "trainable_parameters": 725061,
+  "non_trainable_parameters": 0,
+  "model_size_mb": 2.784,
+  "gmacs": 0.2631,
+  "flops_or_macs": 0.2631,
+  "flops_estimate_g": 0.5261,
+  "gmacs_method": "fvcore.FlopCountAnalysis (MAC=1)",
+  "mean_latency_ms": 1.3485,
+  "median_latency_ms": 1.3103,
+  "std_latency_ms": 0.2914,
+  "min_latency_ms": 0.9682,
+  "max_latency_ms": 2.2106,
+  "throughput_images_per_sec": 741.54,
+  "latency_device": "cuda",
+  "cpu_mean_latency_ms": 4.6163,
+  "peak_memory_mb": 82.96,
+  "train_peak_cuda_mb": 867.58,
+  "best_epoch": 18,
+  "epochs_run": 23,
+  "training_time_sec": 93.4,
+  "training_time": 93.4,
+  "stopped_early": true,
+  "adjacent_confusions": {
+    "KL1_as_KL2": 20,
+    "KL2_as_KL1": 128,
+    "KL2_as_KL3": 24,
+    "KL3_as_KL2": 15,
+    "KL3_as_KL4": 1,
+    "KL4_as_KL3": 6
+  },
+  "confusion_matrix": [
+    [
+      381,
+      84,
+      15,
+      4,
+      0
+    ],
+    [
+      115,
+      82,
+      20,
+      3,
+      0
+    ],
+    [
+      75,
+      128,
+      111,
+      24,
+      0
+    ],
+    [
+      0,
+      14,
+      15,
+      129,
+      1
+    ],
+    [
+      0,
+      0,
+      0,
+      6,
+      31
+    ]
+  ],
+  "gradcam_layer_candidates": [
+    "classifier.1"
+  ],
+  "backend": "torchvision",
+  "preprocessing_variant": "basic",
+  "loss_name": "weighted_cross_entropy",
+  "seed": 42,
+  "stage_a_epochs": 3,
+  "max_epochs_budget": 30,
+  "patience": 5,
+  "differential_lr": null,
+  "artefacts": {
+    "best_ckpt": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\models\\phase3\\squeezenet\\best.pt",
+    "confusion": {
+      "raw": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase3\\confusion_matrices\\squeezenet_confusion_matrix.png",
+      "normalized": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase3\\confusion_matrices\\squeezenet_confusion_matrix_normalized.png"
+    },
+    "training_curve": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase3\\training_curves\\squeezenet_training_curve.png",
+    "config": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\models\\phase3\\squeezenet\\config.json"
+  },
+  "phase": "phase3"
+}

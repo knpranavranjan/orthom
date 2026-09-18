@@ -1,0 +1,2 @@
+file_path,dataset_source,original_split,class,width,height,channels,mean_pixel,std_pixel,min_pixel,max_pixel,aspect_ratio,format,reason_codes
+kaggle/train/2/9961307R.png,kaggle,train,2,224,224,1,57.5017,7.5442,28,80,1,PNG,LOW_DYNAMIC_RANGE

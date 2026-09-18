@@ -1,0 +1,30 @@
+# AETHER-OA - X-ray module.  Python 3.10+ (verified on CPython 3.14, Windows 11).
+
+# ---- Phase 1 (audit / preprocessing) - no DL stack ----
+numpy>=1.26
+pandas>=2.0
+pillow>=10.0
+opencv-python-headless>=4.9
+scikit-learn>=1.4
+matplotlib>=3.8
+seaborn>=0.13
+pyyaml>=6.0
+tqdm>=4.66
+imagehash>=4.3
+
+# ---- Phase 2 (CNN benchmarking) ----
+# IMPORTANT install order (Windows + Py3.14 + RTX 5080 / Blackwell sm_120):
+#   1) torch/vision from the CUDA 12.8 index, PINNED:
+#      pip install "torch==2.11.0" "torchvision==0.26.0" \
+#          --index-url https://download.pytorch.org/whl/cu128
+#   2) THEN timm etc. WITHOUT deps so pip cannot pull a CPU torch from PyPI:
+#      pip install --no-deps timm==1.0.28
+#      pip install fvcore psutil tabulate huggingface_hub safetensors
+# (Installing timm before/with torch lets its resolver replace +cu128 torch with
+#  a CPU build -> lose the GPU. Keep torch pinned.)
+torch==2.11.0            # +cu128 build
+torchvision==0.26.0     # +cu128 build
+timm==1.0.28
+fvcore>=0.1.5           # GMACs / FLOP counting
+psutil>=5.9
+tabulate>=0.9

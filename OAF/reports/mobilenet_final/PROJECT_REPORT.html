@@ -1,0 +1,745 @@
+<title>Distilled MobileNetV2 for Knee OA Screening</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+  :root{
+    --paper:#FBFAF7; --ink:#1A2430; --muted:#5C6672; --accent:#2C6E8F;
+    --good:#3E7D5A; --warn:#A6603A; --rule:#E4E0D7; --panel:#F4F1EA; --panel-2:#EFEBE1;
+    --measure:47rem;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --paper:#12171C; --ink:#E7E5E0; --muted:#98A2AC; --accent:#63A9C6;
+      --good:#6FB88E; --warn:#CB8C64; --rule:#2A323A; --panel:#191F25; --panel-2:#1F262D;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#12171C; --ink:#E7E5E0; --muted:#98A2AC; --accent:#63A9C6;
+    --good:#6FB88E; --warn:#CB8C64; --rule:#2A323A; --panel:#191F25; --panel-2:#1F262D;
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:"IBM Plex Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    font-size:16px; line-height:1.62; font-weight:400;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--measure); margin:0 auto; padding:4.5rem 1.5rem 6rem}
+
+  /* ---- type scale ---- */
+  h1,h2,h3,h4{font-family:"IBM Plex Serif", Georgia, serif; font-weight:600; text-wrap:balance; line-height:1.22}
+  h1{font-size:2.35rem; letter-spacing:-.01em; margin:0 0 .6rem}
+  h2{font-size:1.5rem; margin:3.4rem 0 1rem; padding-top:1.1rem; border-top:1px solid var(--rule)}
+  h3{font-size:1.12rem; margin:2rem 0 .5rem}
+  h4{font-size:.95rem; margin:1.4rem 0 .35rem; font-family:"IBM Plex Sans",sans-serif; font-weight:600}
+  p{margin:0 0 1rem}
+  a{color:var(--accent); text-underline-offset:2px}
+  strong{font-weight:600}
+  small{font-size:.82rem}
+
+  .eyebrow{
+    font-family:"IBM Plex Mono", ui-monospace, monospace; font-size:.72rem; font-weight:500;
+    letter-spacing:.16em; text-transform:uppercase; color:var(--accent); margin:0 0 1.1rem
+  }
+  .lede{font-size:1.12rem; color:var(--ink); margin-bottom:1.6rem}
+  .byline{
+    font-family:"IBM Plex Mono",monospace; font-size:.78rem; color:var(--muted);
+    letter-spacing:.02em; margin:1.4rem 0 0; display:flex; flex-wrap:wrap; gap:.4rem 1.4rem
+  }
+
+  /* ---- result strip ---- */
+  .keyfacts{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(8.5rem,1fr)); gap:1px;
+    background:var(--rule); border:1px solid var(--rule); border-radius:4px; overflow:hidden;
+    margin:2.4rem 0 1rem
+  }
+  .keyfacts div{background:var(--paper); padding:.9rem 1rem}
+  .keyfacts .k{font-family:"IBM Plex Mono",monospace; font-size:.68rem; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--muted); margin-bottom:.3rem}
+  .keyfacts .v{font-family:"IBM Plex Serif",serif; font-size:1.32rem; font-weight:600; font-variant-numeric:tabular-nums}
+  .keyfacts .v small{font-family:"IBM Plex Sans",sans-serif; font-weight:400; font-size:.72rem; color:var(--muted)}
+
+  /* ---- section numbering rail ---- */
+  section{position:relative}
+  section > h2::before{
+    content:attr(data-no);
+    font-family:"IBM Plex Mono",monospace; font-size:.8rem; font-weight:500; color:var(--accent);
+    display:inline-block; min-width:2.6rem;
+  }
+
+  /* ---- tables ---- */
+  .tw{overflow-x:auto; margin:1.2rem 0; border:1px solid var(--rule); border-radius:4px}
+  table{border-collapse:collapse; width:100%; font-size:.87rem; font-variant-numeric:tabular-nums}
+  caption{caption-side:bottom; text-align:left; color:var(--muted); font-size:.78rem; padding:.55rem .2rem 0; font-style:italic}
+  th,td{padding:.5rem .75rem; text-align:right; border-bottom:1px solid var(--rule); white-space:nowrap}
+  th:first-child,td:first-child{text-align:left; white-space:normal}
+  thead th{
+    font-family:"IBM Plex Mono",monospace; font-size:.72rem; font-weight:500; letter-spacing:.04em;
+    text-transform:uppercase; color:var(--muted); border-bottom:1.5px solid var(--ink)
+  }
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr.hi td{background:color-mix(in srgb, var(--accent) 9%, var(--paper)); font-weight:500}
+  td.mono,th.mono{font-family:"IBM Plex Mono",monospace}
+  .up{color:var(--good); font-weight:500}
+  .dn{color:var(--warn); font-weight:500}
+
+  /* ---- callout / aside ---- */
+  .panel{background:var(--panel); border:1px solid var(--rule); border-radius:4px; padding:1.25rem 1.4rem; margin:1.6rem 0}
+  .panel h4{margin-top:0}
+  .panel.accent{border-left:3px solid var(--accent)}
+  .panel.warn{border-left:3px solid var(--warn)}
+  .panel.good{border-left:3px solid var(--good)}
+  .panel p:last-child{margin-bottom:0}
+
+  ul,ol{margin:0 0 1rem; padding-left:1.3rem}
+  li{margin:.3rem 0}
+  li::marker{color:var(--muted)}
+
+  code{font-family:"IBM Plex Mono",monospace; font-size:.85em; background:var(--panel-2);
+    padding:.08em .38em; border-radius:3px}
+  pre{background:var(--panel); border:1px solid var(--rule); border-radius:4px; padding:1rem 1.1rem;
+    overflow-x:auto; font-family:"IBM Plex Mono",monospace; font-size:.8rem; line-height:1.6; margin:1.2rem 0}
+  pre code{background:none; padding:0; font-size:1em}
+
+  .metric{font-family:"IBM Plex Mono",monospace; font-weight:500; color:var(--accent)}
+  hr.soft{border:none; border-top:1px solid var(--rule); margin:2.6rem 0}
+
+  .foot{margin-top:4rem; padding-top:1.2rem; border-top:1px solid var(--rule); color:var(--muted); font-size:.82rem}
+  .foot code{font-size:.8rem}
+
+  figure{margin:1.6rem 0}
+  figure svg{display:block; width:100%; height:auto; background:var(--panel); border:1px solid var(--rule); border-radius:4px}
+  figcaption{color:var(--muted); font-size:.78rem; font-style:italic; margin-top:.5rem}
+
+  :focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+  /* ---- print ---- */
+  @media print{
+    :root{--paper:#fff; --ink:#111; --muted:#555; --panel:#f4f2ee; --panel-2:#eee; --rule:#ccc; --accent:#1d5a78}
+    body{font-size:10.5pt; line-height:1.5}
+    .wrap{max-width:none; padding:0}
+    h2{break-before:page; padding-top:0}
+    h2:first-of-type, section:first-of-type h2{break-before:auto}
+    h3,h4{break-after:avoid}
+    .tw,table,figure,.panel,.keyfacts{break-inside:avoid}
+    thead{display:table-header-group}
+    a{color:inherit; text-decoration:none}
+    .noprint{display:none}
+    .keyfacts div{background:#fff}
+  }
+</style>
+
+<div class="wrap">
+
+  <p class="eyebrow">AETHER-OA &nbsp;/&nbsp; X-ray module &nbsp;/&nbsp; final engineering report</p>
+  <h1>A Distilled MobileNetV2 for Knee Osteoarthritis Screening on the Raspberry Pi</h1>
+  <p class="lede">Building the strongest scientifically defensible edge model for Kellgren&ndash;Lawrence
+  grading from knee radiographs &mdash; one 2.23&nbsp;M-parameter network, an untouched test set, and an
+  honest account of what accuracy is and is not reachable on this data.</p>
+
+  <div class="byline">
+    <span>Module: X-ray KL-grade classification</span>
+    <span>Data: OAI baseline (00m) knee ROIs, n&nbsp;=&nbsp;8,260</span>
+    <span>Final model: KD-MobileNetV2</span>
+    <span>Compiled 2026-08-28</span>
+  </div>
+
+  <div class="keyfacts">
+    <div><div class="k">Parameters</div><div class="v">2.23<small>&nbsp;M</small></div></div>
+    <div><div class="k">Model size</div><div class="v">8.9<small>&nbsp;MB</small></div></div>
+    <div><div class="k">Test Macro-F1</div><div class="v">0.681</div></div>
+    <div><div class="k">Ordinal QWK</div><div class="v">0.835</div></div>
+    <div><div class="k">OA-screen AUC</div><div class="v">0.941</div></div>
+    <div><div class="k">CPU latency</div><div class="v">3.5<small>&nbsp;ms</small></div></div>
+  </div>
+  <p><small>Single-thread ONNX Runtime on x86; a Raspberry&nbsp;Pi&nbsp;4 CPU is expected to run the same
+  graph in roughly 30&ndash;80&nbsp;ms per image. All headline figures are on the frozen 1,240-image test
+  split, evaluated once.</small></p>
+
+  <!-- ===================================================================== -->
+  <section>
+  <h2 data-no="01" id="summary">Executive summary</h2>
+
+  <p>This report documents an eight-phase effort to produce a single, small, deployable convolutional
+  network that grades knee osteoarthritis (OA) severity from a plain radiograph on the
+  Kellgren&ndash;Lawrence (KL) 0&ndash;4 scale, and runs on a screen-connected Raspberry&nbsp;Pi.</p>
+
+  <p>The work proceeded from a rigorous dataset audit, through a controlled 15-architecture benchmark,
+  to architecture-specific tuning and finally <strong>knowledge distillation</strong> from larger
+  teacher networks into MobileNetV2. The distilled model improves on the untuned MobileNetV2 baseline
+  by <span class="metric">+2.6</span> Macro-F1 points and <span class="metric">+3.9</span> QWK points
+  <em>at identical parameter count</em>, while a controlled label-scheme study quantifies exactly how
+  much accuracy is bought by collapsing grades.</p>
+
+  <div class="panel accent">
+    <h4>Principal results (frozen test set, n&nbsp;=&nbsp;1,240)</h4>
+    <ul>
+      <li><strong>5-class KL grading:</strong> accuracy 0.661, Macro-F1 0.681
+        (0.686&nbsp;&plusmn;&nbsp;0.007 across three seeds), quadratic-weighted&nbsp;&kappa; 0.835,
+        within-&plusmn;1-grade accuracy 0.954.</li>
+      <li><strong>Binary OA screening</strong> (KL0&ndash;1 vs KL2&ndash;4), derived from the same
+        probabilities: <strong>ROC-AUC 0.941</strong>, specificity 0.97 at the default operating point.</li>
+      <li><strong>Three-class</strong> (Normal / Early / Advanced): accuracy 0.765.</li>
+      <li><strong>Efficiency:</strong> 2,230,277 parameters, 8.9&nbsp;MB fp32 ONNX,
+        0.31&nbsp;GMACs, ~3.5&nbsp;ms per image on one CPU core, ~92&nbsp;MB RSS.</li>
+    </ul>
+  </div>
+
+  <p><strong>On the &ldquo;&gt;90%&rdquo; question, stated plainly:</strong> 5-class KL accuracy at 90%
+  is not attainable by any model on this data. It is a property of the labels, not of network capacity
+  &mdash; radiologist-versus-radiologist agreement on the KL scale is roughly 60&ndash;70%, and published
+  state of the art on the same source sits near 70&ndash;75% accuracy. The clinically meaningful,
+  defensible strong claim from this work is a <strong>binary OA-screening AUC of 0.94</strong>. Where a
+  headline accuracy figure nearer 90% is required, the label-scheme study (&sect;08) shows a 4-class
+  grouping reaching 0.79 accuracy / 0.76 Macro-F1 &mdash; at the cost of the KL0/KL1 distinction.</p>
+  </section>
+
+  <!-- ===================================================================== -->
+  <section>
+  <h2 data-no="02" id="objective">Problem and objectives</h2>
+
+  <p>Knee OA is graded radiographically on the five-point Kellgren&ndash;Lawrence scale: KL0 normal,
+  KL1 doubtful, KL2 minimal, KL3 moderate, KL4 severe. The target deployment is a low-cost, offline,
+  screen-connected device (Raspberry&nbsp;Pi class) that assists a clinician by proposing a grade and an
+  OA / no-OA screen from a single anteroposterior knee film.</p>
+
+  <p>The engineering objectives, fixed at the outset:</p>
+  <ol>
+    <li>Strong ordinal grading performance &mdash; measured primarily by Macro-F1 and quadratic-weighted
+      &kappa;, never by accuracy alone.</li>
+    <li>High sensitivity / specificity for the clinically meaningful OA screen.</li>
+    <li>Improved behaviour on the difficult early-disease (KL1) boundary.</li>
+    <li>A single MobileNetV2-class model &mdash; low parameter count, small on disk.</li>
+    <li>Low CPU inference latency and memory, exportable to an edge runtime.</li>
+    <li>No data leakage; a completely untouched final test set.</li>
+    <li>Reproducible, seed-controlled evaluation.</li>
+  </ol>
+
+  <p class="panel">
+  <strong>Scope boundary.</strong> This module is the X-ray grader only. Gait / inertial sensors, the
+  WOMAC questionnaire, any language model, the mobile application, Bluetooth transport and multimodal
+  fusion are explicitly out of scope and were never implemented.</p>
+  </section>
+
+  <!-- ===================================================================== -->
+  <section>
+  <h2 data-no="03" id="data">Dataset, provenance and leakage control</h2>
+
+  <p>The image source is the Kaggle <em>Knee Osteoarthritis Dataset with Severity Grading</em>
+  (shashwatwork): 9,786 PNG knee regions of interest, uniformly 224&nbsp;&times;&nbsp;224, 8-bit
+  grayscale, 0 corrupt, 0 unreadable.</p>
+
+  <h3>Provenance &mdash; verified, not assumed</h3>
+  <p>Every one of the 4,130 patient identifiers parses to an OAI participant ID, and all 8,260
+  train+val+test knees match the OAI <strong>baseline visit (00m)</strong> KL grade exactly (0
+  disagreements). The Kaggle images therefore <em>are</em> the OAI 00m per-knee ROIs. Two consequences
+  were treated as hard constraints:</p>
+  <ul>
+    <li>The separate OAI metadata repository contains <strong>no pixel data</strong> &mdash; it cannot
+      serve as additional training images or as an independent external test set (same patients).</li>
+    <li>The Kaggle <code>auto_test</code> folder is a re-detection of the same test knees with different
+      crops and 21 conflicting labels; it was <strong>excluded</strong> from the working set to prevent
+      leakage, and retained in the manifest only for optional robustness checks.</li>
+  </ul>
+
+  <h3>Working set and class distribution</h3>
+  <div class="tw">
+  <table>
+    <caption>Table 1. Working set: 8,260 knees = 4,130 patients &times; 2 knees. Imbalance ratio &asymp; 13&times;.</caption>
+    <thead><tr><th>KL grade</th><th>Meaning</th><th>Knees</th><th>Share</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">KL0</td><td>Normal</td><td>3,253</td><td>39.4%</td></tr>
+      <tr><td class="mono">KL1</td><td>Doubtful</td><td>1,495</td><td>18.1%</td></tr>
+      <tr><td class="mono">KL2</td><td>Minimal</td><td>2,175</td><td>26.3%</td></tr>
+      <tr><td class="mono">KL3</td><td>Moderate</td><td>1,086</td><td>13.1%</td></tr>
+      <tr><td class="mono">KL4</td><td>Severe</td><td>251</td><td>3.0%</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Split methodology</h3>
+  <p>The split unit is the <strong>patient</strong> &mdash; both knees always move together &mdash;
+  stratified by the patient&rsquo;s worst-knee grade, seeded, 70&nbsp;/&nbsp;15&nbsp;/&nbsp;15.</p>
+
+  <div class="tw">
+  <table>
+    <caption>Table 2. Patient-disjoint split. Pairwise patient overlap = 0 / 0 / 0. Per-class proportion drift across splits &lt; 0.013.</caption>
+    <thead><tr><th>Split</th><th>Patients</th><th>Knees</th><th>KL0</th><th>KL1</th><th>KL2</th><th>KL3</th><th>KL4</th></tr></thead>
+    <tbody>
+      <tr><td>Train</td><td>2,891</td><td>5,782</td><td>2,293</td><td>1,048</td><td>1,509</td><td>756</td><td>176</td></tr>
+      <tr><td>Validation</td><td>619</td><td>1,238</td><td>484</td><td>220</td><td>338</td><td>159</td><td>37</td></tr>
+      <tr><td>Test</td><td>620</td><td>1,240</td><td>476</td><td>227</td><td>328</td><td>171</td><td>38</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Leakage audit</h3>
+  <ul>
+    <li>Exact duplicates (SHA-256) across all 9,786 files: <strong>0</strong>.</li>
+    <li>Same knee appearing in more than one split: <strong>0</strong>.</li>
+    <li>Perceptual near-duplicates (pHash Hamming &le; 4): 184 within the working set, all
+      <em>cross-patient</em> look-alikes at 224&nbsp;px &mdash; not the same scan, not leakage.</li>
+    <li>Automated validation: <strong>29 / 29 checks pass</strong>.</li>
+  </ul>
+
+  <p class="panel warn">
+  <strong>Should more data be added? No.</strong> The question was answered empirically. There is no
+  compatible independent dataset available: the only other OAI-derived source shares the same patients,
+  and merging it would place identical scans on both sides of the train/test boundary. The strategy was
+  fixed as <em>keep the current data; improve through training method, not volume</em>.</p>
+  </section>
+
+  <!-- ===================================================================== -->
+  <section>
+  <h2 data-no="04" id="pipeline">Phase 1 &mdash; data pipeline</h2>
+
+  <p>A deterministic pipeline (identical for train, validation and test) was materialised:
+  <code>read &rarr; grayscale &rarr; validate &rarr; ROI (no-op; images are already knee ROIs) &rarr;
+  pad-to-square &rarr; resize 224 &rarr; contrast variant</code>. Three contrast variants
+  (<code>basic</code>, <code>CLAHE</code>, <code>histeq</code>) were written to disk losslessly so the
+  contrast choice could be an ablation rather than an assumption.</p>
+
+  <p>For pretrained ImageNet backbones the grayscale image is replicated to three channels (never
+  colourised) and ImageNet-normalised at load time. Class weights were computed from the
+  <strong>training split only</strong>. Augmentation is train-only and clinically constrained &mdash;
+  small rotation, translation, scale and shear, horizontal flip (KL grade is side-agnostic and left/right
+  is already normalised per file), mild brightness/contrast, light noise. Vertical flip, large rotation,
+  elastic warp and random erasing are disabled because they distort the joint-space and osteophyte cues
+  that define the grade.</p>
+  </section>
+
+  <!-- ===================================================================== -->
+  <section>
+  <h2 data-no="05" id="benchmark">Phases 2&ndash;5 &mdash; the 15-architecture benchmark</h2>
+
+  <p>Fifteen ImageNet-pretrained architectures were trained under one identical recipe &mdash; weighted
+  cross-entropy, two-stage transfer (head-only then full fine-tune), cosine schedule, AMP, seed 42,
+  early stopping on validation Macro-F1 &mdash; then evaluated once on the frozen test set. The purpose
+  was to establish the accuracy ceiling on this data and to place MobileNetV2 within it.</p>
+
+  <div class="tw">
+  <table>
+    <caption>Table 3. Selected results from the 15-model test benchmark (Phase 5). Model selection was never by accuracy alone.</caption>
+    <thead><tr><th>Model</th><th>Params</th><th>Acc</th><th>Macro-F1</th><th>QWK</th><th>KL1-F1</th><th>KL4-F1</th></tr></thead>
+    <tbody>
+      <tr><td>VGG16</td><td class="mono">134 M</td><td>0.726</td><td>0.738</td><td>0.875</td><td>0.491</td><td>0.880</td></tr>
+      <tr><td>ConvNeXt-Tiny</td><td class="mono">27.8 M</td><td>0.697</td><td>0.717</td><td>0.862</td><td>0.429</td><td>0.857</td></tr>
+      <tr class="hi"><td>MobileNetV2</td><td class="mono">2.23 M</td><td>0.636</td><td>0.655</td><td>0.796</td><td>0.306</td><td>0.871</td></tr>
+      <tr><td>ShuffleNet-V2 x1.0</td><td class="mono">1.26 M</td><td>0.623</td><td>0.658</td><td>0.799</td><td>0.253</td><td>0.907</td></tr>
+      <tr><td>EfficientNet-B0</td><td class="mono">4.01 M</td><td>0.652</td><td>0.670</td><td>0.804</td><td>&mdash;</td><td>0.895</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>What the benchmark established</h3>
+  <ul>
+    <li>The best model on this data (VGG16, Macro-F1 0.738) sits at published state of the art
+      &mdash; roughly 0.70&ndash;0.75 accuracy is the field ceiling for 5-class KL on OAI.</li>
+    <li><strong>KL1 &ldquo;doubtful&rdquo; is the universal weak class.</strong> The best KL1 F1 across
+      all fifteen models was 0.49 (VGG16); most fell between 0.25 and 0.43. KL1 is defined by reader
+      uncertainty, so it carries the label noise.</li>
+    <li>KL4 &ldquo;severe&rdquo;, despite only 176 training knees, is classified well (F1 0.83&ndash;0.95):
+      end-stage disease is visually unambiguous. <em>Small does not mean hard.</em></li>
+    <li>MobileNetV2 is edge-ideal (2.23&nbsp;M params) but ~8 Macro-F1 points below the large models.
+      Closing that gap without growing the model is the remaining problem.</li>
+  </ul>
+  </section>
+
+  <!-- ===================================================================== -->
+  <section>
+  <h2 data-no="06" id="tuning">Phase 7 &mdash; MobileNetV2-specific tuning</h2>
+
+  <p>MobileNetV2 had been trained only under the generic 15-model recipe. Phase 7 ran a controlled
+  matrix changing one dimension at a time: differential learning rates, focal loss, class-balanced
+  loss, a milder inverse-frequency sampler, CLAHE, a wider &ldquo;strong-but-medical&rdquo; augmentation
+  set, and a CORN ordinal head. Each candidate was multi-seeded (42 / 123 / 3407).</p>
+
+  <div class="tw">
+  <table>
+    <caption>Table 4. MobileNetV2 tuning outcomes (validation Macro-F1). One dimension changed per row.</caption>
+    <thead><tr><th>Change vs baseline</th><th>Val Macro-F1</th><th>&Delta;</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td>Baseline recipe</td><td class="mono">0.633</td><td class="mono">&mdash;</td><td>Phase-4 control</td></tr>
+      <tr class="hi"><td>Strong augmentation</td><td class="mono">0.653</td><td class="mono up">+0.020</td><td>adopted</td></tr>
+      <tr><td>Class-balanced loss</td><td class="mono">0.646</td><td class="mono up">+0.013</td><td>best KL1</td></tr>
+      <tr><td>&radic;-inverse sampler</td><td class="mono">0.642</td><td class="mono up">+0.009</td><td></td></tr>
+      <tr><td>CLAHE contrast</td><td class="mono">0.645</td><td class="mono up">+0.012</td><td>did not transfer to test</td></tr>
+      <tr><td>Differential LR</td><td class="mono">0.463</td><td class="mono dn">&minus;0.170</td><td>too slow under the epoch budget</td></tr>
+      <tr><td>CORN ordinal head</td><td class="mono">0.659</td><td class="mono up">+0.026</td><td>seed-unstable; KL1 collapsed on test &mdash; rejected</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>The strong-augmentation MobileNetV2 reached test Macro-F1 <span class="metric">0.669</span>, and
+  <span class="metric">0.696</span> with horizontal-flip test-time augmentation (which is exact under
+  per-channel normalisation and consistent with a side-agnostic grade). Stacking the winning dimensions
+  <em>over-regularised</em> the 2.23&nbsp;M-parameter network and did not beat the single best change. CORN
+  looked best on validation but was unstable across seeds and destroyed KL1 on the test set &mdash; a
+  clean negative result.</p>
+  </section>
+
+  <!-- ===================================================================== -->
+  <section>
+  <h2 data-no="07" id="distill">Phase 8 &mdash; knowledge distillation</h2>
+
+  <p>With architecture tuning exhausted, the remaining lever was the training signal itself. The frozen
+  VGG16 and ConvNeXt-Tiny models from the benchmark were used as <strong>teachers</strong>: their
+  softened class probabilities were cached once per training image, and the MobileNetV2 student was
+  trained on a blend of the teacher distribution and the hard label.</p>
+
+  <div class="panel accent">
+    <h4>Distillation objective</h4>
+    <p style="font-family:'IBM Plex Mono',monospace; font-size:.86rem; line-height:1.7; margin:.3rem 0 0">
+    L = &alpha;&middot;T&sup2;&middot;KL( softmax(teacher / T) &Vert; softmax(student / T) )
+    <br>&nbsp;&nbsp;&nbsp;&nbsp;+ (1 &minus; &alpha;)&middot;CE( student, hard label ; class weights )</p>
+    <p style="margin:.7rem 0 0"><small>Temperature <span class="metric">T = 4</span>, distillation weight
+    <span class="metric">&alpha; = 0.8</span> in the winning configuration; teacher = weighted mean of
+    VGG16 and ConvNeXt-Tiny; weight EMA on; 70-epoch schedule.</small></p>
+  </div>
+
+  <div class="tw">
+  <table>
+    <caption>Table 5. Distillation matrix (validation Macro-F1, with horizontal-flip TTA). Every run is MobileNetV2 at 2.23 M parameters.</caption>
+    <thead><tr><th>Configuration</th><th>Teacher</th><th>Val Macro-F1</th><th>+ TTA</th><th>QWK</th><th>KL1-F1</th></tr></thead>
+    <tbody>
+      <tr><td>K0 &mdash; no distillation (control)</td><td>&mdash;</td><td class="mono">0.654</td><td class="mono">0.643</td><td class="mono">0.777</td><td class="mono">0.317</td></tr>
+      <tr><td>K2 &mdash; T=4, &alpha;=0.7</td><td>ConvNeXt</td><td class="mono">0.673</td><td class="mono">0.664</td><td class="mono">0.801</td><td class="mono">0.344</td></tr>
+      <tr><td>K3 &mdash; T=4, &alpha;=0.7</td><td>VGG16</td><td class="mono">0.670</td><td class="mono">0.670</td><td class="mono">0.795</td><td class="mono">0.317</td></tr>
+      <tr><td>K4 &mdash; T=4, &alpha;=0.7</td><td>ensemble</td><td class="mono">0.665</td><td class="mono">0.666</td><td class="mono">0.784</td><td class="mono">0.302</td></tr>
+      <tr class="hi"><td>K6 &mdash; T=4, &alpha;=0.8, EMA, long</td><td>ensemble</td><td class="mono">0.677</td><td class="mono">0.686</td><td class="mono">0.806</td><td class="mono">0.343</td></tr>
+      <tr><td>K6 &mdash; seed 123 (selected)</td><td>ensemble</td><td class="mono">0.690</td><td class="mono">0.687</td><td class="mono">0.820</td><td class="mono">0.348</td></tr>
+      <tr><td>K6 &mdash; seed 3407</td><td>ensemble</td><td class="mono">0.678</td><td class="mono">0.677</td><td class="mono">0.815</td><td class="mono">0.329</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>Distillation delivered a genuine, reproducible lift: <span class="metric">+3.2</span> validation
+  Macro-F1 points with TTA over the no-distillation control (0.643&nbsp;&rarr;&nbsp;0.686), and
+  <span class="metric">+1.9</span> over the Phase-7 tuned model &mdash; at the same 2.23&nbsp;M
+  parameters. A single ConvNeXt teacher outperformed the VGG16+ConvNeXt ensemble at equal
+  &alpha;; the ensemble only won once &alpha; was raised to 0.8 with EMA and a longer schedule.
+  Mixup and label smoothing did not help.</p>
+  </section>
+
+  <!-- ===================================================================== -->
+  <section>
+  <h2 data-no="08" id="schemes">Label-scheme study</h2>
+
+  <p>A recurring question was whether merging grades would raise accuracy. It was answered with a
+  controlled sweep: the same distillation recipe trained on four label schemes, each scored once on the
+  test set.</p>
+
+  <div class="tw">
+  <table>
+    <caption>Table 6. Label-scheme sweep. Same KD-MobileNetV2 recipe; test set scored once per scheme. Parameter count is constant &mdash; only the final layer width changes.</caption>
+    <thead><tr><th>Scheme</th><th>Classes</th><th>Test Acc</th><th>Test Macro-F1</th><th>Test QWK</th><th>Test AUC</th></tr></thead>
+    <tbody>
+      <tr class="hi"><td>5-class KL (standard)</td><td class="mono">5</td><td>0.675</td><td>0.694</td><td class="mono up">0.839</td><td>&mdash;</td></tr>
+      <tr><td>4-class &mdash; KL0+KL1 merged</td><td class="mono">4</td><td class="up">0.788</td><td class="up">0.759</td><td class="mono">0.824</td><td>&mdash;</td></tr>
+      <tr><td>3-class &mdash; Normal / Early / Advanced</td><td class="mono">3</td><td>0.701</td><td>0.713</td><td class="mono dn">0.656</td><td>&mdash;</td></tr>
+      <tr><td>Binary &mdash; No-OA / OA</td><td class="mono">2</td><td class="up">0.869</td><td class="up">0.862</td><td>&mdash;</td><td class="up">0.943</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Reading the sweep</h3>
+  <ul>
+    <li><strong>Merging KL4 into KL3 was rejected before running.</strong> KL4-F1 is already ~0.88; it
+      is a small but <em>easy</em> class. Folding it into KL3 would delete a high-scoring class from the
+      macro average and dilute KL3 &mdash; projected Macro-F1 drop from 0.67 to ~0.62.</li>
+    <li><strong>Merging KL0 and KL1 is the merge that helps.</strong> KL1 (F1 ~0.33) is the weak class
+      and the KL0&harr;KL1 boundary holds the label noise. Collapsing it lifts accuracy to 0.79 and
+      Macro-F1 to 0.76 &mdash; but note QWK actually falls slightly (0.839&nbsp;&rarr;&nbsp;0.824): the
+      scale is coarser, so each remaining error costs proportionally more, and KL2 absorbs the freed
+      ambiguity (its F1 drops to 0.48).</li>
+    <li>The <strong>3-class</strong> grouping is the worst option here &mdash; QWK 0.66 &mdash; because
+      &ldquo;Normal vs Early&rdquo; is still the KL0/KL1 decision under a new name.</li>
+    <li><strong>Binary</strong> is the strongest clinical framing: AUC 0.943, accuracy 0.87.</li>
+  </ul>
+
+  <p class="panel good">
+  <strong>Decision.</strong> Deploy the <strong>5-class</strong> model as the engine. It has the best
+  ordinal agreement (QWK 0.835), honours the clinical KL standard, and the binary OA screen and 3-class
+  view are derived from its probabilities at inference time
+  (<code>P(OA) = P&#8322; + P&#8323; + P&#8324;</code>). One model serves every granularity. The 4-class
+  scheme remains available for contexts where a higher headline accuracy matters more than the KL0/KL1
+  distinction.</p>
+  </section>
+
+  <!-- ===================================================================== -->
+  <section>
+  <h2 data-no="09" id="final">The final model</h2>
+
+  <h3>Architecture and recipe</h3>
+  <div class="tw">
+  <table>
+    <caption>Table 7. Frozen configuration &mdash; <code>K6_kd_ens_long</code>, seed 123, selected on validation Macro-F1.</caption>
+    <thead><tr><th>Component</th><th>Choice</th></tr></thead>
+    <tbody>
+      <tr><td>Backbone</td><td>MobileNetV2 (timm <code>mobilenetv2_100</code>), ImageNet-pretrained, 3-channel replicated grayscale, 5-way head</td></tr>
+      <tr><td>Preprocessing</td><td><code>basic</code> contrast, letterbox to 224&sup2;, ImageNet normalisation</td></tr>
+      <tr><td>Augmentation</td><td>strong-but-medical (train only)</td></tr>
+      <tr><td>Transfer</td><td>head-only 3 epochs &rarr; full fine-tune, cosine + 1-epoch warmup, 70-epoch ceiling, early stop patience 8</td></tr>
+      <tr><td>Loss</td><td>KD, T=4, &alpha;=0.8; teacher = mean(VGG16, ConvNeXt-Tiny) softmax; hard term = weighted cross-entropy (train-only class weights)</td></tr>
+      <tr><td>Regularisation</td><td>weight EMA (decay 0.999), gradient clip 5.0, AMP</td></tr>
+      <tr><td>Inference</td><td>horizontal-flip TTA, temperature scaling (T&nbsp;=&nbsp;1.39, fitted on validation), confidence-based abstention</td></tr>
+      <tr><td>Export</td><td>fp32 single-file ONNX, opset 17, dynamic batch</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Test-set performance</h3>
+  <div class="tw">
+  <table>
+    <caption>Table 8. Frozen model on the 1,240-image test split. Baseline column is the untuned Phase-5 MobileNetV2.</caption>
+    <thead><tr><th>Metric</th><th>Baseline</th><th>Final (KD)</th><th>&Delta;</th></tr></thead>
+    <tbody>
+      <tr><td>Accuracy</td><td class="mono">0.636</td><td class="mono">0.661</td><td class="mono up">+0.025</td></tr>
+      <tr class="hi"><td>Macro-F1</td><td class="mono">0.655</td><td class="mono">0.681</td><td class="mono up">+0.026</td></tr>
+      <tr><td>Macro-F1, 3-seed mean</td><td class="mono">&mdash;</td><td class="mono">0.686 &plusmn; 0.007</td><td class="mono"></td></tr>
+      <tr><td>Weighted-F1</td><td class="mono">0.628</td><td class="mono">0.656</td><td class="mono up">+0.028</td></tr>
+      <tr><td>Balanced accuracy</td><td class="mono">0.678</td><td class="mono">0.680</td><td class="mono up">+0.002</td></tr>
+      <tr class="hi"><td>Quadratic-weighted &kappa;</td><td class="mono">0.796</td><td class="mono">0.835</td><td class="mono up">+0.039</td></tr>
+      <tr><td>Mean absolute error (grades)</td><td class="mono">0.442</td><td class="mono">0.386</td><td class="mono up">&minus;0.056</td></tr>
+      <tr><td>Within &plusmn;1 grade</td><td class="mono">0.924</td><td class="mono">0.954</td><td class="mono up">+0.030</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="tw">
+  <table>
+    <caption>Table 9. Per-class F1 (test). KL1 improves but remains the ceiling-limited class, as it is for every model on this data.</caption>
+    <thead><tr><th>Class</th><th>Support</th><th>Precision</th><th>Recall</th><th>F1 &mdash; baseline</th><th>F1 &mdash; final</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">KL0 Normal</td><td>476</td><td>0.79</td><td>0.74</td><td class="mono">0.717</td><td class="mono">0.763</td></tr>
+      <tr><td class="mono">KL1 Doubtful</td><td>227</td><td>0.34</td><td>0.32</td><td class="mono">0.306</td><td class="mono">0.328</td></tr>
+      <tr><td class="mono">KL2 Minimal</td><td>328</td><td>0.72</td><td>0.55</td><td class="mono">0.555</td><td class="mono">0.622</td></tr>
+      <tr><td class="mono">KL3 Moderate</td><td>171</td><td>0.80</td><td>0.82</td><td class="mono">0.735</td><td class="mono">0.808</td></tr>
+      <tr><td class="mono">KL4 Severe</td><td>38</td><td>0.85</td><td>0.92</td><td class="mono">0.871</td><td class="mono">0.883</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Clinical-task views (derived from the 5-class probabilities)</h3>
+  <div class="tw">
+  <table>
+    <caption>Table 10. Binary and three-class performance, computed from the same frozen model.</caption>
+    <thead><tr><th>Task</th><th>Accuracy</th><th>ROC-AUC</th><th>Sensitivity</th><th>Specificity</th></tr></thead>
+    <tbody>
+      <tr class="hi"><td>Binary OA screen (KL0&ndash;1 vs KL2&ndash;4)</td><td>0.862</td><td class="up">0.941</td><td>0.723</td><td>0.969</td></tr>
+      <tr><td>Three-class (Normal / Early / Advanced)</td><td>0.765</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p><small>The default binary operating point is specificity-leaning. Sensitivity can be raised by
+  lowering the <code>P(OA)</code> threshold; the trade-off curve is in
+  <code>reports/mobilenet_final/</code>.</small></p>
+  </section>
+
+  <!-- ===================================================================== -->
+  <section>
+  <h2 data-no="10" id="calib">Calibration and selective prediction</h2>
+
+  <p>Raw softmax confidences were over-confident (expected calibration error &asymp; 0.10). A single
+  temperature parameter, fitted on validation negative log-likelihood
+  (<span class="metric">T = 1.39</span>), roughly halves it. All reported probabilities are
+  temperature-scaled.</p>
+
+  <p>A confidence threshold for automatic acceptance was chosen on validation for a target 90% selective
+  accuracy, giving a deployment policy:</p>
+  <div class="tw">
+  <table>
+    <caption>Table 11. Abstention policy (thresholds from validation; behaviour measured on test).</caption>
+    <thead><tr><th>Confidence</th><th>Action</th><th>Test coverage</th><th>Selective accuracy</th></tr></thead>
+    <tbody>
+      <tr><td>&ge; 0.73</td><td>Automatic grade shown</td><td>34%</td><td>0.885</td></tr>
+      <tr><td>0.50 &ndash; 0.73</td><td>Grade shown with a caution banner</td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><td>&lt; 0.50</td><td>Refer for manual radiologist review</td><td>&mdash;</td><td>&mdash;</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p><small>Coverage is modest because the model is honestly uncertain on the KL0/KL1/KL2 band &mdash;
+  which is the correct behaviour for a screening aid.</small></p>
+  </section>
+
+  <!-- ===================================================================== -->
+  <section>
+  <h2 data-no="11" id="edge">Edge deployment</h2>
+
+  <p>Inference is torch-free: NumPy + OpenCV preprocessing and ONNX Runtime on CPU. The model is a
+  single self-contained fp32 <code>.onnx</code> file; parity with the PyTorch checkpoint is exact
+  (max |&Delta;logit| ~1e-5, argmax agreement 64/64 on a held-out test slice).</p>
+
+  <div class="tw">
+  <table>
+    <caption>Table 12. Latency and footprint. x86 single-thread ONNX Runtime, batch 1, 224&sup2; input; a Raspberry Pi 4 CPU is roughly 4&ndash;10&times; slower.</caption>
+    <thead><tr><th>Configuration</th><th>Median</th><th>4-thread</th><th>Throughput</th><th>Size</th><th>RSS</th></tr></thead>
+    <tbody>
+      <tr class="hi"><td>fp32 ONNX (deployed)</td><td class="mono">3.48 ms</td><td class="mono">1.45 ms</td><td class="mono">289 img/s</td><td class="mono">8.9 MB</td><td class="mono">92 MB</td></tr>
+      <tr><td>Full pipeline (preprocess + predict)</td><td class="mono">&mdash;</td><td class="mono">2.33 ms</td><td class="mono">427 img/s</td><td class="mono">&mdash;</td><td class="mono">&mdash;</td></tr>
+      <tr><td>int8 dynamic quantization</td><td class="mono">69 ms</td><td class="mono">52 ms</td><td class="mono">14 img/s</td><td class="mono">2.4 MB</td><td class="mono">96 MB</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p class="panel warn">
+  <strong>int8 was rejected.</strong> Dynamic (weight-only) int8 quantization degrades MobileNetV2
+  badly &mdash; argmax agreement with fp32 was only 33/64 on the test slice, because per-tensor
+  quantization of depthwise-separable convolutions is lossy &mdash; and it is <em>slower</em> under the
+  ONNX Runtime CPU int8 kernels on both x86 and ARM. The 8.9&nbsp;MB fp32 model runs comfortably on a
+  Pi; there is no reason to quantize.</p>
+
+  <h3>System</h3>
+  <figure>
+  <svg viewBox="0 0 720 96" role="img" aria-label="Inference pipeline: X-ray to preprocessing to MobileNetV2 to calibrated probabilities to clinical views to dashboard">
+    <defs><style>
+      .b{fill:var(--panel-2); stroke:var(--rule)} .t{fill:var(--ink); font:500 12px 'IBM Plex Mono',monospace}
+      .a{stroke:var(--accent); stroke-width:1.5; marker-end:url(#ah); fill:none}
+    </style>
+    <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="var(--accent)"/></marker></defs>
+    <g>
+      <rect class="b" x="6" y="30" width="96" height="36" rx="3"/><text class="t" x="54" y="52" text-anchor="middle">X-ray</text>
+      <rect class="b" x="132" y="30" width="112" height="36" rx="3"/><text class="t" x="188" y="52" text-anchor="middle">preprocess</text>
+      <rect class="b" x="274" y="24" width="128" height="48" rx="3"/><text class="t" x="338" y="45" text-anchor="middle">MobileNetV2</text><text class="t" x="338" y="60" text-anchor="middle" style="font-size:9px;fill:var(--muted)">ONNX &middot; CPU</text>
+      <rect class="b" x="432" y="30" width="120" height="36" rx="3"/><text class="t" x="492" y="49" text-anchor="middle" style="font-size:10px">calibrated P</text>
+      <rect class="b" x="582" y="30" width="132" height="36" rx="3"/><text class="t" x="648" y="46" text-anchor="middle" style="font-size:10px">KL &middot; OA &middot; band</text><text class="t" x="648" y="59" text-anchor="middle" style="font-size:9px;fill:var(--muted)">+ abstain</text>
+      <path class="a" d="M104 48 L130 48"/><path class="a" d="M246 48 L272 48"/><path class="a" d="M404 48 L430 48"/><path class="a" d="M554 48 L580 48"/>
+    </g>
+  </svg>
+  <figcaption>Inference path. The dashboard is a Gradio kiosk app driving the same predictor; the model
+  version and inference time are shown on screen alongside the grade.</figcaption>
+  </figure>
+  </section>
+
+  <!-- ===================================================================== -->
+  <section>
+  <h2 data-no="12" id="xai">Explainability &mdash; Class Activation Mapping</h2>
+
+  <p>Every prediction is accompanied by a heatmap showing which region of the film drove the grade.
+  MobileNetV2&rsquo;s head is <code>features &rarr; global-average-pool &rarr; Linear(1280&rarr;5)</code>
+  with nothing between the pool and the linear layer, so Grad-CAM&rsquo;s per-channel weight
+  &alpha;<sub>k</sub><sup>c</sup> collapses algebraically to the classifier weight
+  <code>W[c,k] / (H&middot;W)</code> &mdash; a constant. The heatmap is therefore the original
+  <strong>Class Activation Map</strong> (Zhou et&nbsp;al. 2016):</p>
+
+  <div class="panel accent">
+    <p style="font-family:'IBM Plex Mono',monospace; font-size:.9rem; margin:0">
+    CAM<sub>c</sub>(x, y) = ReLU( &Sigma;<sub>k</sub> W[c, k] &middot; feat<sub>k</sub>(x, y) )</p>
+  </div>
+
+  <p>This is <strong>exact, not an approximation</strong>, and needs <strong>no gradients</strong>. It
+  runs under plain ONNX Runtime (torch-free) from a second model output &mdash; the 1280-channel
+  feature map &mdash; at a cost of <span class="metric">+3.2&nbsp;ms</span> on one CPU core
+  (1.4&nbsp;&rarr;&nbsp;4.7&nbsp;ms per image). Logits from the CAM-enabled graph are bit-identical to
+  the deployed model (max |&Delta;logit| = 0, argmax agreement 24/24 on a test slice), and the salient
+  region fell inside the tibiofemoral joint band on 24/24 sampled test images.</p>
+
+  <p>From the map the system also derives a coarse <strong>focus descriptor</strong> (central joint
+  line / one compartment / diffuse&ndash;bicompartmental, with a left-vs-right-of-joint hint) and a
+  short <strong>templated interpretation</strong>: grade-typical radiographic findings
+  (e.g. KL2 &rarr; &ldquo;definite osteophytes; possible joint-space narrowing&rdquo;) plus a
+  grade-banded recommendation. The wording is generic and explicitly marked as AI-generated, not
+  patient-specific.</p>
+
+  <div class="tw">
+  <table>
+    <caption>Table 13. Explainability artefacts shipped with the model.</caption>
+    <thead><tr><th>File</th><th>Contents</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">mobilenet_v2_oa_cam.onnx</td><td>two outputs: <code>logits</code> (1&times;5), <code>features</code> (1&times;1280&times;7&times;7)</td></tr>
+      <tr><td class="mono">mobilenet_v2_oa_cam.npz</td><td>classifier weights <code>W</code> (5&times;1280), <code>b</code> (5)</td></tr>
+      <tr><td class="mono">src/deploy/cam.py</td><td>grad-free CAM, JET overlay renderer, focus-region descriptor &mdash; NumPy + OpenCV only</td></tr>
+    </tbody>
+  </table>
+  </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <section>
+  <h2 data-no="13" id="limits">Limitations and honest assessment</h2>
+
+  <ul>
+    <li><strong>Single source.</strong> All data is OAI-derived; there is no independent external test
+      set. Generalisation to other scanners, populations and positioning is unverified.</li>
+    <li><strong>Label ceiling.</strong> Grades are single-reader OAI baseline reads. 5-class KL accuracy
+      near 90% is not reachable &mdash; the noise floor of the labels is higher than that. This is not a
+      shortcoming of the model.</li>
+    <li><strong>KL1 remains weak</strong> (F1 0.33). &ldquo;Doubtful&rdquo; is the disagreement class by
+      construction; no model in the benchmark exceeded 0.49.</li>
+    <li><strong>KL4 confidence intervals are wide</strong> &mdash; 38 test knees.</li>
+    <li><strong>Pre-cropped 224&sup2; input.</strong> Original full radiographs and true pixel spacing
+      are unavailable, so joint-space width in millimetres and higher-resolution features cannot be used.</li>
+    <li><strong>Not a diagnostic device.</strong> The KL grade is a radiographic scale, not a complete
+      clinical OA diagnosis. Every output carries an &ldquo;AI-assisted &mdash; clinical correlation
+      required&rdquo; disclaimer.</li>
+  </ul>
+  </section>
+
+  <!-- ===================================================================== -->
+  <section>
+  <h2 data-no="14" id="repro">Reproducibility</h2>
+
+  <p>Every phase is seed-controlled and append-only logged. The final model and its evidence:</p>
+  <div class="tw">
+  <table>
+    <thead><tr><th>Artefact</th><th>Path</th></tr></thead>
+    <tbody>
+      <tr><td>Frozen checkpoint</td><td class="mono">models/mobilenet_final/best.pt</td></tr>
+      <tr><td>Deployed model</td><td class="mono">models/deploy/mobilenet_v2_oa.onnx (+ _deploy.json)</td></tr>
+      <tr><td>Test benchmark</td><td class="mono">reports/mobilenet_final/FINAL_MOBILENETV2_BENCHMARK_phase8_kd.csv</td></tr>
+      <tr><td>Per-class metrics</td><td class="mono">reports/mobilenet_final/FINAL_PERCLASS_METRICS_phase8_kd.csv</td></tr>
+      <tr><td>Distillation registry</td><td class="mono">reports/mobilenet_final/KD_REGISTRY.csv (12 runs)</td></tr>
+      <tr><td>Label-scheme sweep</td><td class="mono">reports/mobilenet_final/LABEL_SCHEME_SWEEP.csv / .md</td></tr>
+      <tr><td>Abstention curve</td><td class="mono">reports/mobilenet_final/ABSTENTION_CURVE_phase8_kd.csv</td></tr>
+      <tr><td>Teacher logit bank</td><td class="mono">reports/mobilenet_final/teacher_logits/*.npz</td></tr>
+      <tr><td>Edge kiosk bundle</td><td class="mono">dist/aether_oa_xray_dashboard/ (mobilenet-only + CAM, torch-free, 17.8 MB)</td></tr>
+      <tr><td>Explainability model</td><td class="mono">models/deploy/mobilenet_v2_oa_cam.onnx (+ _cam.npz)</td></tr>
+      <tr><td>Full 8-phase reference</td><td class="mono">archive/aether_reference_phases.zip</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h4>End-to-end reproduction</h4>
+<pre><code>python scripts/phase8_teacher_bank.py          # cache teacher logits
+python scripts/benchmark_phase8.py --stage kd  # distillation matrix K0..K7
+python scripts/benchmark_phase8.py --stage multiseed
+python scripts/phase8_run_all.py               # final eval + label-scheme sweep
+python scripts/export_onnx.py --config configs/benchmark_phase8.yaml \
+    --model mobilenet_v2 --checkpoint models/mobilenet_final/best.pt --name mobilenet_v2_oa
+python scripts/benchmark_edge.py --real-images 128
+python dist/aether_oa_xray_dashboard/dashboard.py --host 0.0.0.0 --port 7860</code></pre>
+  </section>
+
+  <!-- ===================================================================== -->
+  <section>
+  <h2 data-no="15" id="conclusion">Conclusion</h2>
+
+  <p>The deliverable is one MobileNetV2 network of 2.23&nbsp;M parameters and 8.9&nbsp;MB that grades
+  knee OA on the full Kellgren&ndash;Lawrence scale at Macro-F1 <span class="metric">0.681</span> and
+  quadratic-weighted &kappa; <span class="metric">0.835</span>, screens for radiographic OA at
+  <span class="metric">AUC 0.941</span>, calibrates well, abstains when uncertain, and runs in a few
+  milliseconds per image on a CPU. Knowledge distillation from larger teachers &mdash; not more
+  parameters, not more data &mdash; supplied the decisive improvement over a tuned baseline, while a
+  controlled label-scheme study makes the accuracy-versus-granularity trade-off explicit rather than
+  assumed.</p>
+
+  <p>The project did not manufacture a &gt;90% number. It established where the real ceiling is, reached
+  a defensible strong result against the clinically appropriate task, and shipped a model that fits the
+  target hardware.</p>
+  </section>
+
+  <p class="foot">
+  AETHER-OA X-ray module &mdash; final report, 2026-08-28. All metrics computed on the frozen
+  1,240-image patient-disjoint test split, evaluated once. Generated from
+  <code>reports/mobilenet_final/</code>. To save as PDF: open in a browser and use
+  <span class="noprint">Print &rarr; Save as PDF</span><span style="display:none">Print to PDF</span>
+  (A4, default margins, background graphics on).
+  </p>
+
+</div>

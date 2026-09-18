@@ -1,0 +1,200 @@
+{
+  "experiment_id": "convnext_tiny__M_difflr__seed123",
+  "family": "multiseed",
+  "model": "convnext_tiny",
+  "seed": 123,
+  "ordinal": "",
+  "ema": false,
+  "preprocessing": "basic",
+  "loss": "weighted_cross_entropy",
+  "imbalance": "weighted_ce",
+  "augmentation": "augmentation.yaml",
+  "differential_lr": true,
+  "stage_a_epochs": 5,
+  "weight_decay": 5e-05,
+  "max_epochs": 50,
+  "patience": 5,
+  "best_epoch": 16,
+  "epochs_run": 21,
+  "stopped_early": true,
+  "val_accuracy": 0.6325,
+  "val_macro_f1": 0.6769,
+  "val_weighted_f1": 0.6366,
+  "val_balanced_accuracy": 0.6802,
+  "val_qwk": 0.7694,
+  "val_KL0_F1": 0.6851,
+  "val_KL1_F1": 0.3179,
+  "val_KL2_F1": 0.6618,
+  "val_KL3_F1": 0.8133,
+  "val_KL4_F1": 0.9067,
+  "val_binary_oa_acc": 0.8288,
+  "val_binary_oa_auc": 0.9253,
+  "val_3class_acc": 0.7496,
+  "val_mae": 0.4483,
+  "val_within1": 0.92,
+  "parameters": 27823973,
+  "model_size_mb": 106.198,
+  "gmacs": 4.4697,
+  "gpu_latency_ms": 3.7706,
+  "cpu_latency_ms": 20.6661,
+  "training_time_sec": 156.6,
+  "checkpoint": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\models\\phase7\\convnext_tiny__M_difflr__seed123\\best.pt",
+  "note": "convnext_tiny__M_difflr @ seed 123",
+  "val_full": {
+    "n_samples": 1238,
+    "accuracy": 0.6324717285945073,
+    "balanced_accuracy": 0.6802293573859743,
+    "macro_precision": 0.6905634036637667,
+    "macro_recall": 0.6802293573859743,
+    "macro_f1": 0.6769483308860987,
+    "weighted_f1": 0.6365617532721142,
+    "cohen_kappa": 0.5004358958213422,
+    "quadratic_weighted_kappa": 0.7693843973976797,
+    "per_class": {
+      "KL0": {
+        "precision": 0.8189655172413793,
+        "recall": 0.5888429752066116,
+        "f1": 0.6850961538461539,
+        "support": 484
+      },
+      "KL1": {
+        "precision": 0.3090128755364807,
+        "recall": 0.32727272727272727,
+        "f1": 0.31788079470198677,
+        "support": 220
+      },
+      "KL2": {
+        "precision": 0.5648535564853556,
+        "recall": 0.7988165680473372,
+        "f1": 0.6617647058823529,
+        "support": 338
+      },
+      "KL3": {
+        "precision": 0.8652482269503546,
+        "recall": 0.7672955974842768,
+        "f1": 0.8133333333333334,
+        "support": 159
+      },
+      "KL4": {
+        "precision": 0.8947368421052632,
+        "recall": 0.918918918918919,
+        "f1": 0.9066666666666666,
+        "support": 37
+      }
+    },
+    "kl0_f1": 0.6850961538461539,
+    "kl0_precision": 0.8189655172413793,
+    "kl0_recall": 0.5888429752066116,
+    "kl0_support": 484,
+    "kl1_f1": 0.31788079470198677,
+    "kl1_precision": 0.3090128755364807,
+    "kl1_recall": 0.32727272727272727,
+    "kl1_support": 220,
+    "kl2_f1": 0.6617647058823529,
+    "kl2_precision": 0.5648535564853556,
+    "kl2_recall": 0.7988165680473372,
+    "kl2_support": 338,
+    "kl3_f1": 0.8133333333333334,
+    "kl3_precision": 0.8652482269503546,
+    "kl3_recall": 0.7672955974842768,
+    "kl3_support": 159,
+    "kl4_f1": 0.9066666666666666,
+    "kl4_precision": 0.8947368421052632,
+    "kl4_recall": 0.918918918918919,
+    "kl4_support": 37,
+    "confusion_matrix": [
+      [
+        285,
+        121,
+        77,
+        1,
+        0
+      ],
+      [
+        46,
+        72,
+        102,
+        0,
+        0
+      ],
+      [
+        17,
+        36,
+        270,
+        15,
+        0
+      ],
+      [
+        0,
+        4,
+        29,
+        122,
+        4
+      ],
+      [
+        0,
+        0,
+        0,
+        3,
+        34
+      ]
+    ],
+    "confusion_matrix_normalized": [
+      [
+        0.5888429752066116,
+        0.25,
+        0.1590909090909091,
+        0.002066115702479339,
+        0.0
+      ],
+      [
+        0.20909090909090908,
+        0.32727272727272727,
+        0.4636363636363636,
+        0.0,
+        0.0
+      ],
+      [
+        0.05029585798816568,
+        0.10650887573964497,
+        0.7988165680473372,
+        0.04437869822485207,
+        0.0
+      ],
+      [
+        0.0,
+        0.025157232704402517,
+        0.18238993710691823,
+        0.7672955974842768,
+        0.025157232704402517
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.08108108108108109,
+        0.918918918918919
+      ]
+    ],
+    "adjacent_confusions": {
+      "KL1_as_KL2": 102,
+      "KL2_as_KL1": 36,
+      "KL2_as_KL3": 15,
+      "KL3_as_KL2": 29,
+      "KL3_as_KL4": 4,
+      "KL4_as_KL3": 3
+    },
+    "errors_off_by_1": 356,
+    "errors_off_by_2plus": 99,
+    "roc_auc_ovr_macro": 0.8917486426599506,
+    "roc_auc_ovr_weighted": 0.8707897534110016,
+    "roc_auc_per_class_ovr": {
+      "KL0": 0.8982944954731789,
+      "KL1": 0.7139399892838006,
+      "KL2": 0.8683464825772517,
+      "KL3": 0.9795349758977856,
+      "KL4": 0.9986272700677363
+    },
+    "loss": 0.8430652784993075
+  }
+}

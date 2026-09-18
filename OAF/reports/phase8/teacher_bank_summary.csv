@@ -1,0 +1,5 @@
+teacher,split,n,acc
+vgg16,train,5782,0.78
+vgg16,val,1238,0.6696
+convnext_tiny,train,5782,0.7492
+convnext_tiny,val,1238,0.6785

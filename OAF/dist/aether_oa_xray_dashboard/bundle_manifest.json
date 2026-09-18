@@ -1,0 +1,52 @@
+{
+  "models": [
+    "mobilenet_v2_oa"
+  ],
+  "default": "mobilenet_v2_oa",
+  "cards": {
+    "mobilenet_v2_oa": {
+      "model": "mobilenet_v2_oa",
+      "arch": "mobilenet_v2",
+      "backbone": "mobilenetv2_100",
+      "backend": "timm",
+      "onnx_fp32": "mobilenet_v2_oa.onnx",
+      "onnx_int8": null,
+      "opset": 17,
+      "input": "1x3x224x224 float32 (grayscale->3ch replicate, ImageNet norm)",
+      "temperature": 1.3934,
+      "abstain_threshold": 0.73,
+      "abstain_note": "confidence < 0.73 => REFER (val: 30% coverage @ 90% selective accuracy)",
+      "parameters": 2230277,
+      "parameters_millions": 2.23,
+      "checkpoint": "models/phase8/K6_kd_ens_long__seed123/best.pt",
+      "checkpoint_val_macro_f1": 0.6894845862564097,
+      "onnx_pytorch_parity_max_abs_logit_diff": 1.2e-05,
+      "onnx_pytorch_argmax_agreement": "64/64",
+      "int8_vs_fp32_argmax_agreement": null,
+      "test_metrics": {
+        "accuracy": 0.6605,
+        "macro_f1": 0.6809,
+        "weighted_f1": 0.6559,
+        "balanced_accuracy": 0.6804,
+        "qwk": 0.8345,
+        "kl4_f1": 0.8831,
+        "mae": 0.3863,
+        "within_1_accuracy": 0.954,
+        "per_class_f1": {
+          "KL0": 0.7629,
+          "KL1": 0.3283,
+          "KL2": 0.6218,
+          "KL3": 0.8081,
+          "KL4": 0.8831
+        }
+      },
+      "class_names": {
+        "0": "KL0 Normal",
+        "1": "KL1 Doubtful",
+        "2": "KL2 Minimal OA",
+        "3": "KL3 Moderate OA",
+        "4": "KL4 Severe OA"
+      }
+    }
+  }
+}

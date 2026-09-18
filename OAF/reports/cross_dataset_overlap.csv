@@ -1,0 +1,11 @@
+check,value
+kaggle_unique_patients,4130
+oai_summary_unique_patients,4508
+kaggle_patients_present_in_oai,4130
+kaggle_patients_absent_from_oai,0
+kaggle_patients_in_oai_baseline_00m,4130
+manual_knees_KL_agree_with_oai_00m,8260
+manual_knees_KL_disagree_with_oai_00m,0
+manual_knees_not_found_in_oai_00m,0
+kl_disagreement_examples,(none)
+VERDICT,SAME_SOURCE: Kaggle images are OAI baseline (00m) knee ROIs; datasets are NOT independent - do NOT merge (identical underlying scans / patients).

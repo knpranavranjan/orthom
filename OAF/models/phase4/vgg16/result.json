@@ -1,0 +1,113 @@
+{
+  "model": "vgg16",
+  "timm_name": "vgg16",
+  "accuracy": 0.6688206785137318,
+  "macro_precision": 0.7170908851859848,
+  "macro_recall": 0.7057532516207803,
+  "macro_f1": 0.7077299594325329,
+  "weighted_f1": 0.6778610242129454,
+  "balanced_accuracy": 0.7057532516207803,
+  "cohen_kappa": 0.5464196480592501,
+  "quadratic_weighted_kappa": 0.8440542936525102,
+  "roc_auc_ovr_macro": 0.8997441453035036,
+  "kl0_f1": 0.7713097713097713,
+  "kl1_f1": 0.3769230769230769,
+  "kl2_f1": 0.6423841059602649,
+  "kl3_f1": 0.8291139240506329,
+  "kl4_f1": 0.918918918918919,
+  "kl0_support": 484,
+  "kl1_support": 220,
+  "kl2_support": 338,
+  "kl3_support": 159,
+  "kl4_support": 37,
+  "parameters": 134281029,
+  "trainable_parameters": 134281029,
+  "non_trainable_parameters": 0,
+  "model_size_mb": 512.253,
+  "gmacs": 15.4662,
+  "flops_or_macs": 15.4662,
+  "flops_estimate_g": 30.9324,
+  "gmacs_method": "fvcore.FlopCountAnalysis (MAC=1)",
+  "mean_latency_ms": 3.3027,
+  "median_latency_ms": 3.4014,
+  "std_latency_ms": 0.2551,
+  "min_latency_ms": 2.9486,
+  "max_latency_ms": 4.0161,
+  "throughput_images_per_sec": 302.79,
+  "latency_device": "cuda",
+  "cpu_mean_latency_ms": 60.2504,
+  "peak_memory_mb": 2092.12,
+  "train_peak_cuda_mb": 3091.56,
+  "best_epoch": 21,
+  "epochs_run": 26,
+  "training_time_sec": 520.3,
+  "training_time": 520.3,
+  "stopped_early": true,
+  "adjacent_confusions": {
+    "KL1_as_KL2": 41,
+    "KL2_as_KL1": 95,
+    "KL2_as_KL3": 23,
+    "KL3_as_KL2": 21,
+    "KL3_as_KL4": 3,
+    "KL4_as_KL3": 3
+  },
+  "confusion_matrix": [
+    [
+      371,
+      103,
+      10,
+      0,
+      0
+    ],
+    [
+      81,
+      98,
+      41,
+      0,
+      0
+    ],
+    [
+      26,
+      95,
+      194,
+      23,
+      0
+    ],
+    [
+      0,
+      4,
+      21,
+      131,
+      3
+    ],
+    [
+      0,
+      0,
+      0,
+      3,
+      34
+    ]
+  ],
+  "gradcam_layer_candidates": [
+    "pre_logits.fc2"
+  ],
+  "backend": "timm",
+  "preprocessing_variant": "basic",
+  "loss_name": "weighted_cross_entropy",
+  "seed": 42,
+  "stage_a_epochs": 3,
+  "max_epochs_budget": 50,
+  "patience": 5,
+  "differential_lr": null,
+  "artefacts": {
+    "best_ckpt": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\models\\phase4\\vgg16\\best.pt",
+    "confusion": {
+      "raw": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase4\\confusion_matrices\\vgg16_confusion_matrix.png",
+      "normalized": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase4\\confusion_matrices\\vgg16_confusion_matrix_normalized.png"
+    },
+    "training_curve": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase4\\training_curves\\vgg16_training_curve.png",
+    "config": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\models\\phase4\\vgg16\\config.json"
+  },
+  "phase": "phase4",
+  "max_epochs_config": 50
+}

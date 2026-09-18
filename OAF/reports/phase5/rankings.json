@@ -1,0 +1,849 @@
+{
+  "test_macro_f1": [
+    {
+      "rank": 1,
+      "model": "vgg16",
+      "macro_f1": 0.7382433076367481
+    },
+    {
+      "rank": 2,
+      "model": "convnext_tiny",
+      "macro_f1": 0.7168914279472121
+    },
+    {
+      "rank": 3,
+      "model": "vgg19",
+      "macro_f1": 0.7109701033602291
+    },
+    {
+      "rank": 4,
+      "model": "densenet121",
+      "macro_f1": 0.7061225172697967
+    },
+    {
+      "rank": 5,
+      "model": "inception_v3",
+      "macro_f1": 0.705040907937444
+    },
+    {
+      "rank": 6,
+      "model": "resnet50",
+      "macro_f1": 0.6967157165920742
+    },
+    {
+      "rank": 7,
+      "model": "efficientnet_b1",
+      "macro_f1": 0.6741587353960605
+    },
+    {
+      "rank": 8,
+      "model": "googlenet",
+      "macro_f1": 0.671522912940926
+    },
+    {
+      "rank": 9,
+      "model": "efficientnet_b0",
+      "macro_f1": 0.6704710085541505
+    },
+    {
+      "rank": 10,
+      "model": "resnet18",
+      "macro_f1": 0.6595255547071502
+    },
+    {
+      "rank": 11,
+      "model": "shufflenet",
+      "macro_f1": 0.6582938064783361
+    },
+    {
+      "rank": 12,
+      "model": "mobilenet_v2",
+      "macro_f1": 0.6546650479487768
+    },
+    {
+      "rank": 13,
+      "model": "mobilenet_v3_large",
+      "macro_f1": 0.6517877986039696
+    },
+    {
+      "rank": 14,
+      "model": "squeezenet",
+      "macro_f1": 0.647375783022058
+    },
+    {
+      "rank": 15,
+      "model": "xception",
+      "macro_f1": 0.6350338122946517
+    }
+  ],
+  "test_accuracy": [
+    {
+      "rank": 1,
+      "model": "vgg16",
+      "accuracy": 0.7258064516129032
+    },
+    {
+      "rank": 2,
+      "model": "convnext_tiny",
+      "accuracy": 0.6967741935483871
+    },
+    {
+      "rank": 3,
+      "model": "vgg19",
+      "accuracy": 0.6895161290322581
+    },
+    {
+      "rank": 4,
+      "model": "densenet121",
+      "accuracy": 0.6862903225806452
+    },
+    {
+      "rank": 5,
+      "model": "inception_v3",
+      "accuracy": 0.6862903225806452
+    },
+    {
+      "rank": 6,
+      "model": "resnet50",
+      "accuracy": 0.6524193548387097
+    },
+    {
+      "rank": 7,
+      "model": "efficientnet_b0",
+      "accuracy": 0.6516129032258065
+    },
+    {
+      "rank": 8,
+      "model": "googlenet",
+      "accuracy": 0.646774193548387
+    },
+    {
+      "rank": 9,
+      "model": "mobilenet_v3_large",
+      "accuracy": 0.6459677419354839
+    },
+    {
+      "rank": 10,
+      "model": "mobilenet_v2",
+      "accuracy": 0.6362903225806451
+    },
+    {
+      "rank": 11,
+      "model": "efficientnet_b1",
+      "accuracy": 0.6314516129032258
+    },
+    {
+      "rank": 12,
+      "model": "xception",
+      "accuracy": 0.6290322580645161
+    },
+    {
+      "rank": 13,
+      "model": "resnet18",
+      "accuracy": 0.6282258064516129
+    },
+    {
+      "rank": 14,
+      "model": "shufflenet",
+      "accuracy": 0.6225806451612903
+    },
+    {
+      "rank": 15,
+      "model": "squeezenet",
+      "accuracy": 0.5959677419354839
+    }
+  ],
+  "test_macro_precision": [
+    {
+      "rank": 1,
+      "model": "vgg16",
+      "macro_precision": 0.7460579989211666
+    },
+    {
+      "rank": 2,
+      "model": "vgg19",
+      "macro_precision": 0.719106705290085
+    },
+    {
+      "rank": 3,
+      "model": "inception_v3",
+      "macro_precision": 0.7137812040173496
+    },
+    {
+      "rank": 4,
+      "model": "convnext_tiny",
+      "macro_precision": 0.7098488652123157
+    },
+    {
+      "rank": 5,
+      "model": "resnet50",
+      "macro_precision": 0.7042120098283291
+    },
+    {
+      "rank": 6,
+      "model": "densenet121",
+      "macro_precision": 0.7039107642882214
+    },
+    {
+      "rank": 7,
+      "model": "efficientnet_b1",
+      "macro_precision": 0.7026031785112009
+    },
+    {
+      "rank": 8,
+      "model": "shufflenet",
+      "macro_precision": 0.6817280614745951
+    },
+    {
+      "rank": 9,
+      "model": "efficientnet_b0",
+      "macro_precision": 0.6714327437485823
+    },
+    {
+      "rank": 10,
+      "model": "resnet18",
+      "macro_precision": 0.6666492845015765
+    },
+    {
+      "rank": 11,
+      "model": "googlenet",
+      "macro_precision": 0.6664875599185585
+    },
+    {
+      "rank": 12,
+      "model": "xception",
+      "macro_precision": 0.6589697929760865
+    },
+    {
+      "rank": 13,
+      "model": "squeezenet",
+      "macro_precision": 0.6563318971559388
+    },
+    {
+      "rank": 14,
+      "model": "mobilenet_v3_large",
+      "macro_precision": 0.644508267036332
+    },
+    {
+      "rank": 15,
+      "model": "mobilenet_v2",
+      "macro_precision": 0.637591789169366
+    }
+  ],
+  "test_macro_recall": [
+    {
+      "rank": 1,
+      "model": "vgg16",
+      "macro_recall": 0.7391927991500502
+    },
+    {
+      "rank": 2,
+      "model": "convnext_tiny",
+      "macro_recall": 0.7305811970763132
+    },
+    {
+      "rank": 3,
+      "model": "densenet121",
+      "macro_recall": 0.712429606799619
+    },
+    {
+      "rank": 4,
+      "model": "vgg19",
+      "macro_recall": 0.7123650745126108
+    },
+    {
+      "rank": 5,
+      "model": "inception_v3",
+      "macro_recall": 0.7053388381869292
+    },
+    {
+      "rank": 6,
+      "model": "resnet50",
+      "macro_recall": 0.6989549852653659
+    },
+    {
+      "rank": 7,
+      "model": "mobilenet_v2",
+      "macro_recall": 0.6779626751765553
+    },
+    {
+      "rank": 8,
+      "model": "googlenet",
+      "macro_recall": 0.677040731504506
+    },
+    {
+      "rank": 9,
+      "model": "efficientnet_b0",
+      "macro_recall": 0.6752540276505061
+    },
+    {
+      "rank": 10,
+      "model": "resnet18",
+      "macro_recall": 0.6707884435774841
+    },
+    {
+      "rank": 11,
+      "model": "efficientnet_b1",
+      "macro_recall": 0.6659639067267268
+    },
+    {
+      "rank": 12,
+      "model": "mobilenet_v3_large",
+      "macro_recall": 0.6632675609211713
+    },
+    {
+      "rank": 13,
+      "model": "shufflenet",
+      "macro_recall": 0.6531476845147587
+    },
+    {
+      "rank": 14,
+      "model": "squeezenet",
+      "macro_recall": 0.645524830321611
+    },
+    {
+      "rank": 15,
+      "model": "xception",
+      "macro_recall": 0.6246014407301095
+    }
+  ],
+  "test_weighted_f1": [
+    {
+      "rank": 1,
+      "model": "vgg16",
+      "weighted_f1": 0.7267481536490953
+    },
+    {
+      "rank": 2,
+      "model": "convnext_tiny",
+      "weighted_f1": 0.7022897776567192
+    },
+    {
+      "rank": 3,
+      "model": "vgg19",
+      "weighted_f1": 0.6918339002881162
+    },
+    {
+      "rank": 4,
+      "model": "densenet121",
+      "weighted_f1": 0.6854682637106772
+    },
+    {
+      "rank": 5,
+      "model": "inception_v3",
+      "weighted_f1": 0.6819509666792499
+    },
+    {
+      "rank": 6,
+      "model": "resnet50",
+      "weighted_f1": 0.6563683160155817
+    },
+    {
+      "rank": 7,
+      "model": "googlenet",
+      "weighted_f1": 0.6467069887114155
+    },
+    {
+      "rank": 8,
+      "model": "efficientnet_b1",
+      "weighted_f1": 0.6457502503207038
+    },
+    {
+      "rank": 9,
+      "model": "efficientnet_b0",
+      "weighted_f1": 0.6415137300628446
+    },
+    {
+      "rank": 10,
+      "model": "mobilenet_v3_large",
+      "weighted_f1": 0.6351208183560326
+    },
+    {
+      "rank": 11,
+      "model": "mobilenet_v2",
+      "weighted_f1": 0.6284052765840975
+    },
+    {
+      "rank": 12,
+      "model": "resnet18",
+      "weighted_f1": 0.6237444402496861
+    },
+    {
+      "rank": 13,
+      "model": "shufflenet",
+      "weighted_f1": 0.6178698319940326
+    },
+    {
+      "rank": 14,
+      "model": "xception",
+      "weighted_f1": 0.613820895013582
+    },
+    {
+      "rank": 15,
+      "model": "squeezenet",
+      "weighted_f1": 0.6045714410676495
+    }
+  ],
+  "test_balanced_accuracy": [
+    {
+      "rank": 1,
+      "model": "vgg16",
+      "balanced_accuracy": 0.7391927991500502
+    },
+    {
+      "rank": 2,
+      "model": "convnext_tiny",
+      "balanced_accuracy": 0.7305811970763132
+    },
+    {
+      "rank": 3,
+      "model": "densenet121",
+      "balanced_accuracy": 0.712429606799619
+    },
+    {
+      "rank": 4,
+      "model": "vgg19",
+      "balanced_accuracy": 0.7123650745126108
+    },
+    {
+      "rank": 5,
+      "model": "inception_v3",
+      "balanced_accuracy": 0.7053388381869292
+    },
+    {
+      "rank": 6,
+      "model": "resnet50",
+      "balanced_accuracy": 0.6989549852653659
+    },
+    {
+      "rank": 7,
+      "model": "mobilenet_v2",
+      "balanced_accuracy": 0.6779626751765553
+    },
+    {
+      "rank": 8,
+      "model": "googlenet",
+      "balanced_accuracy": 0.677040731504506
+    },
+    {
+      "rank": 9,
+      "model": "efficientnet_b0",
+      "balanced_accuracy": 0.6752540276505061
+    },
+    {
+      "rank": 10,
+      "model": "resnet18",
+      "balanced_accuracy": 0.6707884435774841
+    },
+    {
+      "rank": 11,
+      "model": "efficientnet_b1",
+      "balanced_accuracy": 0.6659639067267268
+    },
+    {
+      "rank": 12,
+      "model": "mobilenet_v3_large",
+      "balanced_accuracy": 0.6632675609211713
+    },
+    {
+      "rank": 13,
+      "model": "shufflenet",
+      "balanced_accuracy": 0.6531476845147587
+    },
+    {
+      "rank": 14,
+      "model": "squeezenet",
+      "balanced_accuracy": 0.645524830321611
+    },
+    {
+      "rank": 15,
+      "model": "xception",
+      "balanced_accuracy": 0.6246014407301095
+    }
+  ],
+  "test_qwk": [
+    {
+      "rank": 1,
+      "model": "vgg16",
+      "qwk": 0.8752887800767174
+    },
+    {
+      "rank": 2,
+      "model": "vgg19",
+      "qwk": 0.8636815539920465
+    },
+    {
+      "rank": 3,
+      "model": "convnext_tiny",
+      "qwk": 0.861849272109068
+    },
+    {
+      "rank": 4,
+      "model": "inception_v3",
+      "qwk": 0.8441789001618457
+    },
+    {
+      "rank": 5,
+      "model": "densenet121",
+      "qwk": 0.8439623496250063
+    },
+    {
+      "rank": 6,
+      "model": "resnet50",
+      "qwk": 0.8264001812461403
+    },
+    {
+      "rank": 7,
+      "model": "googlenet",
+      "qwk": 0.8168484454444509
+    },
+    {
+      "rank": 8,
+      "model": "resnet18",
+      "qwk": 0.8160152896664041
+    },
+    {
+      "rank": 9,
+      "model": "efficientnet_b1",
+      "qwk": 0.8153625826484996
+    },
+    {
+      "rank": 10,
+      "model": "efficientnet_b0",
+      "qwk": 0.8044208971155308
+    },
+    {
+      "rank": 11,
+      "model": "shufflenet",
+      "qwk": 0.7985733768412935
+    },
+    {
+      "rank": 12,
+      "model": "mobilenet_v2",
+      "qwk": 0.795793997463717
+    },
+    {
+      "rank": 13,
+      "model": "mobilenet_v3_large",
+      "qwk": 0.7929110342659541
+    },
+    {
+      "rank": 14,
+      "model": "xception",
+      "qwk": 0.7776831043419605
+    },
+    {
+      "rank": 15,
+      "model": "squeezenet",
+      "qwk": 0.7729986380851104
+    }
+  ],
+  "test_kl4_f1": [
+    {
+      "rank": 1,
+      "model": "resnet50",
+      "kl4_f1": 0.9487179487179487
+    },
+    {
+      "rank": 2,
+      "model": "shufflenet",
+      "kl4_f1": 0.9066666666666666
+    },
+    {
+      "rank": 3,
+      "model": "squeezenet",
+      "kl4_f1": 0.9
+    },
+    {
+      "rank": 4,
+      "model": "resnet18",
+      "kl4_f1": 0.9
+    },
+    {
+      "rank": 5,
+      "model": "vgg19",
+      "kl4_f1": 0.8947368421052632
+    },
+    {
+      "rank": 6,
+      "model": "inception_v3",
+      "kl4_f1": 0.8947368421052632
+    },
+    {
+      "rank": 7,
+      "model": "efficientnet_b0",
+      "kl4_f1": 0.8947368421052632
+    },
+    {
+      "rank": 8,
+      "model": "densenet121",
+      "kl4_f1": 0.8831168831168831
+    },
+    {
+      "rank": 9,
+      "model": "vgg16",
+      "kl4_f1": 0.88
+    },
+    {
+      "rank": 10,
+      "model": "mobilenet_v2",
+      "kl4_f1": 0.8705882352941177
+    },
+    {
+      "rank": 11,
+      "model": "googlenet",
+      "kl4_f1": 0.8571428571428571
+    },
+    {
+      "rank": 12,
+      "model": "convnext_tiny",
+      "kl4_f1": 0.8571428571428571
+    },
+    {
+      "rank": 13,
+      "model": "efficientnet_b1",
+      "kl4_f1": 0.8493150684931506
+    },
+    {
+      "rank": 14,
+      "model": "mobilenet_v3_large",
+      "kl4_f1": 0.825
+    },
+    {
+      "rank": 15,
+      "model": "xception",
+      "kl4_f1": 0.8235294117647058
+    }
+  ],
+  "lowest_mae": [
+    {
+      "rank": 1,
+      "model": "vgg16",
+      "mae": 0.3008064516129032
+    },
+    {
+      "rank": 2,
+      "model": "convnext_tiny",
+      "mae": 0.33225806451612905
+    },
+    {
+      "rank": 3,
+      "model": "vgg19",
+      "mae": 0.3362903225806452
+    },
+    {
+      "rank": 4,
+      "model": "densenet121",
+      "mae": 0.3580645161290323
+    },
+    {
+      "rank": 5,
+      "model": "inception_v3",
+      "mae": 0.3596774193548387
+    },
+    {
+      "rank": 6,
+      "model": "resnet50",
+      "mae": 0.3959677419354839
+    },
+    {
+      "rank": 7,
+      "model": "googlenet",
+      "mae": 0.4088709677419355
+    },
+    {
+      "rank": 8,
+      "model": "efficientnet_b1",
+      "mae": 0.4120967741935484
+    },
+    {
+      "rank": 9,
+      "model": "efficientnet_b0",
+      "mae": 0.42258064516129035
+    },
+    {
+      "rank": 10,
+      "model": "resnet18",
+      "mae": 0.4274193548387097
+    },
+    {
+      "rank": 11,
+      "model": "mobilenet_v3_large",
+      "mae": 0.43548387096774194
+    },
+    {
+      "rank": 12,
+      "model": "mobilenet_v2",
+      "mae": 0.44193548387096776
+    },
+    {
+      "rank": 13,
+      "model": "shufflenet",
+      "mae": 0.4467741935483871
+    },
+    {
+      "rank": 14,
+      "model": "xception",
+      "mae": 0.4629032258064516
+    },
+    {
+      "rank": 15,
+      "model": "squeezenet",
+      "mae": 0.4798387096774194
+    }
+  ],
+  "lowest_latency": [
+    {
+      "rank": 1,
+      "model": "squeezenet",
+      "mean_latency_ms": 1.2547
+    },
+    {
+      "rank": 2,
+      "model": "xception",
+      "mean_latency_ms": 2.9777
+    },
+    {
+      "rank": 3,
+      "model": "resnet18",
+      "mean_latency_ms": 3.0162
+    },
+    {
+      "rank": 4,
+      "model": "vgg16",
+      "mean_latency_ms": 3.0295
+    },
+    {
+      "rank": 5,
+      "model": "resnet50",
+      "mean_latency_ms": 3.076
+    },
+    {
+      "rank": 6,
+      "model": "mobilenet_v3_large",
+      "mean_latency_ms": 3.2768
+    },
+    {
+      "rank": 7,
+      "model": "vgg19",
+      "mean_latency_ms": 3.3487
+    },
+    {
+      "rank": 8,
+      "model": "googlenet",
+      "mean_latency_ms": 3.4735
+    },
+    {
+      "rank": 9,
+      "model": "efficientnet_b0",
+      "mean_latency_ms": 4.182
+    },
+    {
+      "rank": 10,
+      "model": "convnext_tiny",
+      "mean_latency_ms": 4.2581
+    },
+    {
+      "rank": 11,
+      "model": "mobilenet_v2",
+      "mean_latency_ms": 4.6835
+    },
+    {
+      "rank": 12,
+      "model": "shufflenet",
+      "mean_latency_ms": 5.499
+    },
+    {
+      "rank": 13,
+      "model": "efficientnet_b1",
+      "mean_latency_ms": 5.7207
+    },
+    {
+      "rank": 14,
+      "model": "densenet121",
+      "mean_latency_ms": 8.1832
+    },
+    {
+      "rank": 15,
+      "model": "inception_v3",
+      "mean_latency_ms": 9.389
+    }
+  ],
+  "lowest_params": [
+    {
+      "rank": 1,
+      "model": "squeezenet",
+      "parameters": 725061
+    },
+    {
+      "rank": 2,
+      "model": "shufflenet",
+      "parameters": 1258729
+    },
+    {
+      "rank": 3,
+      "model": "mobilenet_v2",
+      "parameters": 2230277
+    },
+    {
+      "rank": 4,
+      "model": "efficientnet_b0",
+      "parameters": 4013953
+    },
+    {
+      "rank": 5,
+      "model": "mobilenet_v3_large",
+      "parameters": 4208437
+    },
+    {
+      "rank": 6,
+      "model": "googlenet",
+      "parameters": 5605029
+    },
+    {
+      "rank": 7,
+      "model": "efficientnet_b1",
+      "parameters": 6519589
+    },
+    {
+      "rank": 8,
+      "model": "densenet121",
+      "parameters": 6958981
+    },
+    {
+      "rank": 9,
+      "model": "resnet18",
+      "parameters": 11179077
+    },
+    {
+      "rank": 10,
+      "model": "xception",
+      "parameters": 20817197
+    },
+    {
+      "rank": 11,
+      "model": "inception_v3",
+      "parameters": 21795813
+    },
+    {
+      "rank": 12,
+      "model": "resnet50",
+      "parameters": 23518277
+    },
+    {
+      "rank": 13,
+      "model": "convnext_tiny",
+      "parameters": 27823973
+    },
+    {
+      "rank": 14,
+      "model": "vgg16",
+      "parameters": 134281029
+    },
+    {
+      "rank": 15,
+      "model": "vgg19",
+      "parameters": 139590725
+    }
+  ]
+}

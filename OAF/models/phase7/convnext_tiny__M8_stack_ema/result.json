@@ -1,0 +1,200 @@
+{
+  "experiment_id": "convnext_tiny__M8_stack_ema",
+  "family": "combine",
+  "model": "convnext_tiny",
+  "seed": 42,
+  "ordinal": "",
+  "ema": true,
+  "preprocessing": "basic",
+  "loss": "weighted_cross_entropy",
+  "imbalance": "weighted_ce",
+  "augmentation": "augmentation.yaml",
+  "differential_lr": true,
+  "stage_a_epochs": 5,
+  "weight_decay": 5e-05,
+  "max_epochs": 50,
+  "patience": 5,
+  "best_epoch": 28,
+  "epochs_run": 33,
+  "stopped_early": true,
+  "val_accuracy": 0.6607,
+  "val_macro_f1": 0.7003,
+  "val_weighted_f1": 0.6652,
+  "val_balanced_accuracy": 0.6943,
+  "val_qwk": 0.8061,
+  "val_KL0_F1": 0.7389,
+  "val_KL1_F1": 0.3833,
+  "val_KL2_F1": 0.6444,
+  "val_KL3_F1": 0.8158,
+  "val_KL4_F1": 0.9189,
+  "val_binary_oa_acc": 0.8384,
+  "val_binary_oa_auc": 0.9262,
+  "val_3class_acc": 0.752,
+  "val_mae": 0.4039,
+  "val_within1": 0.9362,
+  "parameters": 27823973,
+  "model_size_mb": 106.186,
+  "gmacs": 4.4697,
+  "gpu_latency_ms": 2.6019,
+  "cpu_latency_ms": 20.4729,
+  "training_time_sec": 227.1,
+  "checkpoint": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\models\\phase7\\convnext_tiny__M8_stack_ema\\best.pt",
+  "note": "stack: ['difflr'] + EMA",
+  "val_full": {
+    "n_samples": 1238,
+    "accuracy": 0.6607431340872375,
+    "balanced_accuracy": 0.6943397796637011,
+    "macro_precision": 0.709469863043316,
+    "macro_recall": 0.6943397796637011,
+    "macro_f1": 0.7002705134284082,
+    "weighted_f1": 0.6651675427332259,
+    "cohen_kappa": 0.5308862961345666,
+    "quadratic_weighted_kappa": 0.8060693426874326,
+    "per_class": {
+      "KL0": {
+        "precision": 0.7242063492063492,
+        "recall": 0.7541322314049587,
+        "f1": 0.7388663967611336,
+        "support": 484
+      },
+      "KL1": {
+        "precision": 0.35384615384615387,
+        "recall": 0.41818181818181815,
+        "f1": 0.38333333333333336,
+        "support": 220
+      },
+      "KL2": {
+        "precision": 0.6952054794520548,
+        "recall": 0.6005917159763313,
+        "f1": 0.6444444444444445,
+        "support": 338
+      },
+      "KL3": {
+        "precision": 0.8551724137931035,
+        "recall": 0.779874213836478,
+        "f1": 0.8157894736842105,
+        "support": 159
+      },
+      "KL4": {
+        "precision": 0.918918918918919,
+        "recall": 0.918918918918919,
+        "f1": 0.918918918918919,
+        "support": 37
+      }
+    },
+    "kl0_f1": 0.7388663967611336,
+    "kl0_precision": 0.7242063492063492,
+    "kl0_recall": 0.7541322314049587,
+    "kl0_support": 484,
+    "kl1_f1": 0.38333333333333336,
+    "kl1_precision": 0.35384615384615387,
+    "kl1_recall": 0.41818181818181815,
+    "kl1_support": 220,
+    "kl2_f1": 0.6444444444444445,
+    "kl2_precision": 0.6952054794520548,
+    "kl2_recall": 0.6005917159763313,
+    "kl2_support": 338,
+    "kl3_f1": 0.8157894736842105,
+    "kl3_precision": 0.8551724137931035,
+    "kl3_recall": 0.779874213836478,
+    "kl3_support": 159,
+    "kl4_f1": 0.918918918918919,
+    "kl4_precision": 0.918918918918919,
+    "kl4_recall": 0.918918918918919,
+    "kl4_support": 37,
+    "confusion_matrix": [
+      [
+        365,
+        95,
+        23,
+        1,
+        0
+      ],
+      [
+        89,
+        92,
+        39,
+        0,
+        0
+      ],
+      [
+        50,
+        68,
+        203,
+        17,
+        0
+      ],
+      [
+        0,
+        5,
+        27,
+        124,
+        3
+      ],
+      [
+        0,
+        0,
+        0,
+        3,
+        34
+      ]
+    ],
+    "confusion_matrix_normalized": [
+      [
+        0.7541322314049587,
+        0.1962809917355372,
+        0.047520661157024795,
+        0.002066115702479339,
+        0.0
+      ],
+      [
+        0.40454545454545454,
+        0.41818181818181815,
+        0.17727272727272728,
+        0.0,
+        0.0
+      ],
+      [
+        0.14792899408284024,
+        0.20118343195266272,
+        0.6005917159763313,
+        0.05029585798816568,
+        0.0
+      ],
+      [
+        0.0,
+        0.031446540880503145,
+        0.16981132075471697,
+        0.779874213836478,
+        0.018867924528301886
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.08108108108108109,
+        0.918918918918919
+      ]
+    ],
+    "adjacent_confusions": {
+      "KL1_as_KL2": 39,
+      "KL2_as_KL1": 68,
+      "KL2_as_KL3": 17,
+      "KL3_as_KL2": 27,
+      "KL3_as_KL4": 3,
+      "KL4_as_KL3": 3
+    },
+    "errors_off_by_1": 341,
+    "errors_off_by_2plus": 79,
+    "roc_auc_ovr_macro": 0.8931699943277801,
+    "roc_auc_ovr_weighted": 0.8697958910627713,
+    "roc_auc_per_class_ovr": {
+      "KL0": 0.8868842755990092,
+      "KL1": 0.7358412216467226,
+      "KL2": 0.8685667324128863,
+      "KL3": 0.9757054342187328,
+      "KL4": 0.9988523077615501
+    },
+    "loss": 0.8268113741967135
+  }
+}

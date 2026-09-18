@@ -1,0 +1,5 @@
+scheme,n_classes,val_accuracy,val_macro_f1,val_qwk,test_accuracy,test_macro_f1,test_weighted_f1,test_balanced_accuracy,test_qwk,test_roc_auc,test_sensitivity,test_specificity,test_per_class_f1,parameters,model_size_mb,cpu_latency_ms,kd_recipe
+5class,5,0.643,0.6848,0.8129,0.675,0.6941,0.672,0.6908,0.8385,,,,"{""KL0"": 0.772, ""KL1"": 0.357, ""KL2"": 0.6487, ""KL3"": 0.8095, ""KL4"": 0.8831}",2230277,8.716,6.93,K6_kd_ens_long
+4class_kl01,4,0.7674,0.7469,0.8074,0.7879,0.7594,0.7569,0.7542,0.824,,,,"{""KL0-1"": 0.8669, ""KL2"": 0.4803, ""KL3"": 0.8071, ""KL4"": 0.8831}",2228996,8.711,8.01,K6_kd_ens_long
+3class,3,0.6931,0.7034,0.6321,0.7008,0.7129,0.681,0.7124,0.6557,,,,"{""Normal"": 0.5378, ""Early"": 0.7337, ""Advanced"": 0.8672}",2227715,8.706,8.477,K6_kd_ens_long
+binary,2,0.8263,0.8143,,0.8694,0.8616,0.866,0.8529,,0.9432,0.73,0.9758,"{""No-OA"": 0.8944, ""OA"": 0.8288}",2226434,8.701,7.868,K6_kd_ens_long

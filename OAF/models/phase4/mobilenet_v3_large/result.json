@@ -1,0 +1,113 @@
+{
+  "model": "mobilenet_v3_large",
+  "timm_name": "mobilenetv3_large_100",
+  "accuracy": 0.6365105008077544,
+  "macro_precision": 0.6541916993826916,
+  "macro_recall": 0.6706472328388149,
+  "macro_f1": 0.6595731669824706,
+  "weighted_f1": 0.6278439521018373,
+  "balanced_accuracy": 0.6706472328388149,
+  "cohen_kappa": 0.4933635259934249,
+  "quadratic_weighted_kappa": 0.7593729509270138,
+  "roc_auc_ovr_macro": 0.8720718989432104,
+  "kl0_f1": 0.7147208121827411,
+  "kl1_f1": 0.2894736842105263,
+  "kl2_f1": 0.6204986149584487,
+  "kl3_f1": 0.7870967741935484,
+  "kl4_f1": 0.8860759493670886,
+  "kl0_support": 484,
+  "kl1_support": 220,
+  "kl2_support": 338,
+  "kl3_support": 159,
+  "kl4_support": 37,
+  "parameters": 4208437,
+  "trainable_parameters": 4208437,
+  "non_trainable_parameters": 0,
+  "model_size_mb": 16.24,
+  "gmacs": 0.2242,
+  "flops_or_macs": 0.2242,
+  "flops_estimate_g": 0.4483,
+  "gmacs_method": "fvcore.FlopCountAnalysis (MAC=1)",
+  "mean_latency_ms": 3.5182,
+  "median_latency_ms": 3.4251,
+  "std_latency_ms": 0.4483,
+  "min_latency_ms": 3.1623,
+  "max_latency_ms": 6.7303,
+  "throughput_images_per_sec": 284.23,
+  "latency_device": "cuda",
+  "cpu_mean_latency_ms": 10.9046,
+  "peak_memory_mb": 127.79,
+  "train_peak_cuda_mb": 1628.85,
+  "best_epoch": 19,
+  "epochs_run": 24,
+  "training_time_sec": 130.2,
+  "training_time": 130.2,
+  "stopped_early": true,
+  "adjacent_confusions": {
+    "KL1_as_KL2": 66,
+    "KL2_as_KL1": 40,
+    "KL2_as_KL3": 25,
+    "KL3_as_KL2": 24,
+    "KL3_as_KL4": 7,
+    "KL4_as_KL3": 2
+  },
+  "confusion_matrix": [
+    [
+      352,
+      60,
+      70,
+      2,
+      0
+    ],
+    [
+      99,
+      55,
+      66,
+      0,
+      0
+    ],
+    [
+      49,
+      40,
+      224,
+      25,
+      0
+    ],
+    [
+      1,
+      5,
+      24,
+      122,
+      7
+    ],
+    [
+      0,
+      0,
+      0,
+      2,
+      35
+    ]
+  ],
+  "gradcam_layer_candidates": [
+    "conv_head"
+  ],
+  "backend": "timm",
+  "preprocessing_variant": "basic",
+  "loss_name": "weighted_cross_entropy",
+  "seed": 42,
+  "stage_a_epochs": 3,
+  "max_epochs_budget": 50,
+  "patience": 5,
+  "differential_lr": null,
+  "artefacts": {
+    "best_ckpt": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\models\\phase4\\mobilenet_v3_large\\best.pt",
+    "confusion": {
+      "raw": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase4\\confusion_matrices\\mobilenet_v3_large_confusion_matrix.png",
+      "normalized": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase4\\confusion_matrices\\mobilenet_v3_large_confusion_matrix_normalized.png"
+    },
+    "training_curve": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase4\\training_curves\\mobilenet_v3_large_training_curve.png",
+    "config": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\models\\phase4\\mobilenet_v3_large\\config.json"
+  },
+  "phase": "phase4",
+  "max_epochs_config": 50
+}

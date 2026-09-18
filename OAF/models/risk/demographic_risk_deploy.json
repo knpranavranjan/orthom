@@ -1,0 +1,49 @@
+{
+  "model": "demographic_risk_v1",
+  "algorithm": "logistic_regression",
+  "feature_order": [
+    "AGE",
+    "BMI",
+    "SEX"
+  ],
+  "feature_meaning": {
+    "AGE": "years",
+    "BMI": "kg/m^2",
+    "SEX": "opaque 2-level code from source data (1 or 2)"
+  },
+  "output": "P(knee OA diagnosed at follow-up), class index 1 of a 2-class softmax",
+  "cv_results": {
+    "logistic_regression": {
+      "mean_auc": 0.6433591001708653,
+      "std_auc": 0.029900868213773548
+    },
+    "random_forest": {
+      "mean_auc": 0.6415520807635025,
+      "std_auc": 0.03586210226395067
+    },
+    "hist_gradient_boosting": {
+      "mean_auc": 0.6250016418363897,
+      "std_auc": 0.032746193579951864
+    }
+  },
+  "test_metrics": {
+    "roc_auc": 0.6377440725244072,
+    "accuracy": 0.6033402922755741,
+    "precision": 0.6183574879227053,
+    "recall": 0.5355648535564853,
+    "brier_score": 0.2357356401485687,
+    "n_test": 479,
+    "positive_rate_test": 0.4989561586638831
+  },
+  "training_rows": 1913,
+  "test_rows": 479,
+  "seed": 42,
+  "data_provenance": "data/raw/README.md \u2014 OAI cohort via MatchThem CRAN package, demographic-only, no WOMAC/KL",
+  "dropped_features": {
+    "RAC": "race",
+    "SMK": "smoking status",
+    "OSP": "baseline osteoporosis",
+    "reason": "tested via reports/feature_ablation.json \u2014 added only +0.007 CV ROC-AUC over age+bmi+sex; not worth 3 new kiosk intake questions"
+  },
+  "scope_warning": "Demographic-only proxy model (age, sex, BMI). Does not see WOMAC, KL grade, or any functional/sensor feature. Not validated for clinical use \u2014 screening support signal only, to be superseded once real WOMAC+functional training data exists."
+}

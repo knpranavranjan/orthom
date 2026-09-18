@@ -1,0 +1,16 @@
+experiment_id,class,precision,recall,f1,support
+K6_kd_ens_long,KL0,0.7069,0.8361,0.7661,476
+K6_kd_ens_long,KL1,0.3454,0.3789,0.3613,227
+K6_kd_ens_long,KL2,0.7857,0.5366,0.6377,328
+K6_kd_ens_long,KL3,0.8037,0.7661,0.7844,171
+K6_kd_ens_long,KL4,0.8293,0.8947,0.8608,38
+K6_kd_ens_long__seed123,KL0,0.7,0.8382,0.7629,476
+K6_kd_ens_long__seed123,KL1,0.322,0.3348,0.3283,227
+K6_kd_ens_long__seed123,KL2,0.7703,0.5213,0.6218,328
+K6_kd_ens_long__seed123,KL3,0.8035,0.8129,0.8081,171
+K6_kd_ens_long__seed123,KL4,0.8718,0.8947,0.8831,38
+K6_kd_ens_long__seed3407,KL0,0.7214,0.8487,0.7799,476
+K6_kd_ens_long__seed3407,KL1,0.3782,0.3965,0.3871,227
+K6_kd_ens_long__seed3407,KL2,0.7669,0.5518,0.6418,328
+K6_kd_ens_long__seed3407,KL3,0.8072,0.7836,0.7953,171
+K6_kd_ens_long__seed3407,KL4,0.85,0.8947,0.8718,38

@@ -1,0 +1,10 @@
+# AETHER-OA X-ray inference API - Raspberry Pi / edge runtime (no torch)
+onnxruntime>=1.19
+numpy>=1.26
+opencv-python-headless>=4.9
+pillow>=10.0
+psutil>=5.9
+# REST API (serve_api.py) - the frontend is external
+fastapi>=0.110
+uvicorn[standard]>=0.29
+python-multipart>=0.0.9

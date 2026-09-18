@@ -1,0 +1,91 @@
+# AETHER-OA  X-ray module - PHASE 2: 10-CNN benchmark configuration
+# ---------------------------------------------------------------------------
+# One controlled baseline. Everything here is applied IDENTICALLY to all 10
+# architectures (spec section 7). Only architecture-internal ops differ.
+# ---------------------------------------------------------------------------
+
+seed: 42
+preprocessing_variant: basic          # PHASE 2 uses ONLY data/processed/images/basic/
+image_size: [224, 224]
+in_channels: 3                        # 3-channel replicated grayscale (never colourised)
+num_classes: 5
+
+data:
+  preprocessing_yaml: configs/preprocessing.yaml
+  augmentation_yaml:  configs/augmentation.yaml
+  # normalization: overridden to ImageNet for pretrained backbones (documented).
+  normalization: imagenet             # imagenet | dataset_grayscale
+  num_workers: 4
+  pin_memory: true
+  persistent_workers: true
+
+loss:
+  name: weighted_cross_entropy        # configurable; PHASE-2 default only
+  class_weights_json: metadata/class_weights.json
+  class_weights_key: weights_list_balanced
+  label_smoothing: 0.0
+  # future (NOT used now): focal, ordinal_coral, class_balanced
+  focal_gamma: 2.0
+
+optimizer:
+  name: adamw
+  lr: 1.0e-4                          # Stage B (full fine-tune) LR
+  weight_decay: 1.0e-4
+  betas: [0.9, 0.999]
+
+scheduler:
+  name: cosine                        # cosine | plateau | none
+  warmup_epochs: 1
+  min_lr: 1.0e-6
+
+transfer_learning:
+  # Identical two-stage schedule for every model (spec section 13).
+  stage_a_epochs: 3                   # freeze backbone, train new head only
+  stage_a_lr: 1.0e-3
+  stage_b_lr: 1.0e-4                  # unfreeze all, fine-tune
+
+train:
+  batch_size: 64
+  max_epochs: 30
+  early_stopping:
+    monitor: val_macro_f1
+    mode: max
+    patience: 5
+    min_delta: 0.0
+  amp: true                          # mixed precision (documented as nondeterministic-tolerant)
+  grad_clip_norm: 5.0
+
+eval:
+  selection_metric: val_macro_f1     # SPEC 17: never accuracy alone, never test set
+  roc_auc: { strategy: ovr, average: macro }
+
+latency:
+  device_order: [cuda, cpu]          # measure on each available
+  input_shape: [1, 3, 224, 224]
+  warmup_iters: 20
+  timed_iters: 100
+  cpu_warmup_iters: 5
+  cpu_timed_iters: 30
+
+complexity:
+  flop_input_shape: [1, 3, 224, 224]
+  # fvcore counts one fused multiply-add as 1 -> reported as GMACs.
+  # FLOPs ~= 2 x GMACs. Column is labelled 'gmacs' throughout.
+
+models:
+  # display_name : timm_model_name
+  resnet18:            resnet18
+  resnet50:            resnet50
+  densenet121:         densenet121
+  efficientnet_b0:     efficientnet_b0
+  mobilenet_v2:        mobilenetv2_100
+  mobilenet_v3_large:  mobilenetv3_large_100
+  efficientnet_b1:     efficientnet_b1
+  inception_v3:        inception_v3
+  xception:            legacy_xception
+  convnext_tiny:       convnext_tiny
+
+paths:
+  processed_root:   data/processed/images
+  models_dir:       models/benchmark
+  reports_dir:      reports/benchmark

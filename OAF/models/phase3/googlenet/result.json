@@ -1,0 +1,112 @@
+{
+  "model": "googlenet",
+  "timm_name": "googlenet",
+  "accuracy": 0.6276252019386107,
+  "macro_precision": 0.6621072413715773,
+  "macro_recall": 0.6866006375466727,
+  "macro_f1": 0.669483511274884,
+  "weighted_f1": 0.6356122429949053,
+  "balanced_accuracy": 0.6866006375466727,
+  "cohen_kappa": 0.4939828684866867,
+  "quadratic_weighted_kappa": 0.7991800262072813,
+  "roc_auc_ovr_macro": 0.8774502285966689,
+  "kl0_f1": 0.7259100642398287,
+  "kl1_f1": 0.36952380952380953,
+  "kl2_f1": 0.5921052631578947,
+  "kl3_f1": 0.7598784194528876,
+  "kl4_f1": 0.9,
+  "kl0_support": 484,
+  "kl1_support": 220,
+  "kl2_support": 338,
+  "kl3_support": 159,
+  "kl4_support": 37,
+  "parameters": 5605029,
+  "trainable_parameters": 5605029,
+  "non_trainable_parameters": 0,
+  "model_size_mb": 21.536,
+  "gmacs": 1.5039,
+  "flops_or_macs": 1.5039,
+  "flops_estimate_g": 3.0077,
+  "gmacs_method": "fvcore.FlopCountAnalysis (MAC=1)",
+  "mean_latency_ms": 3.4971,
+  "median_latency_ms": 3.4725,
+  "std_latency_ms": 0.1205,
+  "min_latency_ms": 3.282,
+  "max_latency_ms": 3.9974,
+  "throughput_images_per_sec": 285.95,
+  "latency_device": "cuda",
+  "cpu_mean_latency_ms": 14.5678,
+  "peak_memory_mb": 153.72,
+  "train_peak_cuda_mb": 2149.61,
+  "best_epoch": 24,
+  "epochs_run": 29,
+  "training_time_sec": 145.9,
+  "training_time": 145.9,
+  "stopped_early": true,
+  "adjacent_confusions": {
+    "KL1_as_KL2": 43,
+    "KL2_as_KL1": 83,
+    "KL2_as_KL3": 38,
+    "KL3_as_KL2": 20,
+    "KL3_as_KL4": 7,
+    "KL4_as_KL3": 1
+  },
+  "confusion_matrix": [
+    [
+      339,
+      118,
+      27,
+      0,
+      0
+    ],
+    [
+      74,
+      97,
+      43,
+      6,
+      0
+    ],
+    [
+      37,
+      83,
+      180,
+      38,
+      0
+    ],
+    [
+      0,
+      7,
+      20,
+      125,
+      7
+    ],
+    [
+      0,
+      0,
+      0,
+      1,
+      36
+    ]
+  ],
+  "gradcam_layer_candidates": [
+    "inception5b.branch4.1.conv"
+  ],
+  "backend": "torchvision",
+  "preprocessing_variant": "basic",
+  "loss_name": "weighted_cross_entropy",
+  "seed": 42,
+  "stage_a_epochs": 3,
+  "max_epochs_budget": 30,
+  "patience": 5,
+  "differential_lr": null,
+  "artefacts": {
+    "best_ckpt": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\models\\phase3\\googlenet\\best.pt",
+    "confusion": {
+      "raw": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase3\\confusion_matrices\\googlenet_confusion_matrix.png",
+      "normalized": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase3\\confusion_matrices\\googlenet_confusion_matrix_normalized.png"
+    },
+    "training_curve": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\reports\\phase3\\training_curves\\googlenet_training_curve.png",
+    "config": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\models\\phase3\\googlenet\\config.json"
+  },
+  "phase": "phase3"
+}

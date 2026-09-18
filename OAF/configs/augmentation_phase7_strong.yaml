@@ -1,0 +1,52 @@
+# AETHER-OA  X-ray module - PHASE 7 "strong-but-medical" augmentation (M6/M7 only)
+# ---------------------------------------------------------------------------
+# Same clinical constraints as configs/augmentation.yaml (no vertical flip, no
+# elastic warp, no erasing, no large crop -- all of those change joint-space
+# width or delete the diagnostic ROI). This variant only *widens the ranges* of
+# the already-approved geometric/intensity transforms, because MobileNetV2 (2.2M
+# params) underfits the very mild default augmentation.
+# ---------------------------------------------------------------------------
+
+seed: 42
+enabled: true
+apply_to: [train]
+
+pipeline:
+  random_rotation:
+    enabled: true
+    degrees: [-12, 12]            # was +/-8
+    interpolation: bilinear
+    fill: 0
+
+  random_translation:
+    enabled: true
+    max_fraction: [0.08, 0.08]    # was 0.05
+
+  random_scale:
+    enabled: true
+    range: [0.90, 1.10]           # was 0.95-1.05
+
+  random_affine_shear:
+    enabled: true
+    degrees: [-6, 6]              # was +/-4
+
+  horizontal_flip:
+    enabled: true
+    p: 0.5
+
+  brightness_contrast_jitter:
+    enabled: true
+    brightness: [0.85, 1.15]      # was 0.90-1.10
+    contrast: [0.85, 1.15]
+
+  gaussian_noise:
+    enabled: true
+    p: 0.30                       # was 0.20
+    std_range: [0.0, 0.03]        # was 0.02
+
+  vertical_flip:      { enabled: false }
+  arbitrary_rotation: { enabled: false }
+  heavy_color_jitter: { enabled: false }
+  elastic_warp:       { enabled: false }
+  random_erasing:     { enabled: false }
+  large_random_crop:  { enabled: false }

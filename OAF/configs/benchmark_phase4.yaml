@@ -1,0 +1,112 @@
+# AETHER-OA  X-ray module - PHASE 4: 15-model EXTENDED TRAINING BUDGET benchmark
+# ===========================================================================
+# CONTROLLED EXPERIMENT. This file is byte-for-byte identical to
+# configs/benchmark_phase3.yaml EXCEPT for exactly three things:
+#
+#   1. train.max_epochs :  30  ->  50        (the ONLY intended experimental change)
+#   2. models:          :  the full 15 (Phase-3 reused the 10 Phase-2 results;
+#                          Phase 4 retrains ALL 15 because the epoch budget changed)
+#   3. paths            :  models/phase4  &  reports/phase4   (output isolation)
+#
+# Everything else - dataset, split, preprocessing, resolution, normalization,
+# augmentation, class defs, class weights, loss, optimizer, LR schedule, warmup,
+# batch size, workers, architectures, pretrained weights, freeze/unfreeze,
+# early-stopping logic, metrics, seed, checkpoint-selection - is UNCHANGED.
+# ===========================================================================
+
+seed: 42
+preprocessing_variant: basic
+image_size: [224, 224]
+in_channels: 3
+num_classes: 5
+
+data:
+  preprocessing_yaml: configs/preprocessing.yaml
+  augmentation_yaml:  configs/augmentation.yaml
+  normalization: imagenet
+  num_workers: 4
+  pin_memory: true
+  persistent_workers: true
+
+loss:
+  name: weighted_cross_entropy
+  class_weights_json: metadata/class_weights.json
+  class_weights_key: weights_list_balanced
+  label_smoothing: 0.0
+  focal_gamma: 2.0
+
+optimizer:
+  name: adamw
+  lr: 1.0e-4
+  weight_decay: 1.0e-4
+  betas: [0.9, 0.999]
+
+scheduler:
+  name: cosine
+  warmup_epochs: 1
+  min_lr: 1.0e-6
+
+transfer_learning:
+  stage_a_epochs: 3
+  stage_a_lr: 1.0e-3
+  stage_b_lr: 1.0e-4
+  differential_lr: null
+
+train:
+  batch_size: 64
+  max_epochs: 50                     # <== PHASE 4 CHANGE (Phase 3 = 30). Early stopping still ON.
+  early_stopping:
+    monitor: val_macro_f1
+    mode: max
+    patience: 5
+    min_delta: 0.0
+  amp: true
+  grad_clip_norm: 5.0
+
+eval:
+  selection_metric: val_macro_f1
+  roc_auc: { strategy: ovr, average: macro }
+
+latency:
+  device_order: [cuda, cpu]
+  input_shape: [1, 3, 224, 224]
+  warmup_iters: 20
+  timed_iters: 100
+  cpu_warmup_iters: 5
+  cpu_timed_iters: 30
+
+complexity:
+  flop_input_shape: [1, 3, 224, 224]
+
+# ---- All 15 models (identical set to Phase 3) -------------------------- #
+models:
+  resnet18:            resnet18
+  resnet50:            resnet50
+  densenet121:         densenet121
+  efficientnet_b0:     efficientnet_b0
+  mobilenet_v2:        mobilenetv2_100
+  mobilenet_v3_large:  mobilenetv3_large_100
+  efficientnet_b1:     efficientnet_b1
+  inception_v3:        inception_v3
+  xception:            legacy_xception
+  convnext_tiny:       convnext_tiny
+  vgg16:               vgg16
+  vgg19:               vgg19
+  googlenet:           googlenet
+  squeezenet:          squeezenet1_1
+  shufflenet:          shufflenet_v2_x1_0
+
+# Same VRAM constraint as Phase 3 - NOT a tuning change: bs 64 at 224px OOMs the
+# 135-140M-param VGGs on 16 GB. Every other model keeps bs 64 for parity.
+per_model_batch_size:
+  vgg16: 16
+  vgg19: 16
+
+# For the Phase-3 vs Phase-4 comparison table (read-only; never written to).
+compare_to: reports/phase3/extended_benchmark_results.csv
+compare_phase_label: phase3
+
+paths:
+  processed_root: data/processed/images
+  models_dir:     models/phase4
+  reports_dir:    reports/phase4

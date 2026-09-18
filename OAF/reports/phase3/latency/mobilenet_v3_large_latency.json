@@ -1,0 +1,48 @@
+{
+  "gpu": {
+    "device": "cuda",
+    "input_shape": [
+      1,
+      3,
+      224,
+      224
+    ],
+    "warmup_iters": 20,
+    "timed_iters": 100,
+    "mean_ms": 3.3883,
+    "median_ms": 3.3365,
+    "std_ms": 0.3315,
+    "min_ms": 3.0375,
+    "max_ms": 5.9253,
+    "p90_ms": 3.5375,
+    "throughput_images_per_sec": 295.13
+  },
+  "cpu": {
+    "device": "cpu",
+    "input_shape": [
+      1,
+      3,
+      224,
+      224
+    ],
+    "warmup_iters": 5,
+    "timed_iters": 30,
+    "mean_ms": 8.8005,
+    "median_ms": 8.9773,
+    "std_ms": 0.5095,
+    "min_ms": 7.7398,
+    "max_ms": 9.5133,
+    "p90_ms": 9.4708,
+    "throughput_images_per_sec": 113.63
+  },
+  "train_peak_memory": {
+    "cuda_peak_alloc_mb": 1628.85,
+    "cuda_peak_reserved_mb": 2006.97,
+    "process_rss_mb": 3706.56
+  },
+  "infer_peak_memory": {
+    "cuda_peak_alloc_mb": 127.79,
+    "cuda_peak_reserved_mb": 2006.97,
+    "process_rss_mb": 3696.06
+  }
+}

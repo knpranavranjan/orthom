@@ -1,0 +1,73 @@
+# AETHER-OA  X-ray module - preprocessing configuration
+# ---------------------------------------------------------------------------
+# Every knob the deterministic (train/val/test) preprocessing pipeline reads.
+# Augmentation (train only) lives in configs/augmentation.yaml.
+#
+# dataset_grayscale mean/std below were computed from the TRAIN split ONLY by
+# scripts/compute_norm_stats.py (full record in metadata/normalization_stats.json).
+# ---------------------------------------------------------------------------
+
+seed: 42
+
+paths:
+  manifest:        metadata/master_manifest.csv
+  splits_dir:      metadata
+  raw_root:        kaggle                       # source images (never written to)
+  processed_root:  data/processed/images        # <processed_root>/<variant>/<split>/<kl>/<file>.png
+  interim_root:    data/interim/cleaned
+
+image:
+  # Native Kaggle images are 224x224, single-channel, 8-bit PNG.
+  size: [224, 224]                  # H, W for CNN benchmarking (ImageNet-compatible)
+  keep_original_copy: true          # also persist the pre-resize image alongside processed
+  resample: bilinear               # bilinear | bicubic | area | nearest
+  pad_to_square_before_resize: true # letterbox instead of anamorphic squash if AR != 1
+
+roi:
+  # Kaggle images are ALREADY isolated knee ROIs (per-knee crops from OAI).
+  # So the default is a no-op. Kept configurable for future full-radiograph input.
+  mode: provided                   # full | center_crop | provided
+  center_crop_frac: 0.90           # used only when mode == center_crop
+
+channels:
+  # X-rays are grayscale. Pretrained ImageNet CNNs expect 3 channels ->
+  # we REPLICATE the gray channel (never colourise).
+  grayscale_first: true
+  output_channels: 3               # 1 (native gray) | 3 (replicated gray for pretrained CNNs)
+
+contrast:
+  # Experiment switch - do NOT assume CLAHE is better. Benchmark A/B/C.
+  method: none                     # none | clahe | hist_eq | hist_match
+  clahe:
+    clip_limit: 2.0
+    tile_grid_size: [8, 8]
+  hist_match:
+    reference_image: null
+
+intensity_normalization:
+  # MODE A (dataset_grayscale): per-dataset stats from TRAIN split only.
+  # MODE B (imagenet): ImageNet stats on the 3-channel replicated-gray tensor.
+  mode: dataset_grayscale          # dataset_grayscale | imagenet | minmax | zscore_per_image
+  to_float_range: [0.0, 1.0]       # scale uint8 -> this range before normalization
+  dataset_grayscale:
+    mean: [0.609158]               # TRAIN-only, 'basic' variant
+    std:  [0.193888]
+    stats_file: metadata/normalization_stats.json
+  imagenet:
+    mean: [0.485, 0.456, 0.406]
+    std:  [0.229, 0.224, 0.225]
+
+# Preprocessing variants materialised by scripts/prepare_dataset.py.
+# Each is an independent copy of train/val/test under processed_root/<name>/.
+variants:
+  - name: basic
+    contrast: none
+  - name: clahe
+    contrast: clahe
+  - name: histeq
+    contrast: hist_eq
+
+output:
+  save_format: png                 # lossless; float normalization applied at load time
+  dtype: uint8
+  write_processed_manifest: true   # metadata/processed_manifest_<variant>.csv

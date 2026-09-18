@@ -1,0 +1,442 @@
+[
+  {
+    "model": "resnet18",
+    "timm_name": "resnet18",
+    "ok": true,
+    "issues": [],
+    "batch0": {
+      "in": [
+        8,
+        3,
+        224,
+        224
+      ],
+      "out": [
+        8,
+        5
+      ],
+      "loss": 1.59628
+    },
+    "batch1": {
+      "in": [
+        8,
+        3,
+        224,
+        224
+      ],
+      "out": [
+        8,
+        5
+      ],
+      "loss": 1.69529
+    },
+    "val_batch": {
+      "in": [
+        8,
+        3,
+        224,
+        224
+      ],
+      "out": [
+        8,
+        5
+      ]
+    }
+  },
+  {
+    "model": "resnet50",
+    "timm_name": "resnet50",
+    "ok": true,
+    "issues": [],
+    "batch0": {
+      "in": [
+        8,
+        3,
+        224,
+        224
+      ],
+      "out": [
+        8,
+        5
+      ],
+      "loss": 1.63277
+    },
+    "batch1": {
+      "in": [
+        8,
+        3,
+        224,
+        224
+      ],
+      "out": [
+        8,
+        5
+      ],
+      "loss": 1.58559
+    },
+    "val_batch": {
+      "in": [
+        8,
+        3,
+        224,
+        224
+      ],
+      "out": [
+        8,
+        5
+      ]
+    }
+  },
+  {
+    "model": "densenet121",
+    "timm_name": "densenet121",
+    "ok": true,
+    "issues": [],
+    "batch0": {
+      "in": [
+        8,
+        3,
+        224,
+        224
+      ],
+      "out": [
+        8,
+        5
+      ],
+      "loss": 1.79894
+    },
+    "batch1": {
+      "in": [
+        8,
+        3,
+        224,
+        224
+      ],
+      "out": [
+        8,
+        5
+      ],
+      "loss": 1.59247
+    },
+    "val_batch": {
+      "in": [
+        8,
+        3,
+        224,
+        224
+      ],
+      "out": [
+        8,
+        5
+      ]
+    }
+  },
+  {
+    "model": "efficientnet_b0",
+    "timm_name": "efficientnet_b0",
+    "ok": true,
+    "issues": [],
+    "batch0": {
+      "in": [
+        8,
+        3,
+        224,
+        224
+      ],
+      "out": [
+        8,
+        5
+      ],
+      "loss": 4.78559
+    },
+    "batch1": {
+      "in": [
+        8,
+        3,
+        224,
+        224
+      ],
+      "out": [
+        8,
+        5
+      ],
+      "loss": 3.63031
+    },
+    "val_batch": {
+      "in": [
+        8,
+        3,
+        224,
+        224
+      ],
+      "out": [
+        8,
+        5
+      ]
+    }
+  },
+  {
+    "model": "mobilenet_v2",
+    "timm_name": "mobilenetv2_100",
+    "ok": true,
+    "issues": [],
+    "batch0": {
+      "in": [
+        8,
+        3,
+        224,
+        224
+      ],
+      "out": [
+        8,
+        5
+      ],
+      "loss": 3.56468
+    },
+    "batch1": {
+      "in": [
+        8,
+        3,
+        224,
+        224
+      ],
+      "out": [
+        8,
+        5
+      ],
+      "loss": 4.37961
+    },
+    "val_batch": {
+      "in": [
+        8,
+        3,
+        224,
+        224
+      ],
+      "out": [
+        8,
+        5
+      ]
+    }
+  },
+  {
+    "model": "mobilenet_v3_large",
+    "timm_name": "mobilenetv3_large_100",
+    "ok": true,
+    "issues": [],
+    "batch0": {
+      "in": [
+        8,
+        3,
+        224,
+        224
+      ],
+      "out": [
+        8,
+        5
+      ],
+      "loss": 1.96659
+    },
+    "batch1": {
+      "in": [
+        8,
+        3,
+        224,
+        224
+      ],
+      "out": [
+        8,
+        5
+      ],
+      "loss": 2.57521
+    },
+    "val_batch": {
+      "in": [
+        8,
+        3,
+        224,
+        224
+      ],
+      "out": [
+        8,
+        5
+      ]
+    }
+  },
+  {
+    "model": "efficientnet_b1",
+    "timm_name": "efficientnet_b1",
+    "ok": true,
+    "issues": [],
+    "batch0": {
+      "in": [
+        8,
+        3,
+        224,
+        224
+      ],
+      "out": [
+        8,
+        5
+      ],
+      "loss": 4.18363
+    },
+    "batch1": {
+      "in": [
+        8,
+        3,
+        224,
+        224
+      ],
+      "out": [
+        8,
+        5
+      ],
+      "loss": 10.48442
+    },
+    "val_batch": {
+      "in": [
+        8,
+        3,
+        224,
+        224
+      ],
+      "out": [
+        8,
+        5
+      ]
+    }
+  },
+  {
+    "model": "inception_v3",
+    "timm_name": "inception_v3",
+    "ok": true,
+    "issues": [],
+    "batch0": {
+      "in": [
+        8,
+        3,
+        224,
+        224
+      ],
+      "out": [
+        8,
+        5
+      ],
+      "loss": 1.64517
+    },
+    "batch1": {
+      "in": [
+        8,
+        3,
+        224,
+        224
+      ],
+      "out": [
+        8,
+        5
+      ],
+      "loss": 2.24884
+    },
+    "val_batch": {
+      "in": [
+        8,
+        3,
+        224,
+        224
+      ],
+      "out": [
+        8,
+        5
+      ]
+    }
+  },
+  {
+    "model": "xception",
+    "timm_name": "legacy_xception",
+    "ok": true,
+    "issues": [],
+    "batch0": {
+      "in": [
+        8,
+        3,
+        224,
+        224
+      ],
+      "out": [
+        8,
+        5
+      ],
+      "loss": 1.60189
+    },
+    "batch1": {
+      "in": [
+        8,
+        3,
+        224,
+        224
+      ],
+      "out": [
+        8,
+        5
+      ],
+      "loss": 1.64992
+    },
+    "val_batch": {
+      "in": [
+        8,
+        3,
+        224,
+        224
+      ],
+      "out": [
+        8,
+        5
+      ]
+    }
+  },
+  {
+    "model": "convnext_tiny",
+    "timm_name": "convnext_tiny",
+    "ok": true,
+    "issues": [],
+    "batch0": {
+      "in": [
+        8,
+        3,
+        224,
+        224
+      ],
+      "out": [
+        8,
+        5
+      ],
+      "loss": 1.90552
+    },
+    "batch1": {
+      "in": [
+        8,
+        3,
+        224,
+        224
+      ],
+      "out": [
+        8,
+        5
+      ],
+      "loss": 5.15835
+    },
+    "val_batch": {
+      "in": [
+        8,
+        3,
+        224,
+        224
+      ],
+      "out": [
+        8,
+        5
+      ]
+    }
+  }
+]

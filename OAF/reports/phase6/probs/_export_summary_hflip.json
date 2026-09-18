@@ -1,0 +1,142 @@
+{
+  "env": {
+    "timestamp_utc": "2026-08-27T20:12:02.936082+00:00",
+    "python": "3.14.6",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "os": "Windows 11",
+    "machine": "AMD64",
+    "processor": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+    "cpu_count_logical": 32,
+    "torch": "2.11.0+cu128",
+    "torchvision": "0.26.0+cu128",
+    "cuda_available": true,
+    "cuda_version": "12.8",
+    "cudnn_version": 91900,
+    "cudnn_deterministic": true,
+    "cudnn_benchmark": false,
+    "timm": "1.0.28",
+    "numpy": "2.5.2",
+    "fvcore": "0.1.5.post20221221",
+    "ram_total_gb": 66.2,
+    "psutil": "7.2.2",
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 5080",
+      "index": 0,
+      "total_memory_gb": 17.09,
+      "multi_processor_count": 84,
+      "capability": "12.0",
+      "device_count": 1
+    }
+  },
+  "tta": "hflip",
+  "splits": [
+    "val",
+    "test"
+  ],
+  "models": [
+    "vgg16",
+    "vgg19",
+    "convnext_tiny",
+    "densenet121",
+    "inception_v3",
+    "resnet50"
+  ],
+  "results": [
+    {
+      "model": "vgg16",
+      "split": "val",
+      "n": 1238,
+      "macro_f1": 0.7078016773809288,
+      "qwk": 0.8469793241797559,
+      "file": "reports\\phase6\\probs\\val__vgg16__hflip.npz"
+    },
+    {
+      "model": "vgg16",
+      "split": "test",
+      "n": 1240,
+      "macro_f1": 0.7447081007875739,
+      "qwk": 0.8799295378597941,
+      "file": "reports\\phase6\\probs\\test__vgg16__hflip.npz"
+    },
+    {
+      "model": "vgg19",
+      "split": "val",
+      "n": 1238,
+      "macro_f1": 0.7092574020555823,
+      "qwk": 0.8477004072619362,
+      "file": "reports\\phase6\\probs\\val__vgg19__hflip.npz"
+    },
+    {
+      "model": "vgg19",
+      "split": "test",
+      "n": 1240,
+      "macro_f1": 0.7174541911855947,
+      "qwk": 0.8723033515357864,
+      "file": "reports\\phase6\\probs\\test__vgg19__hflip.npz"
+    },
+    {
+      "model": "convnext_tiny",
+      "split": "val",
+      "n": 1238,
+      "macro_f1": 0.7071852830723828,
+      "qwk": 0.8469326392359613,
+      "file": "reports\\phase6\\probs\\val__convnext_tiny__hflip.npz"
+    },
+    {
+      "model": "convnext_tiny",
+      "split": "test",
+      "n": 1240,
+      "macro_f1": 0.7185312396040758,
+      "qwk": 0.8681332724783204,
+      "file": "reports\\phase6\\probs\\test__convnext_tiny__hflip.npz"
+    },
+    {
+      "model": "densenet121",
+      "split": "val",
+      "n": 1238,
+      "macro_f1": 0.705795532109864,
+      "qwk": 0.8178572704906277,
+      "file": "reports\\phase6\\probs\\val__densenet121__hflip.npz"
+    },
+    {
+      "model": "densenet121",
+      "split": "test",
+      "n": 1240,
+      "macro_f1": 0.7086662876657192,
+      "qwk": 0.8429852084267144,
+      "file": "reports\\phase6\\probs\\test__densenet121__hflip.npz"
+    },
+    {
+      "model": "inception_v3",
+      "split": "val",
+      "n": 1238,
+      "macro_f1": 0.677199567404496,
+      "qwk": 0.8154783552235425,
+      "file": "reports\\phase6\\probs\\val__inception_v3__hflip.npz"
+    },
+    {
+      "model": "inception_v3",
+      "split": "test",
+      "n": 1240,
+      "macro_f1": 0.7044823578303872,
+      "qwk": 0.842495876855415,
+      "file": "reports\\phase6\\probs\\test__inception_v3__hflip.npz"
+    },
+    {
+      "model": "resnet50",
+      "split": "val",
+      "n": 1238,
+      "macro_f1": 0.662247747505467,
+      "qwk": 0.7975530478743547,
+      "file": "reports\\phase6\\probs\\val__resnet50__hflip.npz"
+    },
+    {
+      "model": "resnet50",
+      "split": "test",
+      "n": 1240,
+      "macro_f1": 0.7013620461392001,
+      "qwk": 0.8379108509680324,
+      "file": "reports\\phase6\\probs\\test__resnet50__hflip.npz"
+    }
+  ]
+}

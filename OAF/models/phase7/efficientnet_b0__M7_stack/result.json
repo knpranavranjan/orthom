@@ -1,0 +1,200 @@
+{
+  "experiment_id": "efficientnet_b0__M7_stack",
+  "family": "combine",
+  "model": "efficientnet_b0",
+  "seed": 42,
+  "ordinal": "",
+  "ema": false,
+  "preprocessing": "basic",
+  "loss": "weighted_cross_entropy",
+  "imbalance": "weighted_ce",
+  "augmentation": "augmentation.yaml",
+  "differential_lr": false,
+  "stage_a_epochs": 3,
+  "weight_decay": 0.0001,
+  "max_epochs": 50,
+  "patience": 5,
+  "best_epoch": 34,
+  "epochs_run": 39,
+  "stopped_early": true,
+  "val_accuracy": 0.6252,
+  "val_macro_f1": 0.6497,
+  "val_weighted_f1": 0.6175,
+  "val_balanced_accuracy": 0.6422,
+  "val_qwk": 0.7652,
+  "val_KL0_F1": 0.724,
+  "val_KL1_F1": 0.3022,
+  "val_KL2_F1": 0.5654,
+  "val_KL3_F1": 0.7803,
+  "val_KL4_F1": 0.8767,
+  "val_binary_oa_acc": 0.8207,
+  "val_binary_oa_auc": 0.8988,
+  "val_3class_acc": 0.7157,
+  "val_mae": 0.4717,
+  "val_within1": 0.9039,
+  "parameters": 4013953,
+  "model_size_mb": 15.577,
+  "gmacs": 0.3981,
+  "gpu_latency_ms": 5.3613,
+  "cpu_latency_ms": 11.3083,
+  "training_time_sec": 210.4,
+  "checkpoint": "C:\\Users\\knpra\\OneDrive\\Documents\\projects\\OA\\models\\phase7\\efficientnet_b0__M7_stack\\best.pt",
+  "note": "stack: ['(none beat M0 -> == M0)']",
+  "val_full": {
+    "n_samples": 1238,
+    "accuracy": 0.6252019386106623,
+    "balanced_accuracy": 0.6422154541141215,
+    "macro_precision": 0.6633359318413249,
+    "macro_recall": 0.6422154541141215,
+    "macro_f1": 0.6497198216175284,
+    "weighted_f1": 0.6175385558527244,
+    "cohen_kappa": 0.47251713948316176,
+    "quadratic_weighted_kappa": 0.7651614562640805,
+    "per_class": {
+      "KL0": {
+        "precision": 0.6615384615384615,
+        "recall": 0.7995867768595041,
+        "f1": 0.7240411599625819,
+        "support": 484
+      },
+      "KL1": {
+        "precision": 0.3197969543147208,
+        "recall": 0.2863636363636364,
+        "f1": 0.302158273381295,
+        "support": 220
+      },
+      "KL2": {
+        "precision": 0.6313868613138686,
+        "recall": 0.5118343195266272,
+        "f1": 0.565359477124183,
+        "support": 338
+      },
+      "KL3": {
+        "precision": 0.815068493150685,
+        "recall": 0.7484276729559748,
+        "f1": 0.780327868852459,
+        "support": 159
+      },
+      "KL4": {
+        "precision": 0.8888888888888888,
+        "recall": 0.8648648648648649,
+        "f1": 0.8767123287671232,
+        "support": 37
+      }
+    },
+    "kl0_f1": 0.7240411599625819,
+    "kl0_precision": 0.6615384615384615,
+    "kl0_recall": 0.7995867768595041,
+    "kl0_support": 484,
+    "kl1_f1": 0.302158273381295,
+    "kl1_precision": 0.3197969543147208,
+    "kl1_recall": 0.2863636363636364,
+    "kl1_support": 220,
+    "kl2_f1": 0.565359477124183,
+    "kl2_precision": 0.6313868613138686,
+    "kl2_recall": 0.5118343195266272,
+    "kl2_support": 338,
+    "kl3_f1": 0.780327868852459,
+    "kl3_precision": 0.815068493150685,
+    "kl3_recall": 0.7484276729559748,
+    "kl3_support": 159,
+    "kl4_f1": 0.8767123287671232,
+    "kl4_precision": 0.8888888888888888,
+    "kl4_recall": 0.8648648648648649,
+    "kl4_support": 37,
+    "confusion_matrix": [
+      [
+        387,
+        62,
+        35,
+        0,
+        0
+      ],
+      [
+        120,
+        63,
+        37,
+        0,
+        0
+      ],
+      [
+        77,
+        66,
+        173,
+        22,
+        0
+      ],
+      [
+        1,
+        6,
+        29,
+        119,
+        4
+      ],
+      [
+        0,
+        0,
+        0,
+        5,
+        32
+      ]
+    ],
+    "confusion_matrix_normalized": [
+      [
+        0.7995867768595041,
+        0.128099173553719,
+        0.07231404958677685,
+        0.0,
+        0.0
+      ],
+      [
+        0.5454545454545454,
+        0.2863636363636364,
+        0.16818181818181818,
+        0.0,
+        0.0
+      ],
+      [
+        0.22781065088757396,
+        0.1952662721893491,
+        0.5118343195266272,
+        0.0650887573964497,
+        0.0
+      ],
+      [
+        0.006289308176100629,
+        0.03773584905660377,
+        0.18238993710691823,
+        0.7484276729559748,
+        0.025157232704402517
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.13513513513513514,
+        0.8648648648648649
+      ]
+    ],
+    "adjacent_confusions": {
+      "KL1_as_KL2": 37,
+      "KL2_as_KL1": 66,
+      "KL2_as_KL3": 22,
+      "KL3_as_KL2": 29,
+      "KL3_as_KL4": 4,
+      "KL4_as_KL3": 5
+    },
+    "errors_off_by_1": 345,
+    "errors_off_by_2plus": 119,
+    "roc_auc_ovr_macro": 0.8607847973271273,
+    "roc_auc_ovr_weighted": 0.8327167432581507,
+    "roc_auc_per_class_ovr": {
+      "KL0": 0.8555171317710502,
+      "KL1": 0.6802330773352385,
+      "KL2": 0.821870479947403,
+      "KL3": 0.962100943687668,
+      "KL4": 0.9842023538942772
+    },
+    "loss": 1.3281764402528187
+  }
+}

@@ -1,0 +1,102 @@
+# AETHER-OA  X-ray module - PHASE 3: extended CNN benchmark + controlled optimization
+# ---------------------------------------------------------------------------
+# Identical training/eval protocol to Phase 2 (configs/benchmark.yaml).
+# ONLY differences: 5 new architectures, output dirs -> models/phase3 &
+# reports/phase3, and per-model batch overrides for the memory-heavy VGGs.
+#
+# The 10 Phase-2 models are NOT retrained - benchmark_phase3.py reuses their
+# frozen results from models/benchmark/<m>/result.json.
+# ---------------------------------------------------------------------------
+
+seed: 42
+preprocessing_variant: basic
+image_size: [224, 224]
+in_channels: 3
+num_classes: 5
+
+data:
+  preprocessing_yaml: configs/preprocessing.yaml
+  augmentation_yaml:  configs/augmentation.yaml
+  normalization: imagenet
+  num_workers: 4
+  pin_memory: true
+  persistent_workers: true
+
+loss:
+  name: weighted_cross_entropy       # PHASE-3 baseline (same as Phase 2)
+  class_weights_json: metadata/class_weights.json
+  class_weights_key: weights_list_balanced
+  label_smoothing: 0.0
+  focal_gamma: 2.0
+
+optimizer:
+  name: adamw
+  lr: 1.0e-4
+  weight_decay: 1.0e-4
+  betas: [0.9, 0.999]
+
+scheduler:
+  name: cosine
+  warmup_epochs: 1
+  min_lr: 1.0e-6
+
+transfer_learning:
+  stage_a_epochs: 3
+  stage_a_lr: 1.0e-3
+  stage_b_lr: 1.0e-4
+  differential_lr: null              # experiments set {backbone_lr: 1e-5, head_lr: 1e-4}
+
+train:
+  batch_size: 64
+  max_epochs: 30
+  early_stopping:
+    monitor: val_macro_f1
+    mode: max
+    patience: 5
+    min_delta: 0.0
+  amp: true
+  grad_clip_norm: 5.0
+
+eval:
+  selection_metric: val_macro_f1
+  roc_auc: { strategy: ovr, average: macro }
+
+latency:
+  device_order: [cuda, cpu]
+  input_shape: [1, 3, 224, 224]
+  warmup_iters: 20
+  timed_iters: 100
+  cpu_warmup_iters: 5
+  cpu_timed_iters: 30
+
+complexity:
+  flop_input_shape: [1, 3, 224, 224]
+
+# ---- PHASE 3 : the 5 NEW architectures to train ------------------------- #
+#   name : backend id  (backend resolved in src/benchmark/models.py MODEL_ZOO)
+models:
+  vgg16:       vgg16              # timm  vgg16.tv_in1k  (classic VGG-16, no BN)
+  vgg19:       vgg19              # timm  vgg19.tv_in1k
+  googlenet:   googlenet          # torchvision (Inception-v1); no timm equivalent
+  squeezenet:  squeezenet1_1      # torchvision
+  shufflenet:  shufflenet_v2_x1_0 # torchvision (ShuffleNet-V2 1.0x)
+
+# VGG-16/19 have ~135-140M params + large activation maps -> reduce batch to fit
+# 16 GB VRAM (bs 64 at 224px would OOM). Everything else keeps bs 64 for parity.
+per_model_batch_size:
+  vgg16: 16
+  vgg19: 16
+
+# Phase-2 models (results reused, NOT retrained) - listed for the merged report.
+phase2_models:
+  [resnet18, resnet50, densenet121, efficientnet_b0, mobilenet_v2,
+   mobilenet_v3_large, efficientnet_b1, inception_v3, xception, convnext_tiny]
+phase2_results_dir: models/benchmark
+
+# Optional Part-D attention models (run explicitly, not in the 15-model default).
+attention_models: [resnet18_spatial_attention, convnext_tiny_spatial_attention]
+
+paths:
+  processed_root: data/processed/images
+  models_dir:     models/phase3
+  reports_dir:    reports/phase3
